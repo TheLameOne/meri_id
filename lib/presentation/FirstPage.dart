@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:meri_id/presentation/PhoneNumber.dart';
+import 'package:meri_id/presentation/custom/CustomIcon.dart';
 import 'package:meri_id/presentation/otp.dart';
 import 'package:meri_id/presentation/splashPage.dart';
 
@@ -14,45 +15,39 @@ class FirstPage extends StatefulWidget {
   static const String routeNamed = "FirstPage";
 
   @override
-  State<FirstPage>createState() => _FirstPageState();
+  State<FirstPage> createState() => _FirstPageState();
 }
 
 class _FirstPageState extends State<FirstPage> {
-
-   @override
+  @override
   void initState() {
     super.initState();
     startTime();
   }
+
   startTime() async {
-  var duration = new Duration(seconds: 3);
-  return Timer(duration, route);
-}
-route() {
-  Navigator.popAndPushNamed(context, PhoneNumber.routeNamed);
-}
+    var duration = new Duration(seconds: 3);
+    return Timer(duration, route);
+  }
+
+  route() {
+    Navigator.popAndPushNamed(context, PhoneNumber.routeNamed);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return    
-    CustomScaffold(
-            body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.network(
-            StringValues.LOGO_IMAGE,
-            height: 200,
-            width: 200,
-          ),
-          const Text(
-            "मेरी ID",
-            style: TextStyle(
-              fontSize: 35,
+    return CustomScaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomIcon(
+              height: 200,
+              width: 200,
             ),
-          )
-        ],
+          ],
+        ),
       ),
-      ),
-      );
+    );
   }
 }
