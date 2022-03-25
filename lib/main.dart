@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meri_id/presentation/homepage.dart';
-import 'package:meri_id/presentation/location.dart';
-import 'package:meri_id/presentation/location2.dart';
 import 'package:meri_id/presentation/location_page.dart';
 import 'package:meri_id/presentation/otp.dart';
 import 'package:meri_id/presentation/splashscreen.dart';
@@ -14,11 +12,10 @@ import 'utils/styles.dart';
 import 'utils/strings.dart';
 import 'presentation/splashscreen.dart';
 //import 'presentation/location_page.dart';
-import 'presentation/location2.dart';
 import "package:meri_id/presentation/homepage.dart";
 
 void main() {
-  runApp(Location(lat: 28.644800, long: 77.216721));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -48,7 +45,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: const MyHomePage(title: "meri ID"),
+          home: SplashPage(),
         ),
       ),
     );
