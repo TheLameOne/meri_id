@@ -18,7 +18,7 @@ import 'presentation/location2.dart';
 import "package:meri_id/presentation/homepage.dart";
 
 void main() {
-  runApp(const OTPScreen());
+  runApp(Location(lat: 28.644800, long: 77.216721));
 }
 
 class MyApp extends StatelessWidget {

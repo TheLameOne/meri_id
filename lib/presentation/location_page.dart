@@ -30,15 +30,17 @@ class _LocationState extends State<Location> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          GoogleMap(
-            initialCameraPosition: CameraPosition(
-                target: LatLng(widget.lat, widget.long), zoom: 12.0),
-            markers: Set.from(allMarkers),
-          ),
-        ],
+    return MaterialApp(
+      home: Scaffold(
+        body: Stack(
+          children: [
+            GoogleMap(
+              initialCameraPosition: CameraPosition(
+                  target: LatLng(widget.lat, widget.long), zoom: 12.0),
+              markers: Set.from(allMarkers),
+            ),
+          ],
+        ),
       ),
     );
   }

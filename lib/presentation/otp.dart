@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meri_id/presentation/custom/text_icon_card.dart';
+import 'package:meri_id/presentation/custom/textfield.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({Key? key}) : super(key: key);
@@ -10,22 +13,30 @@ class OTPScreen extends StatefulWidget {
 class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          body: Center(
+    ScreenUtil.instance =
+        ScreenUtil(height: 640, width: 320, allowFontScaling: false)
+          ..init(context);
+    return Scaffold(
+      body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             //Number TextField
-            Text("Enter Number"),
+            CustomTextField(
+                labelText: "adsd",
+                hintText: "ddf",
+                initialValue: "",
+                onSaved: () {},
+                onChanged: () {},
+                validator: () {}),
             //Submit Button
             Text("Submit"),
             //OTP Text Field
             Text("Enter OTP"),
           ],
         ),
-      )),
+      ),
     );
   }
 }
