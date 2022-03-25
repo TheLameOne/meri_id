@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:meri_id/presentation/homepage.dart';
-import 'package:meri_id/presentation/location_page.dart';
+import 'package:meri_id/presentation/FirstPage.dart';
+import 'package:meri_id/presentation/PhoneNumber.dart';
+import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/otp.dart';
-import 'package:meri_id/presentation/splashscreen.dart';
 import 'package:meri_id/utils/LanguageChangeProvider.dart';
 import 'package:provider/provider.dart';
 import 'utils/generated/l10n.dart';
-import 'utils/styles.dart';
 import 'utils/strings.dart';
-import 'presentation/splashscreen.dart';
+import 'presentation/SplashPage.dart';
 //import 'presentation/location_page.dart';
-import "package:meri_id/presentation/homepage.dart";
+
 
 void main() {
   runApp(MyApp());
@@ -42,12 +41,21 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: S.delegate.supportedLocales,
           title: StringValues.APP_NAME,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: SplashPage(),
+          debugShowCheckedModeBanner: false,
+        theme: ThemeData(primaryColor: Colors.white,),
+          initialRoute: FirstPage.routeNamed,
+                  routes: {
+            SplashPage.routeNamed: (BuildContext context) => SplashPage(),     
+            FirstPage.routeNamed: (BuildContext context) => FirstPage(),
+            OTP.routeNamed: (BuildContext context) => OTP(),
+            PhoneNumber.routeNamed: (BuildContext context) => PhoneNumber(),
+        }
         ),
       ),
     );
   }
 }
+
+
+
+

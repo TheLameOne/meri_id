@@ -3,19 +3,20 @@ import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomIcon.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
-import 'package:meri_id/presentation/splashPage.dart';
+import 'package:meri_id/presentation/otp.dart';
 
 
-class OTP extends StatefulWidget {
-    static const String routeNamed = 'OTP';
+class PhoneNumber extends StatefulWidget {
+    static const String routeNamed = 'PhoneNumber';
   @override
-  State<OTP> createState() => _OTPState();
+  State<PhoneNumber> createState() => _PhoneNumberState();
 }
 
-class _OTPState extends State<OTP> {
-  _routeToSplashPage()
+class _PhoneNumberState extends State<PhoneNumber> {
+
+  _routeToOtp()
   {
-    Navigator.pushNamed(context, SplashPage.routeNamed);
+    Navigator.pushNamed(context, OTP.routeNamed);
   }
 
   @override
@@ -31,17 +32,17 @@ class _OTPState extends State<OTP> {
             CustomIcon(height: 100, width: 100,),
             SizedBox(height: 10,),
           CustomTextField(
-          hintText: "Enter OTP",
+          hintText: "Enter Phone Number",
           hintTextSize: 16,
-          initialValue: '', onChanged: (){}, onSaved: (){}, validator:(){}, labelText: 'Enter OTP',
+          initialValue: '', onChanged: (){}, onSaved: (){}, validator:(){}, labelText: 'Enter Phone Number',
         ),
     
             Padding(
               padding: const EdgeInsets.all(32),
               child: CustomButton(postIcon: Icons.arrow_forward_ios,
               visiblepostIcon: true,
-               labelText: "OTP ", 
-               onTap:(){_routeToSplashPage();}),
+               labelText: "GET OTP ", 
+               onTap: _routeToOtp )
             )
           ],
         ),

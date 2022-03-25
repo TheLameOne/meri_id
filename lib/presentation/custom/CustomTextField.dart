@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meri_id/utils/styles.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -7,7 +6,7 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final double hintTextSize;
   final String initialValue;
-  final double width;
+
   final TextInputType textInputType;
   final Function onSaved;
   final Function onChanged;
@@ -25,14 +24,13 @@ class CustomTextField extends StatelessWidget {
       this.preIconSize = 30,
       this.hintTextSize = 16,
       required this.initialValue,
-      this.width = 680,
       required this.onSaved,
       required this.onChanged,
       required this.validator,
       this.textInputType = TextInputType.text,
       this.icon = Icons.location_on,
       this.isPrefixIcon = false,
-      this.padding = 20,
+      this.padding = 32,
       this.size = false,
       this.onRegPage = false});
 
@@ -41,22 +39,19 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding),
       child: Container(
-        width: ScreenUtil.instance.setWidth(width)
-            ? ScreenUtil.instance.setWidth(ScreenUtil.instance.width)
-            : ScreenUtil.instance.setWidth(380),
         decoration: (onRegPage == true)
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: Colors.white,
-                border: Border.all(width: 2, color: Styles.MAROON_COLOR),
+                border: Border.all(width: 2, color: Styles.LightBLue_COLOR),
               )
             : BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: Colors.white,
                 boxShadow: [
                     BoxShadow(
-                        color: Styles.MAROON_COLOR,
-                        blurRadius: 20,
+                        color: Colors.grey,
+                        blurRadius: 10,
                         offset: Offset(2, 4))
                   ]),
         child: Padding(
@@ -75,7 +70,7 @@ class CustomTextField extends StatelessWidget {
                   prefixIcon: isPrefixIcon
                       ? Icon(
                           icon,
-                          color: Styles.MAROON_COLOR,
+                          color: Styles.LightBLue_COLOR,
                           size: preIconSize,
                         )
                       : null,

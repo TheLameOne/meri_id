@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meri_id/utils/styles.dart';
 
 class CustomTextIconCard extends StatelessWidget {
@@ -29,8 +28,8 @@ class CustomTextIconCard extends StatelessWidget {
       this.preIconSize = 24,
       this.visiblePreIcon = false,
       this.sizelabelText = 20,
-      this.defaultColor = Styles.MAROON_COLOR,
-      this.preIconColor = Styles.ORANGE_COLOR,
+      this.defaultColor = Styles.LightBLue_COLOR,
+      this.preIconColor =Styles.LightBLue_COLOR,
       this.otherContainer = false,
       this.postIconColor = Colors.black,
       this.onRegpage = false});
@@ -43,15 +42,15 @@ class CustomTextIconCard extends StatelessWidget {
           onTap: (otherContainer == true) ? onTap() : () {},
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            height: ScreenUtil.instance.setHeight(60),
-            margin: EdgeInsets.only(bottom: ScreenUtil.instance.setHeight(24)),
+            height: 60,
+            margin: EdgeInsets.only(bottom: 24),
             decoration: (onRegpage == false)
                 ? BoxDecoration(
                     color: defaultColor,
                     borderRadius: BorderRadius.circular(5),
                     boxShadow: [
                         BoxShadow(
-                            color: Styles.ORANGE_COLOR,
+                            color: Styles.LightBLue_COLOR,
                             blurRadius: 15,
                             offset: Offset(0, 2))
                       ])
@@ -70,12 +69,12 @@ class CustomTextIconCard extends StatelessWidget {
                         text,
                         style: TextStyle(
                             fontSize: textSize,
-                            color: Styles.MAROON_COLOR,
+                            color: Styles.LightBLue_COLOR,
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w500),
                       ),
                       SizedBox(
-                        width: ScreenUtil.instance.setWidth(10),
+                        width: 10,
                       ),
                       Container(
                         child: (visiblePostIcon == true)
@@ -139,7 +138,7 @@ class CustomTextIconCard extends StatelessWidget {
                             Container(
                                 child: (visiblePreIcon == true)
                                     ? SizedBox(
-                                        width: ScreenUtil.instance.setWidth(10),
+                                        width: 10,
                                       )
                                     : Container()),
                             Container(

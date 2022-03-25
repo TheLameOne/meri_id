@@ -6,7 +6,7 @@ import 'package:meri_id/utils/global.dart';
 import 'package:meri_id/utils/styles.dart';
 
 class SplashPage extends StatefulWidget {
-  static const String routeNamed = 'SplashPage';
+    static const String routeNamed = 'SplashPage';
   @override
   _SplashPageState createState() => _SplashPageState();
 }
@@ -63,7 +63,7 @@ class _SplashPageState extends State<SplashPage> {
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 color: currentPage == index
-                    ? Styles.MAROON_COLOR
+                    ? Styles.LightBLue_COLOR
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(5),
               ),

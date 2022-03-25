@@ -5,7 +5,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Styles.MAROON_COLOR,
+      color: Styles.LightBLue_COLOR,
     );
   }
 }
