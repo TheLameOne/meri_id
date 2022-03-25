@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:meri_id/presentation/LocationPage.dart';
 import 'package:meri_id/presentation/PhoneNumber.dart';
 import 'package:meri_id/presentation/otp.dart';
 import 'package:meri_id/presentation/splashPage.dart';
@@ -29,7 +30,7 @@ class _FirstPageState extends State<FirstPage> {
   return Timer(duration, route);
 }
 route() {
-  Navigator.popAndPushNamed(context, PhoneNumber.routeNamed);
+  Navigator.popAndPushNamed(context, Location.routeNamed);
 }
   @override
   Widget build(BuildContext context) {

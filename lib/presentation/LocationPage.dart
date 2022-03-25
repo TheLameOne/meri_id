@@ -1,18 +1,17 @@
 //import "package:meri_id/presentation/custom/custom_scaffold.dart";
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:meri_id/presentation/otp.dart';
 
 class Location extends StatefulWidget {
-  double lat = 28.644800;
-  double long = 77.216721;
-
-  Location({required this.lat, required this.long});
-
+    static const String routeNamed = "LocationPage";
   @override
   _LocationState createState() => _LocationState();
 }
 
 class _LocationState extends State<Location> {
+  double lat = 28.644800;
+  double long = 77.216721;
   List<Marker> allMarkers = [];
 
   @override
@@ -24,19 +23,28 @@ class _LocationState extends State<Location> {
       onTap: () {
         print('Marker Tapped');
       },
-      position: LatLng(widget.lat, widget.long),
+      position: LatLng(lat, long),
     ));
   }
 
+ 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return SafeArea(
+      child: Scaffold(
+      appBar: AppBar(
+        title: Text("Your Operator Location"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+           onPressed: () => Navigator.pushNamed(context, OTP.routeNamed),
+          ), 
+           centerTitle: true,
+        ),
         body: Stack(
           children: [
             GoogleMap(
               initialCameraPosition: CameraPosition(
-                  target: LatLng(widget.lat, widget.long), zoom: 12.0),
+                  target: LatLng(lat, long), zoom: 12.0),
               markers: Set.from(allMarkers),
             ),
           ],
@@ -44,21 +52,4 @@ class _LocationState extends State<Location> {
       ),
     );
   }
-  // Widget build(BuildContext context) {
-  //   return CustomScaffold(
-  //     appBarText: 'Location',
-  //     appbarOnTap: () {
-  //       Navigator.pop(context);
-  //     },
-  //     body: Stack(
-  //       children: [
-  //         GoogleMap(
-  //           initialCameraPosition: CameraPosition(
-  //               target: LatLng(widget.lat, widget.long), zoom: 12.0),
-  //           markers: Set.from(allMarkers),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 var currentPage = 0;
+var role = "user";
 
 String? validateEmail(String email) {
   if (email == null || email.isEmpty) return 'Required !!!';

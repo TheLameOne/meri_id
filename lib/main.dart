@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meri_id/presentation/FirstPage.dart';
+import 'package:meri_id/presentation/LocationPage.dart';
 import 'package:meri_id/presentation/PhoneNumber.dart';
 import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/otp.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
             FirstPage.routeNamed: (BuildContext context) => FirstPage(),
             OTP.routeNamed: (BuildContext context) => OTP(),
             PhoneNumber.routeNamed: (BuildContext context) => PhoneNumber(),
+            Location.routeNamed: (BuildContext context) => Location(),
         }
         ),
       ),
