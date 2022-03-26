@@ -30,7 +30,7 @@ class _FirstPageState extends State<FirstPage> {
   return Timer(duration, route);
 }
 route() {
-  Navigator.popAndPushNamed(context, Location.routeNamed);
+  Navigator.popAndPushNamed(context, PhoneNumber.routeNamed);
 }
   @override
   Widget build(BuildContext context) {

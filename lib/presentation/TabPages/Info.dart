@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
-
 import '../../utils/global.dart';
-
-
-
 
 class Info extends StatefulWidget {
   const Info({ Key? key }) : super(key: key);
@@ -29,6 +25,7 @@ class _InfoState extends State<Info> {
     Response res = await get(Uri.parse(url));
       if (res.statusCode == 200) {
         var body = jsonDecode(res.body);
+        print("DDFDF");
         print(body["data"][0]["guideline"]);
          setState(() {
           _isLoading = false;
@@ -40,12 +37,10 @@ class _InfoState extends State<Info> {
           {
              value = body["data"][1]["guideline"];
           }
-        
     });
 
   }
 }
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +52,23 @@ class _InfoState extends State<Info> {
             child: _isLoading ? Center(child: CircularProgressIndicator( color:  Colors.blue)) :
             Padding(
               padding: const EdgeInsets.all(32),
-              child: Center(child: Text(value)),
+              child: Column(
+                children: [
+                  Text("GuideLines",   style: TextStyle(
+                            fontSize: 32,
+                            fontFamily: 'Montserrat',
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold)
+        ),
+        SizedBox(height:  20,),          
+                  Center(child: Text(value ,   style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Montserrat',
+                            color: Colors.black.withOpacity(0.7),
+                            fontWeight: FontWeight.w500)
+        )),
+                ],
+              ),
             )
           ),
         ),

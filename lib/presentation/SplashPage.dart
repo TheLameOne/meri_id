@@ -5,6 +5,8 @@ import 'package:meri_id/presentation/TabPages/Info.dart';
 import 'package:meri_id/utils/global.dart';
 import 'package:meri_id/utils/styles.dart';
 
+import 'TabPages/Issue.dart';
+
 class SplashPage extends StatefulWidget {
     static const String routeNamed = 'SplashPage';
   @override
@@ -23,6 +25,9 @@ class _SplashPageState extends State<SplashPage> {
       case 2:
         return Info();
         break;
+      case 3:
+        return Issue();
+        break;
       default:
         return Home();
     }
@@ -36,8 +41,9 @@ class _SplashPageState extends State<SplashPage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           _getBottomBarItem(index: 0, icontab: Icons.home),
-          _getBottomBarItem(index: 1, icontab: (Icons.add)),
+          _getBottomBarItem(index: 1, icontab: Icons.add),
           _getBottomBarItem(index: 2, icontab: Icons.info),
+          _getBottomBarItem(index: 3, icontab: Icons.info),
         ],
       ),
     );
