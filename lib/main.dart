@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meri_id/presentation/AddFriend.dart';
+import 'package:meri_id/presentation/ChatBot.dart';
 import 'package:meri_id/presentation/FirstPage.dart';
 import 'package:meri_id/presentation/LocationPage.dart';
 import 'package:meri_id/presentation/PhoneNumber.dart';
@@ -15,7 +16,7 @@ import 'presentation/SplashPage.dart';
 //import 'presentation/location_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyWidget());
 }
 
 class MyApp extends StatelessWidget {
