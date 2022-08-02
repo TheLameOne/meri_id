@@ -14,7 +14,6 @@ import 'utils/strings.dart';
 import 'presentation/SplashPage.dart';
 //import 'presentation/location_page.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -33,33 +32,30 @@ class MyApp extends StatelessWidget {
       create: (context) => LanguageChangeProvider(),
       child: Builder(
         builder: (context) => MaterialApp(
-          locale: Provider.of<LanguageChangeProvider>(context, listen: true)
-              .currentLocale,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          title: StringValues.APP_NAME,
-          debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: Colors.white,),
-          initialRoute: FirstPage.routeNamed,
-                  routes: {
-            SplashPage.routeNamed: (BuildContext context) => SplashPage(),     
-            FirstPage.routeNamed: (BuildContext context) => FirstPage(),
-            OTP.routeNamed: (BuildContext context) => OTP(),
-            PhoneNumber.routeNamed: (BuildContext context) => PhoneNumber(),
-            Location.routeNamed: (BuildContext context) => Location(),
-            AddFriend.routeNamed: (BuildContext context) => AddFriend(),
-        }
-        ),
+            locale: Provider.of<LanguageChangeProvider>(context, listen: true)
+                .currentLocale,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            title: StringValues.APP_NAME,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primaryColor: Colors.white,
+            ),
+            initialRoute: FirstPage.routeNamed,
+            routes: {
+              SplashPage.routeNamed: (BuildContext context) => SplashPage(),
+              FirstPage.routeNamed: (BuildContext context) => FirstPage(),
+              OTP.routeNamed: (BuildContext context) => OTP(),
+              PhoneNumber.routeNamed: (BuildContext context) => PhoneNumber(),
+              Location.routeNamed: (BuildContext context) => Location(),
+              AddFriend.routeNamed: (BuildContext context) => AddFriend(),
+            }),
       ),
     );
   }
 }
-
-
-
-
