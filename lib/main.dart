@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
           title: StringValues.APP_NAME,
           debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.white,),
-          initialRoute: FirstPage.routeNamed,
+          initialRoute: SplashPage.routeNamed,
                   routes: {
             SplashPage.routeNamed: (BuildContext context) => SplashPage(),     
             FirstPage.routeNamed: (BuildContext context) => FirstPage(),
