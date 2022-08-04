@@ -1,7 +1,9 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meri_id/presentation/AddFriend.dart';
+import 'package:meri_id/presentation/CameraScreen.dart';
 import 'package:meri_id/presentation/FirstPage.dart';
 import 'package:meri_id/presentation/LocationPage.dart';
 import 'package:meri_id/presentation/PhoneNumber.dart';
@@ -14,8 +16,10 @@ import 'utils/strings.dart';
 import 'presentation/SplashPage.dart';
 //import 'presentation/location_page.dart';
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
 
-void main() {
   runApp(MyApp());
 }
 
@@ -33,33 +37,30 @@ class MyApp extends StatelessWidget {
       create: (context) => LanguageChangeProvider(),
       child: Builder(
         builder: (context) => MaterialApp(
-          locale: Provider.of<LanguageChangeProvider>(context, listen: true)
-              .currentLocale,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          title: StringValues.APP_NAME,
-          debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: Colors.white,),
-          initialRoute: SplashPage.routeNamed,
-                  routes: {
-            SplashPage.routeNamed: (BuildContext context) => SplashPage(),     
-            FirstPage.routeNamed: (BuildContext context) => FirstPage(),
-            OTP.routeNamed: (BuildContext context) => OTP(),
-            PhoneNumber.routeNamed: (BuildContext context) => PhoneNumber(),
-            Location.routeNamed: (BuildContext context) => Location(),
-            AddFriend.routeNamed: (BuildContext context) => AddFriend(),
-        }
-        ),
+            locale: Provider.of<LanguageChangeProvider>(context, listen: true)
+                .currentLocale,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            title: StringValues.APP_NAME,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primaryColor: Colors.white,
+            ),
+            initialRoute: SplashPage.routeNamed,
+            routes: {
+              SplashPage.routeNamed: (BuildContext context) => SplashPage(),
+              FirstPage.routeNamed: (BuildContext context) => FirstPage(),
+              OTP.routeNamed: (BuildContext context) => OTP(),
+              PhoneNumber.routeNamed: (BuildContext context) => PhoneNumber(),
+              Location.routeNamed: (BuildContext context) => Location(),
+              AddFriend.routeNamed: (BuildContext context) => AddFriend(),
+            }),
       ),
     );
   }
 }
-
-
-
-

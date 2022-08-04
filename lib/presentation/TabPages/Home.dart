@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
+import 'package:meri_id/presentation/CameraScreen.dart';
 import 'package:meri_id/utils/styles.dart';
 
 import '../custom/Fingerprint.dart';
@@ -16,6 +17,15 @@ class Home extends StatelessWidget {
                   buildAvailability(context),
                   SizedBox(height: 24),
                   buildAuthenticate(context),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CameraScreen()),
+                        );
+                      },
+                      child: const Text("Upload Documents"))
                 ]))),
         floatingActionButton: FloatingActionButton(
             elevation: 12,
