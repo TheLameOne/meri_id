@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 
-import '../../api/local_auth_api.dart';
+import '../../services/LocalAuthApi.dart';
 
 class FingerprintPage extends StatelessWidget {
   @override
