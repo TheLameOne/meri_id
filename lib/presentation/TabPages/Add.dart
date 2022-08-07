@@ -5,7 +5,7 @@ class Add extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color:Styles.LightBLue_COLOR,
+      color:Styles.backgroundColor,
     );
   }
 }

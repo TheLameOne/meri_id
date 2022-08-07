@@ -43,12 +43,12 @@ class CustomTextField extends StatelessWidget {
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: Colors.white,
-                border: Border.all(width: 2, color: Styles.LightBLue_COLOR),
+                border: Border.all(width: 2, color: Styles.iconColor),
               )
             : BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                     BoxShadow(
                         color: Colors.grey,
                         blurRadius: 10,
@@ -56,7 +56,7 @@ class CustomTextField extends StatelessWidget {
                   ]),
         child: Padding(
           padding:
-              (isPrefixIcon) ? EdgeInsets.all(0) : EdgeInsets.only(left: 16),
+              (isPrefixIcon) ? const EdgeInsets.all(0) : const EdgeInsets.only(left: 16),
           child: TextFormField(
               onSaved: onSaved(),
               onChanged: onChanged(),
@@ -70,7 +70,7 @@ class CustomTextField extends StatelessWidget {
                   prefixIcon: isPrefixIcon
                       ? Icon(
                           icon,
-                          color: Styles.LightBLue_COLOR,
+                          color: Styles.backgroundColor,
                           size: preIconSize,
                         )
                       : null,

@@ -12,7 +12,8 @@ class CustomButton extends StatelessWidget {
   final Color postIconColor;
   final Color containerColor;
   final bool isLoading;
-  CustomButton(
+
+  const CustomButton(
       {required this.postIcon,
       required this.labelText,
       this.visiblepostIcon = false,
@@ -22,7 +23,7 @@ class CustomButton extends StatelessWidget {
       this.isLoading = false,
       this.postIconSize = 24,
       this.postIconColor = Colors.black,
-      this.containerColor =Styles.LightBLue_COLOR,});
+      this.containerColor =Styles.iconColor});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +32,9 @@ class CustomButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(color: containerColor, boxShadow: [
           BoxShadow(
-              color: Styles.Creme_COLOR.withOpacity(.1),
+              color: Styles.grayColor.withOpacity(.1),
               blurRadius: 3,
-              offset: Offset(0, 5))
+              offset: const Offset(0, 5))
         ]),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
@@ -56,7 +57,7 @@ class CustomButton extends StatelessWidget {
                       : Container(),
                 ),
               ],
-            ):CircularProgressIndicator(),
+            ):const CircularProgressIndicator(),
           ),
         ),
       ),

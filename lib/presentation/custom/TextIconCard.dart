@@ -28,8 +28,8 @@ class CustomTextIconCard extends StatelessWidget {
       this.preIconSize = 24,
       this.visiblePreIcon = false,
       this.sizelabelText = 20,
-      this.defaultColor = Styles.LightBLue_COLOR,
-      this.preIconColor =Styles.LightBLue_COLOR,
+      this.defaultColor = Styles.iconColor,
+      this.preIconColor =Styles.iconColor,
       this.otherContainer = false,
       this.postIconColor = Colors.black,
       this.onRegpage = false});
@@ -43,14 +43,14 @@ class CustomTextIconCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             height: 60,
-            margin: EdgeInsets.only(bottom: 24),
+            margin: const EdgeInsets.only(bottom: 24),
             decoration: (onRegpage == false)
                 ? BoxDecoration(
                     color: defaultColor,
                     borderRadius: BorderRadius.circular(5),
-                    boxShadow: [
+                    boxShadow: const [
                         BoxShadow(
-                            color: Styles.LightBLue_COLOR,
+                            color: Styles.iconColor,
                             blurRadius: 15,
                             offset: Offset(0, 2))
                       ])
@@ -69,22 +69,20 @@ class CustomTextIconCard extends StatelessWidget {
                         text,
                         style: TextStyle(
                             fontSize: textSize,
-                            color: Styles.LightBLue_COLOR,
+                            color: Styles.iconColor,
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Container(
                         child: (visiblePostIcon == true)
-                            ? Container(
-                                child: Icon(
-                                  postIcon,
-                                  size: postIconSize,
-                                  color: postIconColor,
-                                ),
-                              )
+                            ? Icon(
+                              postIcon,
+                              size: postIconSize,
+                              color: postIconColor,
+                            )
                             : Container(),
                       ),
                     ],
@@ -92,74 +90,66 @@ class CustomTextIconCard extends StatelessWidget {
                 );
               } else {
                 if ((visiblePreIcon == false && visiblePostIcon == false)) {
-                  return Container(
-                    child: Center(
-                      child: Container(
-                        child: Text(
-                          text,
-                          style: TextStyle(
-                              fontSize: textSize,
-                              color: Colors.black,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w500),
-                        ),
+                  return Center(
+                    child: Container(
+                      child: Text(
+                        text,
+                        style: TextStyle(
+                            fontSize: textSize,
+                            color: Colors.black,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                   );
                 } else {
-                  return Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: (visiblePreIcon == true)
-                              ? Container(
-                                  child: Icon(
-                                    preIcon,
-                                    size: preIconSize,
-                                    color: preIconColor,
-                                  ),
-                                )
-                              : Container(),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              child: Text(
-                                text,
-                                style: TextStyle(
-                                    fontSize: textSize,
-                                    color: Colors.black,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            Container(
-                                child: (visiblePreIcon == true)
-                                    ? SizedBox(
-                                        width: 10,
-                                      )
-                                    : Container()),
-                            Container(
-                              child: (visiblePostIcon == true)
-                                  ? GestureDetector(
-                                      onTap: (onRegpage == false)
-                                          ? onTap()
-                                          : () {},
-                                      child: Container(
-                                        child: Icon(
-                                          postIcon,
-                                          size: postIconSize,
-                                        ),
-                                      ),
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: (visiblePreIcon == true)
+                            ? Icon(
+                              preIcon,
+                              size: preIconSize,
+                              color: preIconColor,
+                            )
+                            : Container(),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            text,
+                            style: TextStyle(
+                                fontSize: textSize,
+                                color: Colors.black,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Container(
+                              child: (visiblePreIcon == true)
+                                  ? const SizedBox(
+                                      width: 10,
                                     )
-                                  : Container(),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                                  : Container()),
+                          Container(
+                            child: (visiblePostIcon == true)
+                                ? GestureDetector(
+                                    onTap: (onRegpage == false)
+                                        ? onTap()
+                                        : () {},
+                                    child: Container(
+                                      child: Icon(
+                                        postIcon,
+                                        size: postIconSize,
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
+                          ),
+                        ],
+                      ),
+                    ],
                   );
                 }
               }

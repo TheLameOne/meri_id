@@ -69,7 +69,7 @@ class _SplashPageState extends State<SplashPage> {
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 color: currentPage == index
-                    ? Styles.LightBLue_COLOR
+                    ? Styles.iconColor
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(5),
               ),

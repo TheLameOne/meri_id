@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart';
 import 'package:meri_id/utils/styles.dart';
-
-import '../../utils/global.dart';
 import '../custom/CustomButton.dart';
 
 class Issue extends StatefulWidget {
@@ -17,7 +13,7 @@ class _IssueState extends State<Issue> {
 
   _raiseIssue()
   {
-    print("DF");
+    // print("DF");
   }
 
   @override
@@ -28,22 +24,22 @@ class _IssueState extends State<Issue> {
           padding: const EdgeInsets.all(32),
           child: Column(
             children: [
-              Text("Raise Issue",
+              const Text("Raise Issue",
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     fontSize: 32)),
     
     
-              SizedBox(height:  32,),
+              const SizedBox(height:  32,),
     
     
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: Colors.white,
-                  border: Border.all(width: 2, color: Styles.LightBLue_COLOR),),
+                  border: Border.all(width: 2, color: Styles.iconColor),),
                   child:  TextField(
           keyboardType: TextInputType.multiline,
           minLines: 3,
