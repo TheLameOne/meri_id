@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:meri_id/presentation/otp.dart';
 
 class Location extends StatefulWidget {
-    static const String routeNamed = "LocationPage";
+  static const String routeNamed = "LocationPage";
   @override
   _LocationState createState() => _LocationState();
 }
@@ -27,24 +27,22 @@ class _LocationState extends State<Location> {
     ));
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-      appBar: AppBar(
-        title: Text("Your Operator Location"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-           onPressed: () => Navigator.pushNamed(context, OTP.routeNamed),
-          ), 
-           centerTitle: true,
+        appBar: AppBar(
+          title: Text("Your Operator Location"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.pushNamed(context, OTP.routeNamed),
+          ),
+          centerTitle: true,
         ),
         body: Stack(
           children: [
             GoogleMap(
-              initialCameraPosition: CameraPosition(
-                  target: LatLng(lat, long), zoom: 12.0),
+              initialCameraPosition: CameraPosition(target: LatLng(lat, long), zoom: 12.0),
               markers: Set.from(allMarkers),
             ),
           ],

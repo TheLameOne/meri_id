@@ -5,18 +5,15 @@ import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
 import 'package:meri_id/utils/styles.dart';
 
-
 class AdduserDetails extends StatefulWidget {
-  const AdduserDetails({ Key? key }) : super(key: key);
+  const AdduserDetails({Key? key}) : super(key: key);
 
   @override
   State<AdduserDetails> createState() => _AdduserDetailsState();
 }
 
 class _AdduserDetailsState extends State<AdduserDetails> {
-
-
-   @override
+  @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       body: SingleChildScrollView(
@@ -75,5 +72,4 @@ class _AdduserDetailsState extends State<AdduserDetails> {
       ),
     );
   }
-
 }

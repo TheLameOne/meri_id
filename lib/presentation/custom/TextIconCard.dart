@@ -29,7 +29,7 @@ class CustomTextIconCard extends StatelessWidget {
       this.visiblePreIcon = false,
       this.sizelabelText = 20,
       this.defaultColor = Styles.iconColor,
-      this.preIconColor =Styles.iconColor,
+      this.preIconColor = Styles.iconColor,
       this.otherContainer = false,
       this.postIconColor = Colors.black,
       this.onRegpage = false});
@@ -48,12 +48,7 @@ class CustomTextIconCard extends StatelessWidget {
                 ? BoxDecoration(
                     color: defaultColor,
                     borderRadius: BorderRadius.circular(5),
-                    boxShadow: const [
-                        BoxShadow(
-                            color: Styles.iconColor,
-                            blurRadius: 15,
-                            offset: Offset(0, 2))
-                      ])
+                    boxShadow: const [BoxShadow(color: Styles.iconColor, blurRadius: 15, offset: Offset(0, 2))])
                 : BoxDecoration(
                     color: defaultColor,
                     borderRadius: BorderRadius.circular(5),
@@ -79,10 +74,10 @@ class CustomTextIconCard extends StatelessWidget {
                       Container(
                         child: (visiblePostIcon == true)
                             ? Icon(
-                              postIcon,
-                              size: postIconSize,
-                              color: postIconColor,
-                            )
+                                postIcon,
+                                size: postIconSize,
+                                color: postIconColor,
+                              )
                             : Container(),
                       ),
                     ],
@@ -109,10 +104,10 @@ class CustomTextIconCard extends StatelessWidget {
                       Container(
                         child: (visiblePreIcon == true)
                             ? Icon(
-                              preIcon,
-                              size: preIconSize,
-                              color: preIconColor,
-                            )
+                                preIcon,
+                                size: preIconSize,
+                                color: preIconColor,
+                              )
                             : Container(),
                       ),
                       Row(
@@ -135,9 +130,7 @@ class CustomTextIconCard extends StatelessWidget {
                           Container(
                             child: (visiblePostIcon == true)
                                 ? GestureDetector(
-                                    onTap: (onRegpage == false)
-                                        ? onTap()
-                                        : () {},
+                                    onTap: (onRegpage == false) ? onTap() : () {},
                                     child: Container(
                                       child: Icon(
                                         postIcon,

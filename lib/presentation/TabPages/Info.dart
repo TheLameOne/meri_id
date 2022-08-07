@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import '../../utils/global.dart';
 
 class Info extends StatefulWidget {
-  const Info({ Key? key }) : super(key: key);
+  const Info({Key? key}) : super(key: key);
 
   @override
   State<Info> createState() => _InfoState();
@@ -14,65 +14,64 @@ class _InfoState extends State<Info> {
   bool _isLoading = true;
   String value = "No GuideLines";
 
-   @override
+  @override
   void initState() {
     super.initState();
-    _getGuidleLines();     
+    _getGuidleLines();
   }
-  _getGuidleLines() async 
-  {
-    final String url="https://meriid.herokuapp.com/api/general/guidelines";
-    Response res = await get(Uri.parse(url));
-      if (res.statusCode == 200) {
-        var body = jsonDecode(res.body);
-        print("DDFDF");
-        print(body["data"][0]["guideline"]);
-         setState(() {
-          _isLoading = false;
-          if(role =="user")
-          {
-          value = body["data"][0]["guideline"];
-          }
-          else
-          {
-             value = body["data"][1]["guideline"];
-          }
-    });
 
+  _getGuidleLines() async {
+    final String url = "https://meriid.herokuapp.com/api/general/guidelines";
+    Response res = await get(Uri.parse(url));
+    if (res.statusCode == 200) {
+      var body = jsonDecode(res.body);
+      print("DDFDF");
+      print(body["data"][0]["guideline"]);
+      setState(() {
+        _isLoading = false;
+        if (role == "user") {
+          value = body["data"][0]["guideline"];
+        } else {
+          value = body["data"][1]["guideline"];
+        }
+      });
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
     return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SingleChildScrollView(
           child: Container(
-            child: _isLoading ? Center(child: CircularProgressIndicator( color:  Colors.blue)) :
-            Padding(
-              padding: const EdgeInsets.all(32),
-              child: Column(
-                children: [
-                  Text("GuideLines",   style: TextStyle(
-                            fontSize: 32,
-                            fontFamily: 'Montserrat',
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold)
-        ),
-        SizedBox(height:  20,),          
-                  Center(child: Text(value ,   style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'Montserrat',
-                            color: Colors.black.withOpacity(0.7),
-                            fontWeight: FontWeight.w500)
-        )),
-                ],
-              ),
-            )
-          ),
+              child: _isLoading
+                  ? Center(child: CircularProgressIndicator(color: Colors.blue))
+                  : Padding(
+                      padding: const EdgeInsets.all(32),
+                      child: Column(
+                        children: [
+                          Text("GuideLines",
+                              style: TextStyle(
+                                  fontSize: 32,
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold)),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Center(
+                              child: Text(value,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: 'Montserrat',
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontWeight: FontWeight.w500))),
+                        ],
+                      ),
+                    )),
         ),
       ],
     );
   }
-  }
+}

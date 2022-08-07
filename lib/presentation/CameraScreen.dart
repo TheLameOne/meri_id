@@ -77,8 +77,7 @@ class _CameraScreenState extends State<CameraScreen> {
                               flash = !flash;
                             });
                             flash
-                                ? _cameraController
-                                    .setFlashMode(FlashMode.torch)
+                                ? _cameraController.setFlashMode(FlashMode.torch)
                                 : _cameraController.setFlashMode(FlashMode.off);
                           }),
                       GestureDetector(
@@ -89,8 +88,7 @@ class _CameraScreenState extends State<CameraScreen> {
                           });
                         },
                         onLongPressUp: () async {
-                          XFile videopath =
-                              await _cameraController.stopVideoRecording();
+                          XFile videopath = await _cameraController.stopVideoRecording();
                           setState(() {
                             isRecoring = false;
                           });
@@ -131,8 +129,7 @@ class _CameraScreenState extends State<CameraScreen> {
                               transform = transform + pi;
                             });
                             int cameraPos = iscamerafront ? 0 : 1;
-                            _cameraController = CameraController(
-                                cameras[cameraPos], ResolutionPreset.high);
+                            _cameraController = CameraController(cameras[cameraPos], ResolutionPreset.high);
                             cameraValue = _cameraController.initialize();
                           }),
                     ],

@@ -3,18 +3,15 @@ import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
 
-
-
 class AddFriend extends StatefulWidget {
-   static const String routeNamed = "AddFriend";
-
+  static const String routeNamed = "AddFriend";
 
   @override
   State<AddFriend> createState() => _AddFriendState();
 }
 
 class _AddFriendState extends State<AddFriend> {
-   @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: CustomScaffold(
@@ -34,7 +31,7 @@ class _AddFriendState extends State<AddFriend> {
                 ),
               ),
               SizedBox(height: 32),
-               CustomTextField(
+              CustomTextField(
                 hintText: "Adhar Number",
                 hintTextSize: 16,
                 initialValue: '',
@@ -81,5 +78,3 @@ class _AddFriendState extends State<AddFriend> {
     );
   }
 }
-
-

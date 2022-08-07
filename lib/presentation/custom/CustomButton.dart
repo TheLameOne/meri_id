@@ -19,45 +19,43 @@ class CustomButton extends StatelessWidget {
       this.visiblepostIcon = false,
       this.sizelabelText = 20,
       this.labelTextWeight = FontWeight.w500,
-      required this.onTap ,
+      required this.onTap,
       this.isLoading = false,
       this.postIconSize = 24,
       this.postIconColor = Colors.black,
-      this.containerColor =Styles.iconColor});
+      this.containerColor = Styles.iconColor});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:() { onTap(); },
+      onTap: () {
+        onTap();
+      },
       child: Container(
-        decoration: BoxDecoration(color: containerColor, boxShadow: [
-          BoxShadow(
-              color: Styles.grayColor.withOpacity(.1),
-              blurRadius: 3,
-              offset: const Offset(0, 5))
-        ]),
+        decoration: BoxDecoration(
+            color: containerColor,
+            boxShadow: [BoxShadow(color: Styles.grayColor.withOpacity(.1), blurRadius: 3, offset: const Offset(0, 5))]),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Center(
-            child: (isLoading==false)?Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(labelText,
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 18,
-                        fontWeight: labelTextWeight)),
-                Container(
-                  child: (visiblepostIcon)
-                      ? Icon(
-                          postIcon,
-                          size: postIconSize,
-                          color: postIconColor,
-                        )
-                      : Container(),
-                ),
-              ],
-            ):const CircularProgressIndicator(),
+            child: (isLoading == false)
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(labelText,
+                          style: TextStyle(fontFamily: 'Montserrat', fontSize: 18, fontWeight: labelTextWeight)),
+                      Container(
+                        child: (visiblepostIcon)
+                            ? Icon(
+                                postIcon,
+                                size: postIconSize,
+                                color: postIconColor,
+                              )
+                            : Container(),
+                      ),
+                    ],
+                  )
+                : const CircularProgressIndicator(),
           ),
         ),
       ),

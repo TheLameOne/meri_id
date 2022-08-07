@@ -8,7 +8,7 @@ import 'package:meri_id/utils/styles.dart';
 import 'TabPages/Issue.dart';
 
 class SplashPage extends StatefulWidget {
-    static const String routeNamed = 'SplashPage';
+  static const String routeNamed = 'SplashPage';
   @override
   _SplashPageState createState() => _SplashPageState();
 }
@@ -18,16 +18,14 @@ class _SplashPageState extends State<SplashPage> {
     switch (currentPage) {
       case 0:
         return Home();
-        break;
       case 1:
         return Add();
-        break;
       case 2:
-        return Info();
-        break;
+        return const Info();
       case 3:
-        return Issue();
-        break;
+        return const Issue();
+      case 4:
+        return  Add();
       default:
         return Home();
     }
@@ -35,8 +33,9 @@ class _SplashPageState extends State<SplashPage> {
 
   _getBottomBar() {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-      margin: EdgeInsets.all(0),
+      elevation: 20,
+      margin: const EdgeInsets.all(0),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5), topLeft: Radius.circular(5)  , topRight: Radius.circular(5) ,  bottomRight : Radius.circular(5))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
@@ -44,45 +43,42 @@ class _SplashPageState extends State<SplashPage> {
           _getBottomBarItem(index: 1, icontab: Icons.add),
           _getBottomBarItem(index: 2, icontab: Icons.info),
           _getBottomBarItem(index: 3, icontab: Icons.info),
+          _getBottomBarItem(index: 4, icontab: Icons.info),
         ],
       ),
     );
   }
 
+  void _onPressedAction() {}
+
   _getBottomBarItem({
     required int index,
     required IconData icontab,
   }) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          currentPage = index;
-        });
-      },
-      child: Container(
-        alignment: Alignment.center,
-        height: 60,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: currentPage == index
-                    ? Styles.iconColor
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Center(
-                child: Icon(
-                  icontab,
-                  color: currentPage == index ? Colors.white : Colors.black38,
-                  size: (32),
-                ),
-              ),
+    return Container(
+      alignment: Alignment.center,
+      height: 60,
+      margin:  const EdgeInsets.all(10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(0),
+            decoration: BoxDecoration(
+              color: currentPage == index ? Styles.iconColor : Colors.transparent,
+              borderRadius: BorderRadius.circular(5),
             ),
-          ],
-        ),
+            child: Center(
+                child: IconButton(
+              icon: Icon(icontab, color: currentPage == index ? Colors.white : Colors.black38, size: (28)),
+              onPressed: () {
+                setState(() {
+                  currentPage = index;
+                });
+              },
+            )),
+          ),
+        ],
       ),
     );
   }
@@ -91,6 +87,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Column(
           children: <Widget>[Expanded(child: _getBody()), _getBottomBar()],
         ),

@@ -48,15 +48,9 @@ class CustomTextField extends StatelessWidget {
             : BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: Colors.white,
-                boxShadow: const [
-                    BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 10,
-                        offset: Offset(2, 4))
-                  ]),
+                boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10, offset: Offset(2, 4))]),
         child: Padding(
-          padding:
-              (isPrefixIcon) ? const EdgeInsets.all(0) : const EdgeInsets.only(left: 16),
+          padding: (isPrefixIcon) ? const EdgeInsets.all(0) : const EdgeInsets.only(left: 16),
           child: TextFormField(
               onSaved: onSaved(),
               onChanged: onChanged(),
