@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 var currentPage = 0;
 var role = "user";
+bool isHindi = false;
 
 String? validateEmail(String email) {
   if (email == null || email.isEmpty) return 'Required !!!';
@@ -29,3 +30,4 @@ String? requiredString(String value) {
   if (value == null || value.isEmpty) return 'Required !!!';
   return null;
 }
+

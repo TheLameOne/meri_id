@@ -70,7 +70,7 @@ class CustomTextField extends StatelessWidget {
                           size: preIconSize,
                         )
                       : null,
-                  hintStyle:  CustomTextStyles.textStyleHigh() ),
+                  hintStyle:  CustomTextStyles.textStylelow() ),
               
         ),
       ),

@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 import 'package:meri_id/presentation/features/CameraScreen.dart';
+import 'package:meri_id/utils/global.dart';
 
 import '../custom/Fingerprint.dart';
 
-class Home extends StatelessWidget {
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +22,7 @@ class Home extends StatelessWidget {
             child: Padding(
                 padding: const EdgeInsets.all(32),
                 child: Column(children: [
-                  const Text("hi my name is khan"),
+                  Text( (isHindi) ?  "hi my name is khan" : "hi my name "), 
                   buildAvailability(context),
                   const SizedBox(height: 24),
                   buildAuthenticate(context),
@@ -39,4 +49,5 @@ class Home extends StatelessWidget {
               }
             }));
   }
+
 }

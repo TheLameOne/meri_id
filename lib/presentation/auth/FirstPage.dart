@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
+import 'package:meri_id/utils/styles.dart';
 import '../../utils/strings.dart';
 import '../custom/CustomScaffold.dart';
 
@@ -36,7 +37,7 @@ class _FirstPageState extends State<FirstPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
-              StringValues.LOGO_IMAGE,
+              Styles.LOGO_IMAGE,
               height: 200,
               width: 200,
             ),

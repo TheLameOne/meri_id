@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meri_id/utils/styles.dart';
 
 import '../../utils/strings.dart';
 
@@ -16,7 +17,7 @@ class CustomIcon extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
-              StringValues.LOGO_IMAGE,
+              Styles.LOGO_IMAGE,
               height: height,
               width: width,
             ),

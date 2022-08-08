@@ -10,11 +10,11 @@ import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/auth/otp.dart';
 import 'package:meri_id/utils/LanguageChangeProvider.dart';
+import 'package:meri_id/utils/global.dart';
 import 'package:provider/provider.dart';
 import 'utils/generated/l10n.dart';
 import 'utils/strings.dart';
 import 'presentation/SplashPage.dart';
-//import 'presentation/location_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,6 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: S.delegate.supportedLocales,
-            title: StringValues.APP_NAME,
+            title: (isHindi) ?  StringValues.appName.english : StringValues.appName.hindi ,
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primaryColor: Colors.white,
