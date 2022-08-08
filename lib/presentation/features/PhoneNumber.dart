@@ -3,7 +3,7 @@ import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomIcon.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
-import 'package:meri_id/presentation/otp.dart';
+import 'package:meri_id/presentation/features/otp.dart';
 
 class PhoneNumber extends StatefulWidget {
   static const String routeNamed = 'PhoneNumber';

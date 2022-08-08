@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
-import 'package:meri_id/presentation/CameraScreen.dart';
+import 'package:meri_id/presentation/features/CameraScreen.dart';
 
 import '../custom/Fingerprint.dart';
 

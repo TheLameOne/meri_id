@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:meri_id/presentation/LocationPage.dart';
-import 'package:meri_id/presentation/PhoneNumber.dart';
-import 'package:meri_id/presentation/otp.dart';
+import 'package:meri_id/presentation/features/LocationPage.dart';
+import 'package:meri_id/presentation/features/PhoneNumber.dart';
+import 'package:meri_id/presentation/features/otp.dart';
 import 'package:meri_id/presentation/splashPage.dart';
 import 'package:meri_id/utils/styles.dart';
 
-import '../utils/strings.dart';
-import 'custom/CustomScaffold.dart';
+import '../../utils/strings.dart';
+import '../custom/CustomScaffold.dart';
 
 class FirstPage extends StatefulWidget {
   static const String routeNamed = "FirstPage";
