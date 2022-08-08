@@ -1,7 +1,7 @@
 //import "package:meri_id/presentation/custom/custom_scaffold.dart";
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:meri_id/presentation/features/otp.dart';
+import 'package:meri_id/presentation/auth/otp.dart';
 
 class Location extends StatefulWidget {
   static const String routeNamed = "LocationPage";

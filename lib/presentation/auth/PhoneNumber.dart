@@ -3,7 +3,7 @@ import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomIcon.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
-import 'package:meri_id/presentation/features/otp.dart';
+import 'package:meri_id/presentation/auth/otp.dart';
 
 class PhoneNumber extends StatefulWidget {
   static const String routeNamed = 'PhoneNumber';
@@ -32,7 +32,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
               height: 10,
             ),
             CustomTextField(
-              hintText: "Enter Phone Number",
+               hintText: "+91783090900",
               hintTextSize: 16,
               initialValue: '',
               onChanged: () {},

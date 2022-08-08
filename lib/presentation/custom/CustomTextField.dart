@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meri_id/services/CustomComponentFunction.dart';
 import 'package:meri_id/utils/styles.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -48,7 +49,7 @@ class CustomTextField extends StatelessWidget {
             : BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: Colors.white,
-                boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10, offset: Offset(2, 4))]),
+                boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 5, offset: Offset(2, 4))]),
         child: Padding(
           padding: (isPrefixIcon) ? const EdgeInsets.all(0) : const EdgeInsets.only(left: 16),
           child: TextFormField(
@@ -56,11 +57,12 @@ class CustomTextField extends StatelessWidget {
               onChanged: onChanged(),
               keyboardType: textInputType,
               initialValue: initialValue,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 16),
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: hintText,
                   labelText: labelText,
+                  labelStyle: CustomTextStyles.textStylelow(),
                   prefixIcon: isPrefixIcon
                       ? Icon(
                           icon,
@@ -68,13 +70,11 @@ class CustomTextField extends StatelessWidget {
                           size: preIconSize,
                         )
                       : null,
-                  hintStyle: TextStyle(
-                      fontSize: hintTextSize,
-                      fontFamily: 'Montserrat',
-                      color: Colors.black.withOpacity(0.5),
-                      fontWeight: FontWeight.w300))),
+                  hintStyle:  CustomTextStyles.textStyleHigh() ),
+              
         ),
       ),
+    )
     );
   }
 }

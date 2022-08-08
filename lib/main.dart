@@ -4,11 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meri_id/presentation/features/AddFriend.dart';
 import 'package:meri_id/presentation/features/CameraScreen.dart';
-import 'package:meri_id/presentation/features/FirstPage.dart';
+import 'package:meri_id/presentation/auth/FirstPage.dart';
 import 'package:meri_id/presentation/features/LocationPage.dart';
-import 'package:meri_id/presentation/features/PhoneNumber.dart';
+import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/SplashPage.dart';
-import 'package:meri_id/presentation/features/otp.dart';
+import 'package:meri_id/presentation/auth/otp.dart';
 import 'package:meri_id/utils/LanguageChangeProvider.dart';
 import 'package:provider/provider.dart';
 import 'utils/generated/l10n.dart';
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primaryColor: Colors.white,
             ),
-            initialRoute: SplashPage.routeNamed,
+            initialRoute: FirstPage.routeNamed,
             routes: {
               SplashPage.routeNamed: (BuildContext context) => SplashPage(),
               FirstPage.routeNamed: (BuildContext context) => FirstPage(),

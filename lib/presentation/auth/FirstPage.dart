@@ -1,12 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:meri_id/presentation/features/LocationPage.dart';
-import 'package:meri_id/presentation/features/PhoneNumber.dart';
-import 'package:meri_id/presentation/features/otp.dart';
-import 'package:meri_id/presentation/splashPage.dart';
-import 'package:meri_id/utils/styles.dart';
-
+import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import '../../utils/strings.dart';
 import '../custom/CustomScaffold.dart';
 
