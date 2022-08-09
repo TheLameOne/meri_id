@@ -1,24 +1,18 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:meri_id/presentation/features/AddFriend.dart';
-import 'package:meri_id/presentation/features/CameraScreen.dart';
-import 'package:meri_id/presentation/auth/FirstPage.dart';
-import 'package:meri_id/presentation/features/LocationPage.dart';
-import 'package:meri_id/presentation/auth/PhoneNumber.dart';
+import 'package:meri_id/presentation/KYC/AadharPage.dart';
+import 'package:meri_id/presentation/KYC/PanPage.dart';
+import 'package:meri_id/presentation/KYC/VideoPage.dart';
 import 'package:meri_id/presentation/SplashPage.dart';
+import 'package:meri_id/presentation/auth/FirstPage.dart';
+import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/auth/otp.dart';
-import 'package:meri_id/utils/LanguageChangeProvider.dart';
-import 'package:provider/provider.dart';
-import 'utils/generated/l10n.dart';
+import 'package:meri_id/presentation/features/AddFriend.dart';
+import 'package:meri_id/presentation/features/LocationPage.dart';
 import 'utils/strings.dart';
-import 'presentation/SplashPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
-
   runApp(const MyApp());
 }
 
@@ -31,33 +25,23 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return ChangeNotifierProvider<LanguageChangeProvider>(
-      create: (context) => LanguageChangeProvider(),
-      child: Builder(
-        builder: (context) => MaterialApp(
-            locale: Provider.of<LanguageChangeProvider>(context, listen: true).currentLocale,
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            title:StringValues.appName.english,
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primaryColor: Colors.white,
-            ),
-            initialRoute: FirstPage.routeNamed,
-            routes: {
-              SplashPage.routeNamed: (BuildContext context) => SplashPage(),
-              FirstPage.routeNamed: (BuildContext context) => FirstPage(),
-              OTP.routeNamed: (BuildContext context) => OTP(),
-              PhoneNumber.routeNamed: (BuildContext context) => PhoneNumber(),
-              Location.routeNamed: (BuildContext context) => Location(),
-              AddFriend.routeNamed: (BuildContext context) => AddFriend(),
-            }),
-      ),
-    );
+    return MaterialApp(
+        title: StringValues.appName.english,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: Colors.white,
+        ),
+        initialRoute: FirstPage.routeNamed,
+        routes: {
+          SplashPage.routeNamed: (BuildContext context) => SplashPage(),
+          FirstPage.routeNamed: (BuildContext context) => FirstPage(),
+          OTP.routeNamed: (BuildContext context) => OTP(),
+          PhoneNumber.routeNamed: (BuildContext context) => PhoneNumber(),
+          Location.routeNamed: (BuildContext context) => Location(),
+          AddFriend.routeNamed: (BuildContext context) => AddFriend(),
+          PANPage.routeNamed: (BuildContext context) => PANPage(),
+          AadharPage.routeNamed: (BuildContext context) => AadharPage(),
+          VideoPage.routeNamed: (BuildContext context) => VideoPage(),
+        });
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:meri_id/services/PreferenceService.dart';
 
 var currentPage = 0;

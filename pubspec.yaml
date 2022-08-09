@@ -29,23 +29,23 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  camera: ^0.10.0
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
+  flutter_screenutil: ^5.5.3+2
+  fluttertoast: ^8.0.9
   google_maps_flutter: ^2.1.1
   http: ^0.13.3
+  image_picker: ^0.8.5+3
   kommunicate_flutter: ^1.5.0
   local_auth: ^2.1.1
   path_provider: ^2.0.11
-  provider: ^5.0.0
-  shared_preferences:
+  provider: ^6.0.3
   video_player: ^2.4.5  
+  shared_preferences:
 
 dev_dependencies:
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
 
@@ -85,5 +85,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-flutter_intl:
-  enabled: true

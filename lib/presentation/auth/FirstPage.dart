@@ -38,7 +38,7 @@ class _FirstPageState extends State<FirstPage> {
     String? lang = await preferenceService.getLanguage();
     setState(() {
       if (value == null || value == "") {
-        _showFingerPrintButton = true;
+        _showFingerPrintButton = false;
       } else {
         _showFingerPrintButton = true;
       }
@@ -90,59 +90,60 @@ class _FirstPageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const SizedBox(height: 20),
-            Column(
-              children: [
-                Image.asset(
-                  Styles.STATIC_LOGO_IMAGE,
-                  height: 160,
-                  width: 160,
-                ),
-                Text("मेरी ID", style: CustomTextStyles.textStyleHigh()),
-              ],
-            ),
-            (_isVisible) ? _dialoque() : Container(),
-            SizedBox(height: (_showFingerPrintButton) ? 120 : 80),
-            Column(
-              children: [
-                Padding(
-                    padding:
-                        (!_isTimer && _showFingerPrintButton && !_isVisible)
-                            ? const EdgeInsets.all(32)
-                            : const EdgeInsets.all(0),
-                    child: (!_isTimer && _showFingerPrintButton)
-                        ? CustomButton(
-                            postIcon: Icons.arrow_forward_ios,
-                            visiblepostIcon: false,
-                            labelText: (_language)
-                                ? "Finger Print"
-                                : "finger print hindi",
-                            containerColor: Styles.redColor,
-                            onTap: () {})
-                        : Container()),
-                Padding(
-                    padding: (!_isTimer)
-                        ? const EdgeInsets.symmetric(horizontal: 32)
-                        : const EdgeInsets.all(0),
-                    child: (_isTimer == false && !_isVisible)
-                        ? CustomButton(
-                            postIcon: Icons.arrow_forward_ios,
-                            visiblepostIcon: false,
-                            labelText: (_language)
-                                ? "Sign in by mobile number"
-                                : "Sign in by mobile number",
-                            containerColor: Styles.redColor,
-                            onTap: () {
-                              route();
-                            })
-                        : Container()),
-                const SizedBox(height: 20),
-              ],
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const SizedBox(height: 20),
+              Column(
+                children: [
+                  Image.asset(
+                    Styles.STATIC_LOGO_IMAGE,
+                    height: 160,
+                    width: 160,
+                  ),
+                  Text("मेरी ID", style: CustomTextStyles.textStyleHigh()),
+                ],
+              ),
+              (_isVisible) ? _dialoque() : Container(),
+              SizedBox(height: (_showFingerPrintButton) ? 120 : 80),
+              Column(
+                children: [
+                  Padding(
+                      padding:
+                          (!_isTimer && _showFingerPrintButton && !_isVisible)
+                              ? const EdgeInsets.all(0)
+                              : const EdgeInsets.all(0),
+                      child: (!_isTimer && _showFingerPrintButton)
+                          ? CustomButton(
+                              postIcon: Icons.arrow_forward_ios,
+                              visiblepostIcon: false,
+                              labelText: (_language)
+                                  ? "Finger Print"
+                                  : "finger print hindi",
+                              containerColor: Styles.redColor,
+                              onTap: () {})
+                          : Container()),
+                  Padding(
+                      padding: const EdgeInsets.only(top: 32),
+                      child: (_isTimer == false && !_isVisible)
+                          ? CustomButton(
+                              postIcon: Icons.arrow_forward_ios,
+                              visiblepostIcon: false,
+                              labelText: (_language)
+                                  ? "Sign in by mobile number"
+                                  : "Sign in by mobile number",
+                              containerColor: Styles.redColor,
+                              onTap: () {
+                                route();
+                              })
+                          : Container()),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

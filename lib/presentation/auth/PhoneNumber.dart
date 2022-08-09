@@ -28,8 +28,8 @@ class _PhoneNumberState extends State<PhoneNumber> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomIcon(
-                height: 100,
-                width: 100,
+                height: 120,
+                width: 120,
               ),
               const SizedBox(
                 height: 10,

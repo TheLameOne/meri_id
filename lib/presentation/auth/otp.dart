@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meri_id/presentation/KYC/PanPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomIcon.dart';
@@ -24,6 +25,10 @@ class _OTPState extends State<OTP> {
     Navigator.pushNamed(context, PhoneNumber.routeNamed);
   }
 
+      _routeToPanpage() {
+    Navigator.pushNamed(context, PANPage.routeNamed);
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -35,8 +40,8 @@ class _OTPState extends State<OTP> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomIcon(
-                height: 100,
-                width: 100,
+                height: 120,
+                width: 120,
               ),
               const SizedBox(
                 height: 10,
@@ -56,7 +61,7 @@ class _OTPState extends State<OTP> {
                     visiblepostIcon: false,
                     labelText: "Submit",
                     onTap: () {
-                      _routeToSplashPage();
+                      _routeToPanpage();
                     },
                     containerColor: Styles.redColor
                     ), 

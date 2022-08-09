@@ -26,4 +26,12 @@ abstract class CustomTextStyles {
         fontWeight: FontWeight.w600);
   }
 
+   static TextStyle textStyleHighX() {
+    return const TextStyle(
+        fontSize: 28,
+        fontFamily: 'Montserrat',
+        color: Colors.black,
+        fontWeight: FontWeight.w800);
+  }
+
 }

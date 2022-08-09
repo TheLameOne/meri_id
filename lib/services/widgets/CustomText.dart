@@ -11,6 +11,10 @@ abstract class CustomText {
     
   }
   static Text largeText(String text) {
-       return Text(text, style: CustomTextStyles.textStylelow());
+       return Text(text, style: CustomTextStyles.textStyleHigh());
+  }
+
+    static Text xLargeText(String text) {
+       return Text(text, style: CustomTextStyles.textStyleHighX());
   }
 }

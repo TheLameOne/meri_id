@@ -20,7 +20,7 @@ class _AddFriendState extends State<AddFriend> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 60,
               ),
               Padding(
@@ -30,7 +30,7 @@ class _AddFriendState extends State<AddFriend> {
                   style: TextStyle(fontSize: 32, color: Colors.grey[700]),
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               CustomTextField(
                 hintText: "Adhar Number",
                 hintTextSize: 16,
@@ -49,7 +49,7 @@ class _AddFriendState extends State<AddFriend> {
                 validator: () {},
                 labelText: 'Enter Phone Number',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               CustomTextField(
