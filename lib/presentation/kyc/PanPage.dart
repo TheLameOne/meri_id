@@ -59,7 +59,6 @@ class _PANPageState extends State<PANPage> {
               CustomButton(
                 postIcon: Icons.arrow_forward_ios,
                 labelText: "submit",
-                isLoading: true,
                 onTap: () {
                   _routeToAdhar();
                 },

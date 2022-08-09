@@ -57,9 +57,9 @@ class CustomButton extends StatelessWidget {
                     ],
                   )
                 : const SizedBox(
-                child: const CircularProgressIndicator(color: Styles.blackColor),
                 height: 24.0,
                 width: 24,
+                child: CircularProgressIndicator(color: Styles.blackColor),
               ),
           ),
         ),

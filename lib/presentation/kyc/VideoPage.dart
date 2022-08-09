@@ -33,7 +33,7 @@ class _VideoPageState extends State<VideoPage> {
               const SizedBox(
                 height: 32,
               ),
-              CustomText.xLargeText("UPLOAD PAN"),
+              CustomText.xLargeText("UPLOAD VIDEO"),
               Padding(
                 padding: const EdgeInsets.all(32),
                 child: CustomImageContainer(
