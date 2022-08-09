@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
-import 'package:meri_id/presentation/features/CameraScreen.dart';
+import 'package:meri_id/presentation/features/KYC/CameraScreen.dart';
+import 'package:meri_id/presentation/features/KYC/KYCScreen.dart';
 import 'package:meri_id/utils/global.dart';
 
 import '../custom/Fingerprint.dart';
-
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,7 +14,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class _HomeState extends State<Home> {
             child: Padding(
                 padding: const EdgeInsets.all(32),
                 child: Column(children: [
-                  Text( (isHindi) ?  "hi my name is khan" : "hi my name "), 
+                  Text((isHindi) ? "hi my name is khan" : "hi my name "),
                   buildAvailability(context),
                   const SizedBox(height: 24),
                   buildAuthenticate(context),
@@ -30,7 +29,7 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => CameraScreen()),
+                          MaterialPageRoute(builder: (context) => KYCScreen()),
                         );
                       },
                       child: const Text("Upload Documents"))
@@ -41,13 +40,16 @@ class _HomeState extends State<Home> {
             child: Icon(Icons.people),
             onPressed: () async {
               try {
-                dynamic conversationObject = {'appId': '259ee76a76674e8ee1a6d02613a91595f'};
-                dynamic result = await KommunicateFlutterPlugin.buildConversation(conversationObject);
+                dynamic conversationObject = {
+                  'appId': '259ee76a76674e8ee1a6d02613a91595f'
+                };
+                dynamic result =
+                    await KommunicateFlutterPlugin.buildConversation(
+                        conversationObject);
                 print("Conversation builder success : " + result.toString());
               } on Exception catch (e) {
                 print("Conversation builder error occurred : " + e.toString());
               }
             }));
   }
-
 }

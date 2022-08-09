@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -52,7 +51,9 @@ class _VideoViewPageState extends State<VideoViewPage> {
               child: InkWell(
                 onTap: () {
                   setState(() {
-                    _controller.value.isPlaying ? _controller.pause() : _controller.play();
+                    _controller.value.isPlaying
+                        ? _controller.pause()
+                        : _controller.play();
                   });
                 },
                 // Add here the submit button
@@ -60,7 +61,9 @@ class _VideoViewPageState extends State<VideoViewPage> {
                   radius: 33,
                   backgroundColor: Colors.black38,
                   child: Icon(
-                    _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                    _controller.value.isPlaying
+                        ? Icons.pause
+                        : Icons.play_arrow,
                     color: Colors.white,
                     size: 50,
                   ),

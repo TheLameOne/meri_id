@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meri_id/presentation/features/AddFriend.dart';
-import 'package:meri_id/presentation/features/CameraScreen.dart';
+import 'package:meri_id/presentation/features/KYC/CameraScreen.dart';
 import 'package:meri_id/presentation/auth/FirstPage.dart';
 import 'package:meri_id/presentation/features/LocationPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
@@ -12,7 +12,6 @@ import 'package:meri_id/presentation/auth/otp.dart';
 import 'package:meri_id/utils/LanguageChangeProvider.dart';
 import 'package:meri_id/utils/global.dart';
 import 'package:provider/provider.dart';
-import 'utils/generated/l10n.dart';
 import 'utils/strings.dart';
 import 'presentation/SplashPage.dart';
 
@@ -36,15 +35,9 @@ class MyApp extends StatelessWidget {
       create: (context) => LanguageChangeProvider(),
       child: Builder(
         builder: (context) => MaterialApp(
-            locale: Provider.of<LanguageChangeProvider>(context, listen: true).currentLocale,
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            title: (isHindi) ?  StringValues.appName.english : StringValues.appName.hindi ,
+            title: (isHindi)
+                ? StringValues.appName.english
+                : StringValues.appName.hindi,
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primaryColor: Colors.white,

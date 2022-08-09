@@ -3,7 +3,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'CameraViewPage.dart';
 import 'VideoViewPage.dart';
 
@@ -18,7 +17,6 @@ class _CameraScreenState extends State<CameraScreen> {
   late CameraController _cameraController;
   late Future<void> cameraValue;
   bool isRecoring = false;
-  bool flash = false;
   bool iscamerafront = true;
   double transform = 0;
 
@@ -66,20 +64,6 @@ class _CameraScreenState extends State<CameraScreen> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      IconButton(
-                          icon: Icon(
-                            flash ? Icons.flash_on : Icons.flash_off,
-                            color: Colors.white,
-                            size: 28,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              flash = !flash;
-                            });
-                            flash
-                                ? _cameraController.setFlashMode(FlashMode.torch)
-                                : _cameraController.setFlashMode(FlashMode.off);
-                          }),
                       GestureDetector(
                         onLongPress: () async {
                           await _cameraController.startVideoRecording();
@@ -88,7 +72,8 @@ class _CameraScreenState extends State<CameraScreen> {
                           });
                         },
                         onLongPressUp: () async {
-                          XFile videopath = await _cameraController.stopVideoRecording();
+                          XFile videopath =
+                              await _cameraController.stopVideoRecording();
                           setState(() {
                             isRecoring = false;
                           });
@@ -129,7 +114,8 @@ class _CameraScreenState extends State<CameraScreen> {
                               transform = transform + pi;
                             });
                             int cameraPos = iscamerafront ? 0 : 1;
-                            _cameraController = CameraController(cameras[cameraPos], ResolutionPreset.high);
+                            _cameraController = CameraController(
+                                cameras[cameraPos], ResolutionPreset.high);
                             cameraValue = _cameraController.initialize();
                           }),
                     ],
