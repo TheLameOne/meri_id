@@ -20,12 +20,10 @@ abstract class CustomTextStyles {
 
   static TextStyle textStyleHigh() {
     return const TextStyle(
-        fontSize: 18.0,
+        fontSize: 20.0,
         fontFamily: 'Montserrat',
         color: Colors.black,
         fontWeight: FontWeight.w600);
   }
-
-  
 
 }

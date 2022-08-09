@@ -41,6 +41,7 @@ dependencies:
   local_auth: ^2.1.1
   path_provider: ^2.0.11
   provider: ^5.0.0
+  shared_preferences:
   video_player: ^2.4.5  
 
 dev_dependencies:

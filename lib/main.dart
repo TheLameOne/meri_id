@@ -10,7 +10,6 @@ import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/auth/otp.dart';
 import 'package:meri_id/utils/LanguageChangeProvider.dart';
-import 'package:meri_id/utils/global.dart';
 import 'package:provider/provider.dart';
 import 'utils/generated/l10n.dart';
 import 'utils/strings.dart';
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: S.delegate.supportedLocales,
-            title: (isHindi) ?  StringValues.appName.english : StringValues.appName.hindi ,
+            title:StringValues.appName.english,
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primaryColor: Colors.white,

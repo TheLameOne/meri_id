@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 import 'package:meri_id/presentation/features/CameraScreen.dart';
-import 'package:meri_id/utils/global.dart';
 
 import '../custom/Fingerprint.dart';
 
@@ -22,7 +21,6 @@ class _HomeState extends State<Home> {
             child: Padding(
                 padding: const EdgeInsets.all(32),
                 child: Column(children: [
-                  Text( (isHindi) ?  "hi my name is khan" : "hi my name "), 
                   buildAvailability(context),
                   const SizedBox(height: 24),
                   buildAuthenticate(context),
@@ -38,7 +36,7 @@ class _HomeState extends State<Home> {
         floatingActionButton: FloatingActionButton(
             elevation: 12,
             tooltip: 'chat bot',
-            child: Icon(Icons.people),
+            child: const Icon(Icons.people),
             onPressed: () async {
               try {
                 dynamic conversationObject = {'appId': '259ee76a76674e8ee1a6d02613a91595f'};

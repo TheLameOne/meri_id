@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:meri_id/services/PreferenceService.dart';
 
 var currentPage = 0;
 var role = "user";
 bool isHindi = false;
+
+final PreferenceService preferenceService = PreferenceService.getInstance();
 
 String? validateEmail(String email) {
   if (email == null || email.isEmpty) return 'Required !!!';

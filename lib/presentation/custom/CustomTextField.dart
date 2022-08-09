@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meri_id/services/CustomComponentFunction.dart';
+import 'package:meri_id/services/widgets/CustomTextStyles.dart';
 import 'package:meri_id/utils/styles.dart';
 
 class CustomTextField extends StatelessWidget {

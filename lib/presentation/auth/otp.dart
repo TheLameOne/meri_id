@@ -28,7 +28,7 @@ class _OTPState extends State<OTP> {
               height: 100,
               width: 100,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             CustomTextField(
