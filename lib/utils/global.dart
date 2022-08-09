@@ -3,7 +3,6 @@ import 'package:meri_id/services/PreferenceService.dart';
 
 var currentPage = 0;
 var role = "user";
-bool isHindi = false;
 
 final PreferenceService preferenceService = PreferenceService.getInstance();
 
@@ -33,4 +32,5 @@ String? requiredString(String value) {
   if (value == null || value.isEmpty) return 'Required !!!';
   return null;
 }
+
 

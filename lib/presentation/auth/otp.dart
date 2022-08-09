@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomIcon.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
 import 'package:meri_id/presentation/splashPage.dart';
+import 'package:meri_id/services/widgets/CustomText.dart';
+import 'package:meri_id/utils/styles.dart';
 
 class OTP extends StatefulWidget {
   static const String routeNamed = 'OTP';
@@ -12,45 +15,58 @@ class OTP extends StatefulWidget {
 }
 
 class _OTPState extends State<OTP> {
+
   _routeToSplashPage() {
     Navigator.pushNamed(context, SplashPage.routeNamed);
+  }
+
+    _routeToPhoneNumber() {
+    Navigator.pushNamed(context, PhoneNumber.routeNamed);
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomIcon(
-              height: 100,
-              width: 100,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            CustomTextField(
-              hintText: "Enter OTP",
-              hintTextSize: 16,
-              initialValue: '',
-              onChanged: () {},
-              onSaved: () {},
-              validator: () {},
-              labelText: 'Enter OTP',
-            ),
-            Padding(
-              padding: const EdgeInsets.all(32),
-              child: CustomButton(
-                  postIcon: Icons.arrow_forward_ios,
-                  visiblepostIcon: true,
-                  labelText: "OTP ",
-                  onTap: () {
-                    _routeToSplashPage();
-                  }),
-            )
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomIcon(
+                height: 100,
+                width: 100,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              CustomTextField(
+                hintText: "",
+                hintTextSize: 16,
+                initialValue: '',
+                onChanged: () {},
+                onSaved: () {},
+                validator: () {},
+                labelText: "Enter OTP",
+              ),
+              const SizedBox(height :32),
+              CustomButton(
+                    postIcon: Icons.arrow_forward_ios,
+                    visiblepostIcon: false,
+                    labelText: "Submit",
+                    onTap: () {
+                      _routeToSplashPage();
+                    },
+                    containerColor: Styles.redColor
+                    ), 
+                    const SizedBox(height: 16,),
+           InkWell(
+             child:  CustomText.mediumText("Enter Number Again"),
+             onTap: (() => _routeToPhoneNumber()),
+           )
+            ],
+          ),
         ),
       ),
     );

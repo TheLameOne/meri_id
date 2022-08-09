@@ -16,8 +16,8 @@ class CustomIcon extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-              Styles.LOGO_IMAGE,
+            Image.asset(
+              Styles.STATIC_LOGO_IMAGE,
               height: height,
               width: width,
             ),

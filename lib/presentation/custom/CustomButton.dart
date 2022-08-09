@@ -44,7 +44,7 @@ class CustomButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(labelText,
-                          style: TextStyle(fontFamily: 'Montserrat', fontSize: 18, fontWeight: labelTextWeight)),
+                          style: TextStyle(fontFamily: 'Montserrat',fontSize: 18, fontWeight: labelTextWeight)),
                       Container(
                         child: (visiblepostIcon)
                             ? Icon(

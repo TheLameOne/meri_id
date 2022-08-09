@@ -31,7 +31,7 @@ class CustomTextField extends StatelessWidget {
       this.textInputType = TextInputType.text,
       this.icon = Icons.location_on,
       this.isPrefixIcon = false,
-      this.padding = 32,
+      this.padding = 0,
       this.size = false,
       this.onRegPage = false});
 
