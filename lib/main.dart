@@ -9,6 +9,7 @@ import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/auth/otp.dart';
 import 'package:meri_id/presentation/features/AddFriend.dart';
 import 'package:meri_id/presentation/features/LocationPage.dart';
+import 'package:meri_id/presentation/features/SvgScreen.dart';
 import 'package:meri_id/presentation/kyc/KycStepper.dart';
 import 'package:meri_id/presentation/kyc/OtherDocumentPage.dart';
 import 'utils/strings.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.white,
         ),
-        initialRoute: FirstPage.routeNamed,
+        initialRoute: SplashPage.routeNamed,
         routes: {
           SplashPage.routeNamed: (BuildContext context) => SplashPage(),
           FirstPage.routeNamed: (BuildContext context) => FirstPage(),
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           VideoPage.routeNamed: (BuildContext context) => VideoPage(),
           OtherDocumentPage.routeNamed: (BuildContext context) => OtherDocumentPage(),
           KycStepper.routeNamed: (BuildContext context) => KycStepper(),
+          SvgScreen.routeNamed: (BuildContext context) => SvgScreen(),
         });
   }
 }

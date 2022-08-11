@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:meri_id/model/Language.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
-import 'package:meri_id/services/widgets/CustomTextStyles.dart';
+import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/global.dart';
 import 'package:meri_id/utils/styles.dart';
 import '../custom/CustomScaffold.dart';
@@ -68,7 +67,7 @@ class _FirstPageState extends State<FirstPage> {
                     height: 200,
                     width: 200,
                   ),
-                  Text("मेरी ID", style: CustomTextStyles.textStyleHigh()),
+                  CustomText.xLargeText("मेरी ID"),
                 ],
               ),
               SizedBox(height: (_showFingerPrintButton) ? 120 : 80),

@@ -80,7 +80,7 @@ class _SplashPageState extends State<SplashPage> {
                       children: [
                     
                       Icon(icontab, color: currentPage == index ? Colors.black : Styles.blackColor, size: (28)),
-                      (currentPage == index) ? Container(margin:const EdgeInsets.only(left: 8) ,child: CustomText.mediumText(text)) : const Text('')
+                      (currentPage == index) ? Container(margin:const EdgeInsets.only(left: 8) ,child: CustomText.smalltext(text)) : const Text('')
                       ],
                     ),
                   )),

@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:meri_id/services/widgets/CustomTextStyles.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:meri_id/utils/styles.dart';
 
 abstract class CustomText {
 
   static Text smalltext(String text) {
-    return Text(text, style: CustomTextStyles.textStylelow());
+    return Text(text, style: GoogleFonts.montserrat(textStyle: const TextStyle(fontSize: 16 , color: Styles.blackColor , fontWeight: FontWeight.w600)));
   }
   static Text mediumText(String text) {
-       return Text(text, style: CustomTextStyles.textStyleMedium());
+       return Text(text, style:GoogleFonts.montserrat(textStyle: const TextStyle(fontSize: 18 , color: Styles.blackColor , fontWeight: FontWeight.w500)));
     
   }
   static Text largeText(String text) {
-       return Text(text, style: CustomTextStyles.textStyleHigh());
+       return Text(text, style: GoogleFonts.montserrat(textStyle: const TextStyle(fontSize: 24 , color: Styles.blackColor , fontWeight: FontWeight.w800)));
   }
 
     static Text xLargeText(String text) {
-       return Text(text, style: CustomTextStyles.textStyleHighX());
+       return Text(text, style: GoogleFonts.montserrat(textStyle: const TextStyle(fontSize: 32 , color: Styles.blackColor , fontWeight: FontWeight.bold)));
   }
+
 }

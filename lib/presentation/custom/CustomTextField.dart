@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meri_id/services/widgets/CustomTextStyles.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:meri_id/utils/styles.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -57,12 +57,12 @@ class CustomTextField extends StatelessWidget {
               onChanged: onChanged(),
               keyboardType: textInputType,
               initialValue: initialValue,
-              style: TextStyle(fontSize: 16),
+              style: GoogleFonts.montserrat(textStyle: const TextStyle(fontSize: 16 , color: Styles.blackColor)),
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: hintText,
                   labelText: labelText,
-                  labelStyle: CustomTextStyles.textStylelow(),
+                  labelStyle: GoogleFonts.montserrat(textStyle: const TextStyle(fontSize: 16 , color: Styles.blackColor)),
                   prefixIcon: isPrefixIcon
                       ? Icon(
                           icon,
@@ -70,7 +70,7 @@ class CustomTextField extends StatelessWidget {
                           size: preIconSize,
                         )
                       : null,
-                  hintStyle:  CustomTextStyles.textStylelow() ),
+                  hintStyle: GoogleFonts.montserrat(textStyle: const TextStyle(fontSize: 16 , color: Styles.blackColor)), ),
               
         ),
       ),

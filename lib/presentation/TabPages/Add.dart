@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meri_id/services/widgets/CustomText.dart';
 
 
 class Add extends StatefulWidget {
@@ -13,6 +14,15 @@ class _AddState extends State<Add> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Padding(
-            padding: const EdgeInsets.all(32), child: Column(children: [])));
+            padding: const EdgeInsets.all(32),
+             child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                const SizedBox(height: 32),
+                CustomText.xLargeText("Add Booking"),
+            ]
+          )
+        )
+      );
   }
 }

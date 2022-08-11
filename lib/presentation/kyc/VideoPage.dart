@@ -4,6 +4,7 @@ import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomImageContainer.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
+import 'package:meri_id/presentation/features/SvgScreen.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 
@@ -16,8 +17,10 @@ class VideoPage extends StatefulWidget {
 
 class _VideoPageState extends State<VideoPage> {
 
-    _routeToSplashPage() {
-    Navigator.popAndPushNamed(context, SplashPage.routeNamed);
+   
+
+   _routeToSvgScreen() {
+    Navigator.popAndPushNamed(context, SvgScreen.routeNamed);
   }
   
   @override
@@ -61,7 +64,7 @@ class _VideoPageState extends State<VideoPage> {
                 postIcon: Icons.arrow_forward_ios,
                 labelText: "submit",
                 onTap: () {
-                  _routeToSplashPage();
+                  _routeToSvgScreen();
                 },
                 containerColor: Styles.redColor,
               ),
