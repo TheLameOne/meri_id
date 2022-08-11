@@ -34,9 +34,12 @@ class CustomButton extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: containerColor,
-                boxShadow: const [BoxShadow(color: Styles.creamColor, blurRadius: 5, offset: Offset(2, 4))]),
+            borderRadius: BorderRadius.circular(5),
+            color: containerColor,
+            boxShadow: const [
+              BoxShadow(
+                  color: Styles.creamColor, blurRadius: 5, offset: Offset(2, 4))
+            ]),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Center(
@@ -45,7 +48,11 @@ class CustomButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(labelText,
-                          style:  GoogleFonts.montserrat(textStyle: const TextStyle(fontSize: 18 , color: Styles.blackColor , fontWeight: FontWeight.w600))),
+                          style: GoogleFonts.montserrat(
+                              textStyle: const TextStyle(
+                                  fontSize: 18,
+                                  color: Styles.backgroundColor,
+                                  fontWeight: FontWeight.w600))),
                       Container(
                         child: (visiblepostIcon)
                             ? Icon(
@@ -58,10 +65,10 @@ class CustomButton extends StatelessWidget {
                     ],
                   )
                 : const SizedBox(
-                height: 24.0,
-                width: 24,
-                child: CircularProgressIndicator(color: Styles.blackColor),
-              ),
+                    height: 24.0,
+                    width: 24,
+                    child: CircularProgressIndicator(color: Styles.blackColor),
+                  ),
           ),
         ),
       ),

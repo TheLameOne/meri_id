@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:meri_id/utils/styles.dart';
+import '../../services/widgets/CustomText.dart';
 import '../../utils/global.dart';
 
 class Info extends StatefulWidget {
-  const Info({Key? key}) : super(key: key);
-
+  static const String routeNamed = 'Info';
   @override
   State<Info> createState() => _InfoState();
 }
@@ -31,59 +31,54 @@ class _InfoState extends State<Info> {
         _isLoading = false;
         if (role == "user") {
           value = body["data"][0]["guideline"];
-        } else {
-          value = body["data"][1]["guideline"];
         }
       });
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SingleChildScrollView(
-          child: Container(
-              child: _isLoading
-                  ? const Center(child: CircularProgressIndicator(color : Styles.iconColor))
-                  : Padding(
-                      padding: const EdgeInsets.all(32),
-                      child: Column(
-                        children: [
-                          const Text("GuideLines",
-                              style: TextStyle(
-                                  fontSize: 32,
-                                  fontFamily: 'Montserrat',
-                                  color: Color.fromARGB(255, 171, 133, 133),
-                                  fontWeight: FontWeight.bold)),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Center(
-                              child: Text(value,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: 'Montserrat',
-                                      color: Colors.black.withOpacity(0.7),
-                                      fontWeight: FontWeight.w500))),
-
-          //                   Switch(
-          //   value: isHindi,
-          //   onChanged: (value) {
-          //     setState(() {
-          //       isHindi = value;
-          //     });
-          //   },
-          //   activeTrackColor: Colors.lightGreenAccent,
-          //   activeColor: Colors.green,
-          // ),                                  
-                        ],
-                      ),
-                    )),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Styles.backgroundColor,
+        appBar: AppBar(
+          actions: [],
+          backgroundColor: Styles.backgroundColor,
+          foregroundColor: Styles.blackColor,
+          elevation: 0,
         ),
-      ],
+        body: _isLoading
+            ? const Center(
+                child: CircularProgressIndicator(color: Styles.blackColor))
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText.xLargeText("GuideLines"),
+                      const SizedBox(
+                        height: 64,
+                      ),
+                      Center(
+                        child: CustomText.smalltext(value),
+                      ),
+
+                      //                   Switch(
+                      //   value: isHindi,
+                      //   onChanged: (value) {
+                      //     setState(() {
+                      //       isHindi = value;
+                      //     });
+                      //   },
+                      //   activeTrackColor: Colors.lightGreenAccent,
+                      //   activeColor: Colors.green,
+                      // ),
+                    ],
+                  ),
+                ),
+              ),
+      ),
     );
   }
 }
