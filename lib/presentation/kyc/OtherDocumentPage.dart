@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+
 import 'package:image_picker/image_picker.dart';
-import 'package:meri_id/presentation/KYC/AadharPage.dart';
+import 'package:meri_id/presentation/KYC/VideoPage.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomImageContainer.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 
-class PANPage extends StatefulWidget {
-  static const String routeNamed = 'panPage';
+class OtherDocumentPage extends StatefulWidget {
+  static const String routeNamed = 'otherDocumentPage';
 
   @override
-  State<PANPage> createState() => _PANPageState();
+  State<OtherDocumentPage> createState() => _OtherDocumentPageState();
 }
 
-class _PANPageState extends State<PANPage> {
-  _routeToAdhar() {
-    Navigator.popAndPushNamed(context, AadharPage.routeNamed);
+class _OtherDocumentPageState extends State<OtherDocumentPage> {
+  _routeToVideoPage() {
+    Navigator.popAndPushNamed(context, VideoPage.routeNamed);
   }
 
   @override
@@ -32,7 +33,7 @@ class _PANPageState extends State<PANPage> {
               const SizedBox(
                 height: 32,
               ),
-              CustomText.xLargeText("UPLOAD PAN"),
+              CustomText.xLargeText("UPLOAD OTHER DOCUMENTS"),
               Padding(
                 padding: const EdgeInsets.all(32),
                 child: CustomImageContainer(
@@ -60,7 +61,7 @@ class _PANPageState extends State<PANPage> {
                 postIcon: Icons.arrow_forward_ios,
                 labelText: "submit",
                 onTap: () {
-                  _routeToAdhar();
+                  _routeToVideoPage();
                 },
                 containerColor: Styles.redColor,
               ),

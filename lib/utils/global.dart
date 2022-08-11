@@ -33,3 +33,31 @@ String? requiredString(String value) {
 }
 
 
+  // Widget _dialoque() {
+  //   return Builder(builder: (context) {
+  //     return AlertDialog(
+  //       title: const Text('In Which Language you want to use App'),
+  //       actions: <Widget>[
+  //         TextButton(
+  //           child: const Text('Hindi'),
+  //           onPressed: () {
+  //             setState(() {
+  //               _language = false;
+  //               preferenceService.setLanguage("hindi");
+  //               _isVisible = false;
+  //             });
+  //           },
+  //         ),
+  //         TextButton(
+  //           child: const Text('English'),
+  //           onPressed: () {
+  //             setState(() {
+  //               preferenceService.setLanguage("english");
+  //               _isVisible = false;
+  //             });
+  //           },
+  //         ),
+  //       ],
+  //     );
+  //   });
+  // }

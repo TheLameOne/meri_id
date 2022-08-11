@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:meri_id/presentation/KYC/PanPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomIcon.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
+import 'package:meri_id/presentation/kyc/KycStepper.dart';
 import 'package:meri_id/presentation/splashPage.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
@@ -18,15 +18,14 @@ class OTP extends StatefulWidget {
 class _OTPState extends State<OTP> {
 
   _routeToSplashPage() {
-    Navigator.pushNamed(context, SplashPage.routeNamed);
+    Navigator.popAndPushNamed(context, SplashPage.routeNamed);
   }
 
+ _routeToKycStepper() {
+    Navigator.popAndPushNamed(context, KycStepper.routeNamed);
+  }
     _routeToPhoneNumber() {
     Navigator.pushNamed(context, PhoneNumber.routeNamed);
-  }
-
-      _routeToPanpage() {
-    Navigator.pushNamed(context, PANPage.routeNamed);
   }
 
   @override
@@ -61,11 +60,12 @@ class _OTPState extends State<OTP> {
                     visiblepostIcon: false,
                     labelText: "Submit",
                     onTap: () {
-                      _routeToPanpage();
+                      _routeToKycStepper();
                     },
                     containerColor: Styles.redColor
                     ), 
                     const SizedBox(height: 16,),
+           
            InkWell(
              child:  CustomText.mediumText("Enter Number Again"),
              onTap: (() => _routeToPhoneNumber()),

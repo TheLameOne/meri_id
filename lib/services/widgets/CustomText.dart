@@ -7,7 +7,7 @@ abstract class CustomText {
     return Text(text, style: CustomTextStyles.textStylelow());
   }
   static Text mediumText(String text) {
-       return Text(text, style: CustomTextStyles.textStylelow());
+       return Text(text, style: CustomTextStyles.textStyleMedium());
     
   }
   static Text largeText(String text) {

@@ -17,9 +17,9 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+
   bool _showFingerPrintButton = true;
   bool _isTimer = true;
-  bool _isVisible = false;
   bool _language = true;
 
   @override
@@ -42,12 +42,6 @@ class _FirstPageState extends State<FirstPage> {
       } else {
         _showFingerPrintButton = true;
       }
-      if (lang == null || lang == "") {
-        _isVisible = true;
-      } else {
-        _isVisible = false;
-      }
-
       if (lang == 'hindi') _language = false;
       _isTimer = false;
     });
@@ -55,35 +49,6 @@ class _FirstPageState extends State<FirstPage> {
 
   route() {
     Navigator.popAndPushNamed(context, PhoneNumber.routeNamed);
-  }
-
-  Widget _dialoque() {
-    return Builder(builder: (context) {
-      return AlertDialog(
-        title: const Text('In Which Language you want to use App'),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Hindi'),
-            onPressed: () {
-              setState(() {
-                _language = false;
-                preferenceService.setLanguage("hindi");
-                _isVisible = false;
-              });
-            },
-          ),
-          TextButton(
-            child: const Text('English'),
-            onPressed: () {
-              setState(() {
-                preferenceService.setLanguage("english");
-                _isVisible = false;
-              });
-            },
-          ),
-        ],
-      );
-    });
   }
 
   @override
@@ -100,19 +65,18 @@ class _FirstPageState extends State<FirstPage> {
                 children: [
                   Image.asset(
                     Styles.STATIC_LOGO_IMAGE,
-                    height: 160,
-                    width: 160,
+                    height: 200,
+                    width: 200,
                   ),
                   Text("मेरी ID", style: CustomTextStyles.textStyleHigh()),
                 ],
               ),
-              (_isVisible) ? _dialoque() : Container(),
               SizedBox(height: (_showFingerPrintButton) ? 120 : 80),
               Column(
                 children: [
                   Padding(
                       padding:
-                          (!_isTimer && _showFingerPrintButton && !_isVisible)
+                          (!_isTimer && _showFingerPrintButton)
                               ? const EdgeInsets.all(0)
                               : const EdgeInsets.all(0),
                       child: (!_isTimer && _showFingerPrintButton)
@@ -127,13 +91,13 @@ class _FirstPageState extends State<FirstPage> {
                           : Container()),
                   Padding(
                       padding: const EdgeInsets.only(top: 32),
-                      child: (_isTimer == false && !_isVisible)
+                      child: (_isTimer == false)
                           ? CustomButton(
                               postIcon: Icons.arrow_forward_ios,
                               visiblepostIcon: false,
                               labelText: (_language)
                                   ? "Sign in by mobile number"
-                                  : "Sign in by mobile number",
+                                  : "Sign in by mobile number hindi",
                               containerColor: Styles.redColor,
                               onTap: () {
                                 route();

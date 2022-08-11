@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:meri_id/utils/styles.dart';
 
-class Add extends StatelessWidget {
+
+class Add extends StatefulWidget {
+  const Add({Key? key}) : super(key: key);
+
+  @override
+  State<Add> createState() => _AddState();
+}
+
+class _AddState extends State<Add> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Styles.backgroundColor,
-    );
+    return SingleChildScrollView(
+        child: Padding(
+            padding: const EdgeInsets.all(32), child: Column(children: [])));
   }
 }

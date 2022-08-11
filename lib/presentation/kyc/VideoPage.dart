@@ -17,7 +17,7 @@ class VideoPage extends StatefulWidget {
 class _VideoPageState extends State<VideoPage> {
 
     _routeToSplashPage() {
-    Navigator.pushNamed(context, SplashPage.routeNamed);
+    Navigator.popAndPushNamed(context, SplashPage.routeNamed);
   }
   
   @override
