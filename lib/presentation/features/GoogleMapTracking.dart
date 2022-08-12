@@ -7,8 +7,7 @@ import 'package:location/location.dart';
 import 'package:meri_id/utils/styles.dart';
 
 class GoogleMapTracking extends StatefulWidget {
-
-    static const String routeNamed = 'tracking';
+  static const String routeNamed = 'tracking';
   const GoogleMapTracking({Key? key}) : super(key: key);
 
   @override
@@ -21,37 +20,36 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
   static const LatLng destination = LatLng(37.33429383, -122.06600055);
 
   List<LatLng> polylineCoordinates = [];
-void getPolyPoints() async {
-  PolylinePoints polylinePoints = PolylinePoints();
-PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-    "AIzaSyC71uktesLZfNFqlMcKRgJFdNiyZoug9o0", // Your Google Map Key
-    PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
-    PointLatLng(destination.latitude, destination.longitude),
-  );
-if (result.points.isNotEmpty) {
-    result.points.forEach(
-      (PointLatLng point) => polylineCoordinates.add(
-        LatLng(point.latitude, point.longitude),
-      ),
+  void getPolyPoints() async {
+    PolylinePoints polylinePoints = PolylinePoints();
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      "AIzaSyC71uktesLZfNFqlMcKRgJFdNiyZoug9o0", // Your Google Map Key
+      PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
+      PointLatLng(destination.latitude, destination.longitude),
     );
-    setState(() {});
+    if (result.points.isNotEmpty) {
+      result.points.forEach(
+        (PointLatLng point) => polylineCoordinates.add(
+          LatLng(point.latitude, point.longitude),
+        ),
+      );
+      setState(() {});
+    }
   }
-}
 
-
-LocationData? currentLocation;
-void getCurrentLocation() async {
+  LocationData? currentLocation;
+  void getCurrentLocation() async {
     Location location = Location();
-location.getLocation().then(
+    location.getLocation().then(
       (location) {
         currentLocation = location;
       },
     );
-GoogleMapController googleMapController = await _controller.future;
-location.onLocationChanged.listen(
+    GoogleMapController googleMapController = await _controller.future;
+    location.onLocationChanged.listen(
       (newLoc) {
         currentLocation = newLoc;
-googleMapController.animateCamera(
+        googleMapController.animateCamera(
           CameraUpdate.newCameraPosition(
             CameraPosition(
               zoom: 13.5,
@@ -62,66 +60,67 @@ googleMapController.animateCamera(
             ),
           ),
         );
-        if(mounted) setState(() {});
+        // if(mounted)
+        setState(() {});
       },
     );
   }
 
-
-@override
-void initState() {
-  getPolyPoints();
-  getCurrentLocation();
-  super.initState();
-}
-
+  @override
+  void initState() {
+    getPolyPoints();
+    getCurrentLocation();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-                backgroundColor: Styles.backgroundColor,
-           appBar: AppBar(
+        backgroundColor: Styles.backgroundColor,
+        appBar: AppBar(
           actions: [],
           backgroundColor: Colors.white,
           foregroundColor: Styles.blackColor,
           elevation: 0,
         ),
         body: currentLocation == null
-  ? const Center(child: CircularProgressIndicator(color: Styles.redColor),)
-  : GoogleMap(
-      initialCameraPosition: CameraPosition(
-        target: LatLng(
-            currentLocation!.latitude!, currentLocation!.longitude!),
-        zoom: 13.5,
-      ),
-      markers: {
-        Marker(
-          markerId: const MarkerId("currentLocation"),
-          position: LatLng(
-              currentLocation!.latitude!, currentLocation!.longitude!),
-        ),
-        const Marker(
-          markerId: MarkerId("source"),
-          position: sourceLocation,
-        ),
-        const Marker(
-          markerId: MarkerId("destination"),
-          position: destination,
-        ),
-      },
-      onMapCreated: (mapController) {
-        _controller.complete(mapController);
-      },
-      polylines: {
-        Polyline(
-          polylineId: const PolylineId("route"),
-          points: polylineCoordinates,
-          color: const Color(0xFF7B61FF),
-          width: 6,
-        ),
-      },
-        ),
+            ? const Center(
+                child: CircularProgressIndicator(color: Styles.redColor),
+              )
+            : GoogleMap(
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(
+                      currentLocation!.latitude!, currentLocation!.longitude!),
+                  zoom: 13.5,
+                ),
+                markers: {
+                  Marker(
+                    markerId: const MarkerId("currentLocation"),
+                    position: LatLng(currentLocation!.latitude!,
+                        currentLocation!.longitude!),
+                  ),
+                  const Marker(
+                    markerId: MarkerId("source"),
+                    position: sourceLocation,
+                  ),
+                  const Marker(
+                    markerId: MarkerId("destination"),
+                    position: destination,
+                  ),
+                },
+                onMapCreated: (mapController) {
+                  _controller.complete(mapController);
+                },
+                polylines: {
+                  Polyline(
+                    polylineId: const PolylineId("route"),
+                    points: polylineCoordinates,
+                    color: const Color(0xFF7B61FF),
+                    width: 6,
+                  ),
+                },
+              ),
       ),
     );
   }

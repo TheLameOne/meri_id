@@ -61,7 +61,7 @@ class _InfoState extends State<Info> {
                         height: 64,
                       ),
                       Center(
-                        child: CustomText.smalltext(value),
+                        child: CustomText.smallText(value),
                       ),
 
                       //                   Switch(
