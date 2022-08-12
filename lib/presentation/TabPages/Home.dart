@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:meri_id/presentation/custom/CustomButton.dart';
+import 'package:meri_id/presentation/features/GoogleMapTracking.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
+import 'package:meri_id/utils/styles.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,6 +12,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  _routoTracking(){
+     Navigator.pushNamed(context, GoogleMapTracking.routeNamed);
+}
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -19,6 +26,16 @@ class _HomeState extends State<Home> {
              children: [
               const SizedBox(height: 32),
               CustomText.xLargeText("Home"),
+               CustomButton(
+                       postIconSize: 20,
+                    postIcon: Icons.arrow_forward,
+                    visiblepostIcon: false,
+                    labelText: "tracking ",
+                    containerColor: Styles.redColor,
+                    onTap: () {
+                    _routoTracking();
+                    }), 
+              
           ])),
     );
   }

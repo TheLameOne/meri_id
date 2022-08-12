@@ -8,6 +8,7 @@ import 'package:meri_id/presentation/auth/FirstPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/auth/otp.dart';
 import 'package:meri_id/presentation/features/AddFriend.dart';
+import 'package:meri_id/presentation/features/GoogleMapTracking.dart';
 import 'package:meri_id/presentation/features/LocationPage.dart';
 import 'package:meri_id/presentation/features/SvgScreen.dart';
 import 'package:meri_id/presentation/kyc/KycStepper.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           OtherDocumentPage.routeNamed: (BuildContext context) => OtherDocumentPage(),
           KycStepper.routeNamed: (BuildContext context) => KycStepper(),
           SvgScreen.routeNamed: (BuildContext context) => SvgScreen(),
+          GoogleMapTracking.routeNamed: (BuildContext context) => GoogleMapTracking(),
         });
   }
 }
