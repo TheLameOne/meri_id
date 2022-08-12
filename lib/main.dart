@@ -9,10 +9,14 @@ import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/auth/otp.dart';
 import 'package:meri_id/presentation/features/AddFriend.dart';
 import 'package:meri_id/presentation/features/GoogleMapTracking.dart';
+import 'package:meri_id/presentation/features/Info.dart';
+import 'package:meri_id/presentation/features/Issue.dart';
+import 'package:meri_id/presentation/features/Language.dart';
 import 'package:meri_id/presentation/features/LocationPage.dart';
 import 'package:meri_id/presentation/features/SvgScreen.dart';
 import 'package:meri_id/presentation/kyc/KycStepper.dart';
 import 'package:meri_id/presentation/kyc/OtherDocumentPage.dart';
+import 'presentation/features/Feeds.dart';
 import 'utils/strings.dart';
 
 Future<void> main() async {
@@ -46,10 +50,15 @@ class MyApp extends StatelessWidget {
           PANPage.routeNamed: (BuildContext context) => PANPage(),
           AadharPage.routeNamed: (BuildContext context) => AadharPage(),
           VideoPage.routeNamed: (BuildContext context) => VideoPage(),
-          OtherDocumentPage.routeNamed: (BuildContext context) => OtherDocumentPage(),
+          OtherDocumentPage.routeNamed: (BuildContext context) =>
+              OtherDocumentPage(),
           KycStepper.routeNamed: (BuildContext context) => KycStepper(),
           SvgScreen.routeNamed: (BuildContext context) => SvgScreen(),
           GoogleMapTracking.routeNamed: (BuildContext context) => GoogleMapTracking(),
+          Feeds.routeNamed: (BuildContext context) => Feeds(),
+          LanguagePage.routeNamed: (BuildContext context) => LanguagePage(),
+          Issue.routeNamed: (BuildContext context) => Issue(),
+          Info.routeNamed: (BuildContext context) => Info(),
         });
   }
 }

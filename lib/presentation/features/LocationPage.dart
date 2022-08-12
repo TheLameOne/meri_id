@@ -32,9 +32,9 @@ class _LocationState extends State<Location> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Your Operator Location"),
+          title: const Text("Your Operator Location"),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.pushNamed(context, OTP.routeNamed),
           ),
           centerTitle: true,
@@ -42,7 +42,8 @@ class _LocationState extends State<Location> {
         body: Stack(
           children: [
             GoogleMap(
-              initialCameraPosition: CameraPosition(target: LatLng(lat, long), zoom: 12.0),
+              initialCameraPosition:
+                  CameraPosition(target: LatLng(lat, long), zoom: 12.0),
               markers: Set.from(allMarkers),
             ),
           ],

@@ -1,58 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:meri_id/utils/styles.dart';
+import '../../services/widgets/CustomText.dart';
 import '../custom/CustomButton.dart';
 
 class Issue extends StatefulWidget {
-  const Issue({Key? key}) : super(key: key);
-
+  static const String routeNamed = 'Issue';
   @override
   State<Issue> createState() => _IssueState();
 }
 
 class _IssueState extends State<Issue> {
-  _raiseIssue() {
-  }
-
+  _raiseIssue() {}
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            children: [
-              const Text("Raise Issue",
-                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 32)),
-              const SizedBox(
-                height: 32,
-              ),
-              Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.white,
-                    border: Border.all(width: 2, color: Styles.iconColor),
-                  ),
-                  child: TextField(
-                      keyboardType: TextInputType.multiline,
-                      minLines: 3,
-                      maxLines: null,
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontFamily: 'Montserrat',
-                          color: Colors.black.withOpacity(0.5),
-                          fontWeight: FontWeight.w300))),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 32),
-                child: CustomButton(
-                    postIcon: Icons.arrow_forward_ios,
-                    labelText: "Issue",
-                    onTap: () {
-                      _raiseIssue();
-                    }),
-              )
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        actions: [],
+        backgroundColor: Styles.backgroundColor,
+        foregroundColor: Styles.blackColor,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Styles.backgroundColor,
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText.xLargeText("Raise Issue"),
+                const SizedBox(
+                  height: 32,
+                ),
+                // from here
+                Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Styles.grayColor,
+                    ),
+                    child: TextField(
+                        keyboardType: TextInputType.multiline,
+                        minLines: 3,
+                        maxLines: null,
+                        cursorColor: Styles.blackColor,
+                        decoration: InputDecoration(border: InputBorder.none),
+                        style: GoogleFonts.montserrat(
+                            textStyle: const TextStyle(
+                                fontSize: 16,
+                                color: Styles.blackColor,
+                                fontWeight: FontWeight.w400)))),
+                // to here
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  child: CustomButton(
+                      postIcon: Icons.arrow_forward_ios,
+                      labelText: "Issue",
+                      containerColor: Styles.redColor,
+                      onTap: () {
+                        _raiseIssue();
+                      }),
+                )
+              ],
+            ),
           ),
         ),
       ),
