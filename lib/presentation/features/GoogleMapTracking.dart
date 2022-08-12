@@ -62,7 +62,7 @@ googleMapController.animateCamera(
             ),
           ),
         );
-setState(() {});
+        if(mounted) setState(() {});
       },
     );
   }
@@ -74,15 +74,13 @@ void initState() {
   getCurrentLocation();
   super.initState();
 }
- @override
-  void dispose() {
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+                backgroundColor: Styles.backgroundColor,
            appBar: AppBar(
           actions: [],
           backgroundColor: Colors.white,

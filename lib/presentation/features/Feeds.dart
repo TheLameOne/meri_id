@@ -17,9 +17,10 @@ class _FeedsState extends State<Feeds> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Styles.backgroundColor,
         appBar: AppBar(
           actions: [],
-          backgroundColor: Colors.white,
+          backgroundColor: Styles.backgroundColor,
           foregroundColor: Styles.blackColor,
           elevation: 0,
         ),
@@ -31,7 +32,7 @@ class _FeedsState extends State<Feeds> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText.xLargeText("Neews Feed"),
+                  CustomText.xLargeText("News Feed"),
                   const SizedBox(
                     height: 64,
                   ),
