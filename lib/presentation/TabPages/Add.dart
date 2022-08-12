@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meri_id/presentation/custom/CustomTimeBox.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 
 import '../../utils/styles.dart';
@@ -26,6 +27,7 @@ class _AddState extends State<Add> {
               const SizedBox(
                 height: 64,
               ),
+              CustomTimeBox(),
             ],
           ),
         ),
