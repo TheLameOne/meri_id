@@ -8,6 +8,7 @@ import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/auth/FirstPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/auth/otp.dart';
+import 'package:meri_id/presentation/features/QRpage.dart';
 import 'package:meri_id/presentation/features/AddFriend.dart';
 import 'package:meri_id/presentation/features/ChooseAddress.dart';
 import 'package:meri_id/presentation/features/ChooseTimeSlot.dart';
@@ -52,17 +53,17 @@ class MyApp extends StatelessWidget {
           PANPage.routeNamed: (BuildContext context) => PANPage(),
           AadharPage.routeNamed: (BuildContext context) => AadharPage(),
           VideoPage.routeNamed: (BuildContext context) => VideoPage(),
-          OtherDocumentPage.routeNamed: (BuildContext context) =>
-              OtherDocumentPage(),
+          OtherDocumentPage.routeNamed: (BuildContext context) =>OtherDocumentPage(),
           KycStepper.routeNamed: (BuildContext context) => KycStepper(),
-          SvgScreen.routeNamed: (BuildContext context) => SvgScreen(),
-          GoogleMapTracking.routeNamed: (BuildContext context) => GoogleMapTracking(),
+          SvgScreen.routeNamed: (BuildContext context) => const SvgScreen(),
+          GoogleMapTracking.routeNamed: (BuildContext context) => const GoogleMapTracking(),
           Feeds.routeNamed: (BuildContext context) => Feeds(),
           LanguagePage.routeNamed: (BuildContext context) => LanguagePage(),
           Issue.routeNamed: (BuildContext context) => Issue(),
           Info.routeNamed: (BuildContext context) => Info(),
-          ChooseTimeSlot.routeNamed: (BuildContext context) => ChooseTimeSlot(),
-          ChooseAddress.routeNamed: (BuildContext context) => ChooseAddress(),
+          ChooseTimeSlot.routeNamed: (BuildContext context) => const ChooseTimeSlot(),
+          ChooseAddress.routeNamed: (BuildContext context) => const ChooseAddress(),
+
         });
   }
 }

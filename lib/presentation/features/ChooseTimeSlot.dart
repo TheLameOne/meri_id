@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
+import 'package:meri_id/presentation/features/QRpage.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 
@@ -14,7 +15,17 @@ class ChooseTimeSlot extends StatefulWidget {
 class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
   String? radioValue;
 
-  _submit() {}
+  _submit() {
+    _routeToQRPage();
+  }
+
+  _routeToQRPage() {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+       MaterialPageRoute(builder: (context) => const QRpage(data: "lets do it")),
+    );
+  }
 
   Widget _timeWidget(String startTime, String endTime, String val) {
     return Row(
@@ -50,10 +61,9 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
               groupValue: radioValue,
               onChanged: (val) {
                 setState(() {
-                   radioValue = val.toString();
-                     print(radioValue);
+                  radioValue = val.toString();
+                  print(radioValue);
                 });
-               
               }),
         ),
       ],
@@ -110,7 +120,7 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                                 postIconSize: 20,
                                 postIcon: Icons.arrow_forward,
                                 visiblepostIcon: false,
-                                labelText: "Next Page ",
+                                labelText: "Submit",
                                 containerColor: Styles.redColor,
                                 onTap: () {
                                   _submit();

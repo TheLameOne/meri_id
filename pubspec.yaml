@@ -50,6 +50,7 @@ dependencies:
   dropdown_button2: ^1.7.2
   flutter_google_places: ^0.3.0
   uuid: 3.0.6
+  qr_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1
