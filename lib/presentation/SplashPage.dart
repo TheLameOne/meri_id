@@ -3,7 +3,6 @@ import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 import 'package:meri_id/presentation/TabPages/Add.dart';
 import 'package:meri_id/presentation/TabPages/Home.dart';
 import 'package:meri_id/presentation/TabPages/Profile.dart';
-import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/global.dart';
 import 'package:meri_id/utils/styles.dart';
 
@@ -100,34 +99,33 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar:_getBottomBar(),
           backgroundColor: Colors.white,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[Expanded(child: _getBody()), _getBottomBar()],
+            children: <Widget>[Expanded(child: _getBody())],
           ),
-          floatingActionButton: Container(
-            padding: const EdgeInsets.only(bottom: 72),
-            child: FloatingActionButton(
-                backgroundColor: Styles.purpleColor,
-                elevation: 12,
-                tooltip: 'chat bot',
-                child: const Icon(Icons.help, color: Styles.blackColor),
-                onPressed: () async {
-                  try {
-                    dynamic conversationObject = {
-                      'appId': '259ee76a76674e8ee1a6d02613a91595f'
-                    };
-                    dynamic result =
-                        await KommunicateFlutterPlugin.buildConversation(
-                            conversationObject);
-                    print(
-                        "Conversation builder success : " + result.toString());
-                  } on Exception catch (e) {
-                    print("Conversation builder error occurred : " +
-                        e.toString());
-                  }
-                }),
-          )),
+          floatingActionButton: FloatingActionButton(
+              backgroundColor: Styles.purpleColor,
+              elevation: 12,
+              tooltip: 'chat bot',
+              child: const Icon(Icons.help, color: Styles.blackColor),
+              onPressed: () async {
+                try {
+                  dynamic conversationObject = {
+                    'appId': '259ee76a76674e8ee1a6d02613a91595f'
+                  };
+                  dynamic result =
+                      await KommunicateFlutterPlugin.buildConversation(
+                          conversationObject);
+                  print(
+                      "Conversation builder success : " + result.toString());
+                } on Exception catch (e) {
+                  print("Conversation builder error occurred : " +
+                      e.toString());
+                }
+              })),
+
     );
   }
 }

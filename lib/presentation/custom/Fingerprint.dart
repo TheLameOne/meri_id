@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:meri_id/presentation/features/LocationPage.dart';
-
 import '../../services/LocalAuthApi.dart';
 
 class FingerprintPage extends StatelessWidget {

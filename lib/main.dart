@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:meri_id/presentation/KYC/AadharPage.dart';
 import 'package:meri_id/presentation/KYC/PanPage.dart';
 import 'package:meri_id/presentation/KYC/VideoPage.dart';
@@ -8,11 +9,12 @@ import 'package:meri_id/presentation/auth/FirstPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/auth/otp.dart';
 import 'package:meri_id/presentation/features/AddFriend.dart';
+import 'package:meri_id/presentation/features/ChooseAddress.dart';
+import 'package:meri_id/presentation/features/ChooseTimeSlot.dart';
 import 'package:meri_id/presentation/features/GoogleMapTracking.dart';
 import 'package:meri_id/presentation/features/Info.dart';
 import 'package:meri_id/presentation/features/Issue.dart';
 import 'package:meri_id/presentation/features/Language.dart';
-import 'package:meri_id/presentation/features/LocationPage.dart';
 import 'package:meri_id/presentation/features/SvgScreen.dart';
 import 'package:meri_id/presentation/kyc/KycStepper.dart';
 import 'package:meri_id/presentation/kyc/OtherDocumentPage.dart';
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: Colors.white,
+       textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)
         ),
         initialRoute: SplashPage.routeNamed,
         routes: {
@@ -45,7 +48,6 @@ class MyApp extends StatelessWidget {
           FirstPage.routeNamed: (BuildContext context) => FirstPage(),
           OTP.routeNamed: (BuildContext context) => OTP(),
           PhoneNumber.routeNamed: (BuildContext context) => PhoneNumber(),
-          Location.routeNamed: (BuildContext context) => Location(),
           AddFriend.routeNamed: (BuildContext context) => AddFriend(),
           PANPage.routeNamed: (BuildContext context) => PANPage(),
           AadharPage.routeNamed: (BuildContext context) => AadharPage(),
@@ -59,6 +61,8 @@ class MyApp extends StatelessWidget {
           LanguagePage.routeNamed: (BuildContext context) => LanguagePage(),
           Issue.routeNamed: (BuildContext context) => Issue(),
           Info.routeNamed: (BuildContext context) => Info(),
+          ChooseTimeSlot.routeNamed: (BuildContext context) => ChooseTimeSlot(),
+          ChooseAddress.routeNamed: (BuildContext context) => ChooseAddress(),
         });
   }
 }

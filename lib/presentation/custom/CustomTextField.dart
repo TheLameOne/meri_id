@@ -19,6 +19,10 @@ class CustomTextField extends StatelessWidget {
   final bool size;
   final bool onRegPage;
 
+  final int minLine;
+  final int? maxLine;
+  final Color cursorColor;
+
   CustomTextField(
       {required this.labelText,
       required this.hintText,
@@ -33,26 +37,29 @@ class CustomTextField extends StatelessWidget {
       this.isPrefixIcon = false,
       this.padding = 0,
       this.size = false,
-      this.onRegPage = false});
+      this.onRegPage = false , 
+      this.cursorColor = Styles.blackColor,
+      this.maxLine = null , 
+      this.minLine = 1
+     });
+
+
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding),
       child: Container(
-        decoration: (onRegPage == true)
-            ? BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
-                border: Border.all(width: 2, color: Styles.iconColor),
-              )
-            : BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
-                boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 5, offset: Offset(2, 4))]),
+        decoration:   BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Styles.grayColor,
+                    ),
         child: Padding(
           padding: (isPrefixIcon) ? const EdgeInsets.all(0) : const EdgeInsets.only(left: 16),
           child: TextFormField(
+            cursorColor: cursorColor,
+              minLines: minLine,
+              maxLines: maxLine,
               onSaved: onSaved(),
               onChanged: onChanged(),
               keyboardType: textInputType,
@@ -71,10 +78,14 @@ class CustomTextField extends StatelessWidget {
                         )
                       : null,
                   hintStyle: GoogleFonts.montserrat(textStyle: const TextStyle(fontSize: 16 , color: Styles.blackColor)), ),
-              
+  
         ),
       ),
     )
     );
   }
 }
+
+
+
+
