@@ -8,7 +8,7 @@ import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/auth/FirstPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/auth/otp.dart';
-import 'package:meri_id/presentation/features/QRpage.dart';
+import 'package:meri_id/presentation/features/BookingDetail.dart';
 import 'package:meri_id/presentation/features/AddFriend.dart';
 import 'package:meri_id/presentation/features/ChooseAddress.dart';
 import 'package:meri_id/presentation/features/ChooseTimeSlot.dart';
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
           Info.routeNamed: (BuildContext context) => Info(),
           ChooseTimeSlot.routeNamed: (BuildContext context) => const ChooseTimeSlot(),
           ChooseAddress.routeNamed: (BuildContext context) => const ChooseAddress(),
-
+          BookingDetail.routeNamed: (BuildContext context) => const BookingDetail(),
         });
   }
 }

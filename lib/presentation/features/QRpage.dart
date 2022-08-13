@@ -9,7 +9,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 class QRpage extends StatefulWidget {
   final String data;
 
-  const QRpage({Key? key ,required this.data}) : super(key: key);
+  const QRpage({Key? key, required this.data}) : super(key: key);
 
   @override
   State<QRpage> createState() => _QRpageState();
@@ -20,28 +20,28 @@ class _QRpageState extends State<QRpage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor:    Styles.backgroundColor,
+          backgroundColor: Styles.backgroundColor,
           body: Container(
               color: Styles.backgroundColor,
               child: Padding(
                   padding: const EdgeInsets.all(32),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomText.largeText("QR code of booking"),
-                             const SizedBox(
+                            const SizedBox(
                               height: 16,
                             ),
                             CustomText.mediumText("Booking id"),
-                          
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 32 ,vertical: 128),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 32, vertical: 128),
                               child: QrImage(
-                                data: (widget.data == null) ? ""  : widget.data,
+                                data: (widget.data == null) ? "" : widget.data,
                                 version: QrVersions.auto,
                                 size: 320,
                               ),
@@ -67,9 +67,7 @@ class _QRpageState extends State<QRpage> {
                                 labelText: "Go Back",
                                 containerColor: Styles.redColor,
                                 onTap: () {
-                                  currentPage = 0;
-                                  Navigator.popAndPushNamed(
-                                      context, SplashPage.routeNamed);
+                                  Navigator.pop(context);
                                 })
                       ])))),
     );

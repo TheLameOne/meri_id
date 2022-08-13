@@ -9,7 +9,7 @@ abstract class CustomText {
             textStyle: const TextStyle(
                 fontSize: 16,
                 color: Styles.blackColor,
-                fontWeight: FontWeight.w600)));
+                fontWeight: FontWeight.w500)));
   }
 
   static Text mediumText(String text) {
@@ -18,7 +18,7 @@ abstract class CustomText {
             textStyle: const TextStyle(
                 fontSize: 18,
                 color: Styles.blackColor,
-                fontWeight: FontWeight.w500)));
+                fontWeight: FontWeight.w600)));
   }
 
   static Text largeText(String text) {

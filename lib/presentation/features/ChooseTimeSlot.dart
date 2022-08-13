@@ -123,7 +123,7 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                                 labelText: "Submit",
                                 containerColor: Styles.redColor,
                                 onTap: () {
-                                  _submit();
+                                   _submit();
                                 })
                             : Container(),
                       ])))),

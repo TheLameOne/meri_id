@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meri_id/presentation/custom/CustomCard.dart';
+import 'package:meri_id/presentation/features/BookingDetail.dart';
 import 'package:meri_id/presentation/features/GoogleMapTracking.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,8 +14,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  _routoTracking() {
-    Navigator.pushNamed(context, GoogleMapTracking.routeNamed);
+  _routoBookingDetail() {
+    Navigator.pushNamed(context, BookingDetail.routeNamed);
   }
 
   @override
@@ -32,9 +33,11 @@ class _HomeState extends State<Home> {
                 name: "Harsh Verma",
                 date: "22/09/2022",
                 time: "3:00 pm",
-                onTap: () {},
+                onTap: () {
+                  _routoBookingDetail();
+                },
                 makeCall: () {
-                 launchUrlString("tel:+91963852741"); 
+                  launchUrlString("tel:+91963852741");
                 },
               ),
           ])),
