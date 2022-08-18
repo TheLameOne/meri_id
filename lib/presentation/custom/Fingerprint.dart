@@ -22,7 +22,6 @@ Widget buildAvailability(BuildContext context) => buildButton(
       onClicked: () async {
         final isAvailable = await LocalAuthApi.hasBiometrics();
         final biometrics = await LocalAuthApi.getBiometrics();
-
         final hasFingerprint = biometrics.contains(BiometricType.fingerprint);
 
         showDialog(
