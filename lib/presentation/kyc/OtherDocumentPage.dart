@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -20,6 +22,9 @@ class OtherDocumentPage extends StatefulWidget {
 
 class _OtherDocumentPageState extends State<OtherDocumentPage> {
   bool _language = true;
+  bool imageLoading = false;
+  String defaultContainerUrl =
+      'https://cdn4.iconfinder.com/data/icons/human-resources-34/100/Team-02-512.png';
   void initState() {
     super.initState();
     _parent();
@@ -61,21 +66,33 @@ class _OtherDocumentPageState extends State<OtherDocumentPage> {
               Padding(
                 padding: const EdgeInsets.all(32),
                 child: CustomImageContainer(
-                    onTap: () async {
-                      try {
-                        XFile? file = await ImagePicker.platform
-                            .getImage(source: ImageSource.camera);
-                        print(file);
-                        if (file != null) {
-                          String id =
-                              DateTime.now().millisecondsSinceEpoch.toString();
-                        }
-                      } catch (e) {
-                        print(e);
+                  isLoading: imageLoading,
+                  onTap: () async {
+                    try {
+                      setState(() {
+                        imageLoading = true;
+                      });
+                      XFile? xFile = (await ImagePicker.platform
+                          .getImage(source: ImageSource.gallery));
+                      if (xFile != null) {
+                        File file = File(xFile.path);
+                        String id =
+                            DateTime.now().millisecondsSinceEpoch.toString();
+                        defaultContainerUrl = await uploadFileFirebase
+                            .uploadFile(file, id, 'otherDocuments');
+                      } else {
+                        errorToast("Please Choose the File", context);
                       }
-                    },
-                    image: Styles.STATIC_LOGO_IMAGE //post.imageUrl,
-                    ),
+                    } catch (e) {
+                      errorToast("oops! some error occur", context);
+                      print(e);
+                    }
+                    setState(() {
+                      imageLoading = false;
+                    });
+                  },
+                  image: defaultContainerUrl, //post.imageUrl,
+                ),
               ),
             ],
           ),

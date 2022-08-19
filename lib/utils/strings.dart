@@ -99,4 +99,7 @@ abstract class StringValues {
   static Language enterDate =
       Language(english: "Enter Date", hindi: "तिथि दर्ज करें");
   static Language goBack = Language(english: "Enter Date", hindi: "पीछे चले");
+  static Language record = Language(english: "Record", hindi: "रिकॉर्ड करे");
+  static Language uploadAgain =
+      Language(english: "Upload Again", hindi: "दोबारा अपलोड करें");
 }

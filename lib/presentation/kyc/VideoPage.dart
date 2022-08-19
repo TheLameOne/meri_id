@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meri_id/presentation/SplashPage.dart';
@@ -20,6 +21,11 @@ class VideoPage extends StatefulWidget {
 
 class _VideoPageState extends State<VideoPage> {
   bool _language = true;
+  bool imageLoading = false;
+  bool isLoading = true;
+  bool isSubmit = false;
+  String defaultContainerUrl =
+      'https://cdn4.iconfinder.com/data/icons/human-resources-34/100/Team-02-512.png';
   void initState() {
     super.initState();
     _parent();
@@ -27,6 +33,13 @@ class _VideoPageState extends State<VideoPage> {
 
   _parent() async {
     await _languageFunction();
+    await _loadingOff();
+  }
+
+  _loadingOff() {
+    setState(() {
+      isLoading = false;
+    });
   }
 
   _languageFunction() async {
@@ -43,61 +56,88 @@ class _VideoPageState extends State<VideoPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        body: Padding(
-      padding: const EdgeInsets.all(32),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              const SizedBox(
-                height: 32,
-              ),
-              CustomText.xLargeText(
-                (_language)
-                    ? StringValues.videoKYC.english
-                    : StringValues.videoKYC.hindi,
-              ),
-              Padding(
+        body: (isLoading)
+            ? const Center(
+                child: CircularProgressIndicator(color: Styles.redColor),
+              )
+            : Padding(
                 padding: const EdgeInsets.all(32),
-                child: CustomImageContainer(
-                    onTap: () async {
-                      try {
-                        XFile? file = await ImagePicker.platform
-                            .getVideo(source: ImageSource.camera);
-                        print(file);
-                        if (file != null) {
-                          String id =
-                              DateTime.now().millisecondsSinceEpoch.toString();
-                        }
-                      } catch (e) {
-                        print(e);
-                      }
-                    },
-                    image: Styles.STATIC_LOGO_IMAGE //post.imageUrl,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        CustomText.xLargeText(
+                          (_language)
+                              ? StringValues.videoKYC.english
+                              : StringValues.videoKYC.hindi,
+                        ),
+                      ],
                     ),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              CustomButton(
-                postIcon: Icons.arrow_forward_ios,
-                labelText: (_language)
-                    ? StringValues.submit.english
-                    : StringValues.submit.hindi,
-                onTap: () {
-                  _routeToSvgScreen();
-                },
-                containerColor: Styles.redColor,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-            ],
-          )
-        ],
-      ),
-    ));
+                    Column(
+                      children: [
+                        CustomButton(
+                          isLoading: imageLoading,
+                          postIcon: Icons.arrow_forward_ios,
+                          labelText: (isSubmit)
+                              ? (_language)
+                                  ? StringValues.uploadAgain.english
+                                  : StringValues.uploadAgain.hindi
+                              : (_language)
+                                  ? StringValues.record.english
+                                  : StringValues.record.hindi,
+                          onTap: () async {
+                            try {
+                              setState(() {
+                                imageLoading = true;
+                              });
+                              PickedFile? pickedFile = (await ImagePicker
+                                  .platform
+                                  .pickVideo(source: ImageSource.camera));
+                              if (pickedFile != null) {
+                                File file = File(pickedFile.path);
+                                String id = DateTime.now()
+                                    .millisecondsSinceEpoch
+                                    .toString();
+                                defaultContainerUrl = await uploadFileFirebase
+                                    .uploadFile(file, id, 'video');
+                              } else {
+                                errorToast("Please Choose the File", context);
+                              }
+                            } catch (e) {
+                              errorToast("oops! some error occur", context);
+                              print(e);
+                            }
+                            setState(() {
+                              imageLoading = false;
+                              isSubmit = true;
+                            });
+                          },
+                          containerColor: Styles.redColor,
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        (isSubmit)
+                            ? CustomButton(
+                                postIcon: Icons.arrow_forward_ios,
+                                labelText: (_language)
+                                    ? StringValues.submit.english
+                                    : StringValues.submit.hindi,
+                                onTap: () {
+                                  _routeToSvgScreen();
+                                },
+                                containerColor: Styles.redColor,
+                              )
+                            : Container(),
+                        (isSubmit) ? SizedBox(height: 32) : Container(),
+                      ],
+                    )
+                  ],
+                ),
+              ));
   }
 }

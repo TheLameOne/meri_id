@@ -1,9 +1,15 @@
+import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meri_id/services/PreferenceService.dart';
+import 'package:meri_id/utils/styles.dart';
+
+import '../services/FirebaseStorage.dart';
 
 var currentPage = 0;
 var role = "user";
 
 final PreferenceService preferenceService = PreferenceService.getInstance();
+final UploadFileFirebase uploadFileFirebase = UploadFileFirebase.getInstance();
 
 String? validateEmail(String email) {
   if (email == null || email.isEmpty) return 'Required !!!';
@@ -35,32 +41,54 @@ String? requiredString(String value) {
 Future<bool> checkLanguage() async =>
     (await preferenceService.getLanguage() == null ||
         await preferenceService.getLanguage() == "english");
-     
-  // Widget _dialoque() {
-  //   return Builder(builder: (context) {
-  //     return AlertDialog(
-  //       title: const Text('In Which Language you want to use App'),
-  //       actions: <Widget>[
-  //         TextButton(
-  //           child: const Text('Hindi'),
-  //           onPressed: () {
-  //             setState(() {
-  //               _language = false;
-  //               preferenceService.setLanguage("hindi");
-  //               _isVisible = false;
-  //             });
-  //           },
-  //         ),
-  //         TextButton(
-  //           child: const Text('English'),
-  //           onPressed: () {
-  //             setState(() {
-  //               preferenceService.setLanguage("english");
-  //               _isVisible = false;
-  //             });
-  //           },
-  //         ),
-  //       ],
-  //     );
-  //   });
-  // }
+
+// Widget _dialoque() {
+//   return Builder(builder: (context) {
+//     return AlertDialog(
+//       title: const Text('In Which Language you want to use App'),
+//       actions: <Widget>[
+//         TextButton(
+//           child: const Text('Hindi'),
+//           onPressed: () {
+//             setState(() {
+//               _language = false;
+//               preferenceService.setLanguage("hindi");
+//               _isVisible = false;
+//             });
+//           },
+//         ),
+//         TextButton(
+//           child: const Text('English'),
+//           onPressed: () {
+//             setState(() {
+//               preferenceService.setLanguage("english");
+//               _isVisible = false;
+//             });
+//           },
+//         ),
+//       ],
+//     );
+//   });
+// }
+
+Widget customizedLeadingIconWidget(String message) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(25.0),
+      color: Styles.blackColor,
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(message, style: const TextStyle(color: Styles.backgroundColor))
+      ],
+    ),
+  );
+}
+void errorToast(String message, BuildContext context) {
+  var fToast = FToast();
+  fToast.init(context);
+  fToast.showToast(
+      child: customizedLeadingIconWidget(message), gravity: ToastGravity.TOP);
+}

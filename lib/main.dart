@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,6 +25,7 @@ import 'utils/strings.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -40,9 +42,9 @@ class MyApp extends StatelessWidget {
         title: StringValues.appName.english,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.white,
-       textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)
-        ),
+            primaryColor: Colors.white,
+            textTheme:
+                GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
         initialRoute: FirstPage.routeNamed,
         routes: {
           SplashPage.routeNamed: (BuildContext context) => SplashPage(),
@@ -53,17 +55,22 @@ class MyApp extends StatelessWidget {
           PANPage.routeNamed: (BuildContext context) => PANPage(),
           AadharPage.routeNamed: (BuildContext context) => AadharPage(),
           VideoPage.routeNamed: (BuildContext context) => VideoPage(),
-          OtherDocumentPage.routeNamed: (BuildContext context) =>OtherDocumentPage(),
+          OtherDocumentPage.routeNamed: (BuildContext context) =>
+              OtherDocumentPage(),
           KycStepper.routeNamed: (BuildContext context) => KycStepper(),
           SvgScreen.routeNamed: (BuildContext context) => const SvgScreen(),
-          GoogleMapTracking.routeNamed: (BuildContext context) => const GoogleMapTracking(),
+          GoogleMapTracking.routeNamed: (BuildContext context) =>
+              const GoogleMapTracking(),
           Feeds.routeNamed: (BuildContext context) => Feeds(),
           LanguagePage.routeNamed: (BuildContext context) => LanguagePage(),
           Issue.routeNamed: (BuildContext context) => Issue(),
           Info.routeNamed: (BuildContext context) => Info(),
-          ChooseTimeSlot.routeNamed: (BuildContext context) => const ChooseTimeSlot(),
-          ChooseAddress.routeNamed: (BuildContext context) => const ChooseAddress(),
-          BookingDetail.routeNamed: (BuildContext context) => const BookingDetail(),
+          ChooseTimeSlot.routeNamed: (BuildContext context) =>
+              const ChooseTimeSlot(),
+          ChooseAddress.routeNamed: (BuildContext context) =>
+              const ChooseAddress(),
+          BookingDetail.routeNamed: (BuildContext context) =>
+              const BookingDetail(),
         });
   }
 }

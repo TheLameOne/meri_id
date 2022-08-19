@@ -29,18 +29,21 @@ class CustomImageContainer extends StatelessWidget {
                     offset: Offset(1, 1))
               ]),
           child: isLoading
-              ? const CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Styles.grayColor),
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 96,horizontal: 64),
+                  child: const CircularProgressIndicator(
+                    color: Styles.blackColor,
+                  ),
                 )
               : image != null
-                  ? Image.asset(
+                  ? Image.network(
                       image,
                       fit: BoxFit.fill,
                     )
                   : Container(
                       padding: const EdgeInsets.all(16),
                       child: const Icon(Icons.add_a_photo,
-                          size: 50, color: Styles.grayColor)),
+                          size: 50, color: Styles.blackColor)),
         ),
       ),
     );
