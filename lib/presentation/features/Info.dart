@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 import 'package:meri_id/utils/styles.dart';
 import '../../services/widgets/CustomText.dart';
 import '../../utils/global.dart';
+import '../../utils/strings.dart';
 
 class Info extends StatefulWidget {
   static const String routeNamed = 'Info';
@@ -13,12 +14,30 @@ class Info extends StatefulWidget {
 
 class _InfoState extends State<Info> {
   bool _isLoading = true;
+  bool _language = true;
   String value = "No GuideLines";
 
   @override
   void initState() {
     super.initState();
     _getGuidleLines();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+    await _loadingOff();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    _language = val;
+  }
+
+  _loadingOff() {
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   _getGuidleLines() async {
@@ -56,7 +75,9 @@ class _InfoState extends State<Info> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomText.xLargeText("GuideLines"),
+                      CustomText.xLargeText((_language)
+                          ? StringValues.guidelines.english
+                          : StringValues.guidelines.hindi),
                       const SizedBox(
                         height: 64,
                       ),

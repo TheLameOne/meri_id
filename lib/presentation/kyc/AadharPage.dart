@@ -8,6 +8,9 @@ import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
+
 class AadharPage extends StatefulWidget {
   static const String routeNamed = 'adharPage';
 
@@ -16,6 +19,23 @@ class AadharPage extends StatefulWidget {
 }
 
 class _AadharPageState extends State<AadharPage> {
+  bool _language = true;
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
+  }
+
   _routeToVideoPage() {
     Navigator.pushNamed(context, VideoPage.routeNamed);
   }
@@ -33,7 +53,11 @@ class _AadharPageState extends State<AadharPage> {
               const SizedBox(
                 height: 32,
               ),
-              CustomText.xLargeText("UPLOAD ADHAR"),
+              CustomText.xLargeText(
+                (_language)
+                    ? StringValues.uploadAadhar.english
+                    : StringValues.uploadAadhar.hindi,
+              ),
               Padding(
                 padding: const EdgeInsets.all(32),
                 child: CustomImageContainer(
@@ -59,7 +83,9 @@ class _AadharPageState extends State<AadharPage> {
             children: [
               CustomButton(
                 postIcon: Icons.arrow_forward_ios,
-                labelText: "submit",
+                labelText: (_language)
+                    ? StringValues.submit.english
+                    : StringValues.submit.hindi,
                 onTap: () {
                   _routeToVideoPage();
                 },

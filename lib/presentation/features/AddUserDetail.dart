@@ -5,6 +5,8 @@ import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
 import 'package:meri_id/utils/styles.dart';
 
+import '../../utils/global.dart';
+
 class AdduserDetails extends StatefulWidget {
   const AdduserDetails({Key? key}) : super(key: key);
 
@@ -13,6 +15,23 @@ class AdduserDetails extends StatefulWidget {
 }
 
 class _AdduserDetailsState extends State<AdduserDetails> {
+  bool _language = true;
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(

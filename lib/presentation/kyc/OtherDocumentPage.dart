@@ -8,6 +8,9 @@ import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
+
 class OtherDocumentPage extends StatefulWidget {
   static const String routeNamed = 'otherDocumentPage';
 
@@ -16,6 +19,23 @@ class OtherDocumentPage extends StatefulWidget {
 }
 
 class _OtherDocumentPageState extends State<OtherDocumentPage> {
+  bool _language = true;
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
+  }
+
   _routeToVideoPage() {
     Navigator.popAndPushNamed(context, VideoPage.routeNamed);
   }
@@ -33,7 +53,11 @@ class _OtherDocumentPageState extends State<OtherDocumentPage> {
               const SizedBox(
                 height: 32,
               ),
-              CustomText.xLargeText("UPLOAD OTHER DOCUMENTS"),
+              CustomText.xLargeText(
+                (_language)
+                    ? StringValues.uploadOtherDocuments.english
+                    : StringValues.uploadOtherDocuments.hindi,
+              ),
               Padding(
                 padding: const EdgeInsets.all(32),
                 child: CustomImageContainer(
@@ -59,7 +83,9 @@ class _OtherDocumentPageState extends State<OtherDocumentPage> {
             children: [
               CustomButton(
                 postIcon: Icons.arrow_forward_ios,
-                labelText: "submit",
+                labelText: (_language)
+                    ? StringValues.submit.english
+                    : StringValues.submit.hindi,
                 onTap: () {
                   _routeToVideoPage();
                 },

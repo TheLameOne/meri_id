@@ -60,11 +60,11 @@ abstract class StringValues {
   static Language videoKYC =
       Language(english: "Video KYC", hindi: "वीडियो KYC");
   static Language uploadPANCard =
-      Language(english: "Upload PAN Card", hindi: "वीडियो KYC");
+      Language(english: "Upload PAN Card", hindi: "पैन अपलोड");
   static Language uploadAadhar =
-      Language(english: "Upload Aadhar Card", hindi: "वीडियो KYC");
-  static Language uploadOtherDocuments =
-      Language(english: "Upload Other Documents", hindi: "वीडियो KYC");
+      Language(english: "Upload Aadhar Card", hindi: "आधार अपलोड");
+  static Language uploadOtherDocuments = Language(
+      english: "Upload Other Documents", hindi: "अन्य दस्तावेज अपलोड करें");
   static Language proceed = Language(english: "Proceed", hindi: "आगे बढ़ें");
   static Language checkKYCStatus =
       Language(english: "Check KYC Status", hindi: "KYC की स्थिति जाँचिए");
@@ -77,7 +77,7 @@ abstract class StringValues {
       Language(english: "Number of People", hindi: "लोगों की संख्या");
   static Language name = Language(english: "Name", hindi: "नाम");
   static Language reason = Language(english: "Reason", hindi: "कारण");
-  static Language address = Language(english: "Reason", hindi: "पता");
+  static Language address = Language(english: "Address", hindi: "पता");
   static Language chooseYourLocation =
       Language(english: "Choose your location", hindi: "अपना स्थान चुनें");
   static Language homeStreet =
@@ -94,4 +94,9 @@ abstract class StringValues {
       Language(english: "QR code of booking", hindi: "बुकिंग का QR कोड");
   static Language goToHomePage =
       Language(english: "Go to Home Page", hindi: "होमपेज पर जाये");
+  static Language chooseDay =
+      Language(english: "Choose Day", hindi: "दिन चुनें");
+  static Language enterDate =
+      Language(english: "Enter Date", hindi: "तिथि दर्ज करें");
+  static Language goBack = Language(english: "Enter Date", hindi: "पीछे चले");
 }

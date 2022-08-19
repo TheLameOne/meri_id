@@ -8,6 +8,9 @@ import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 import 'package:intl/intl.dart';
 
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
+
 class ChooseTimeSlot extends StatefulWidget {
   static const String routeNamed = 'choose time';
   const ChooseTimeSlot({Key? key}) : super(key: key);
@@ -17,12 +20,25 @@ class ChooseTimeSlot extends StatefulWidget {
 }
 
 class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
+  bool _language = true;
   TextEditingController dateInput = TextEditingController();
 
   @override
   void initState() {
     dateInput.text = ""; //set the initial value of text field
     super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
   }
 
   String? radioValue;
@@ -121,7 +137,9 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                     children: [
                       Column(
                         children: [
-                          CustomText.xLargeText("Choose Day"),
+                          CustomText.xLargeText((_language)
+                              ? StringValues.chooseDay.english
+                              : StringValues.chooseDay.hindi),
                           const SizedBox(
                             height: 16,
                           ),
@@ -133,7 +151,9 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                                 icon: Icon(Icons.calendar_today),
                                 prefixIconColor: Styles.redColor,
                                 fillColor: Styles.redColor,
-                                labelText: "Enter Date",
+                                labelText: (_language)
+                                    ? StringValues.enterDate.english
+                                    : StringValues.enterDate.hindi,
                                 border: InputBorder.none,
                                 labelStyle: GoogleFonts.montserrat(
                                     textStyle: const TextStyle(
@@ -177,7 +197,9 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                           postIconSize: 20,
                           postIcon: Icons.arrow_forward,
                           visiblepostIcon: false,
-                          labelText: "Submit",
+                          labelText: (_language)
+                              ? StringValues.submit.english
+                              : StringValues.submit.hindi,
                           containerColor: Styles.redColor,
                           onTap: () {
                             _submit();

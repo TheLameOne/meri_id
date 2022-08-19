@@ -5,6 +5,8 @@ import 'package:meri_id/presentation/custom/CustomTextField.dart';
 import 'package:meri_id/presentation/features/ChooseAddress.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
 import '../../utils/styles.dart';
 
 class Add extends StatefulWidget {
@@ -15,6 +17,23 @@ class Add extends StatefulWidget {
 }
 
 class _AddState extends State<Add> {
+  bool _language = true;
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
+  }
+
   final List<String> items = ['1', '2', '3'];
   String? selectedValue;
 
@@ -29,7 +48,7 @@ class _AddState extends State<Add> {
         hint: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
-            children: const [
+            children: [
               Icon(
                 Icons.list,
                 size: 28,
@@ -40,7 +59,9 @@ class _AddState extends State<Add> {
               ),
               Expanded(
                 child: Text(
-                  'Number of People',
+                  (_language)
+                      ? StringValues.numberOfPeople.english
+                      : StringValues.numberOfPeople.hindi,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -109,10 +130,17 @@ class _AddState extends State<Add> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 32),
-                  CustomText.xLargeText("Add Bookings"),
+                  CustomText.xLargeText(
+                    (_language)
+                        ? StringValues.addBookings.english
+                        : StringValues.addBookings.hindi,
+                  ),
                   const SizedBox(height: 16),
                   CustomText.mediumText(
-                      "For how many people you want to do booking?"),
+                    (_language)
+                        ? StringValues.forHowMany.english
+                        : StringValues.forHowMany.hindi,
+                  ),
                   const SizedBox(
                     height: 32,
                   ),
@@ -120,103 +148,169 @@ class _AddState extends State<Add> {
                   const SizedBox(height: 16),
                   Builder(
                     builder: (context) {
-                     if (selectedValue != null) {
+                      if (selectedValue != null) {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            (selectedValue == "1" || selectedValue == "2" || selectedValue == "3")  ?
-                            CustomText.mediumText("Person 1") : Container(),
-                             (selectedValue == "1" || selectedValue == "2" || selectedValue == "3") ?
-                            const SizedBox(height: 16) : Container(),
-                             (selectedValue == "1" || selectedValue == "2" || selectedValue == "3") ?
-                            CustomTextField(
-                              hintText: "",
-                              hintTextSize: 16,
-                              initialValue: '',
-                              onChanged: () {},
-                              onSaved: () {},
-                              validator: () {},
-                              labelText: 'Name',
-                            ) : Container(),
-                            (selectedValue == "1" || selectedValue == "2" || selectedValue == "3") ?
-                            const SizedBox(height: 16) : Container(),
-                            (selectedValue == "1" || selectedValue == "2" || selectedValue == "3") ?
-                            CustomTextField(
-                              hintText: "",
-                              minLine: 3,
-                              textInputType: TextInputType.multiline,
-                              hintTextSize: 16,
-                              initialValue: '',
-                              onChanged: () {},
-                              onSaved: () {},
-                              validator: () {},
-                              labelText: 'Reason',
-                            ) : Container(),
-                            (selectedValue == "1" || selectedValue == "2" || selectedValue == "3") ?
-                            const SizedBox(height: 16) : Container(),
-
-                              (selectedValue == "2" || selectedValue == "3")  ?
-                            CustomText.mediumText("Person 2") : Container(),
-                             (selectedValue == "2" || selectedValue == "3") ?
-                            const SizedBox(height: 16) : Container(),
-                             (selectedValue == "2" || selectedValue == "3") ?
-                            CustomTextField(
-                              hintText: "",
-                              hintTextSize: 16,
-                              initialValue: '',
-                              onChanged: () {},
-                              onSaved: () {},
-                              validator: () {},
-                              labelText: 'Name',
-                            ) : Container(),
-                            (selectedValue == "2" || selectedValue == "3") ?
-                            const SizedBox(height: 16) : Container(),
-                            (selectedValue == "2" || selectedValue == "3") ?
-                            CustomTextField(
-                              hintText: "",
-                              minLine: 3,
-                              textInputType: TextInputType.multiline,
-                              hintTextSize: 16,
-                              initialValue: '',
-                              onChanged: () {},
-                              onSaved: () {},
-                              validator: () {},
-                              labelText: 'Reason',
-                            ) : Container(),
-                            (selectedValue == "2" || selectedValue == "3") ?
-                            const SizedBox(height: 16) : Container(),
-
-                              (selectedValue == "3")  ?
-                            CustomText.mediumText("Person 3") : Container(),
-                             ( selectedValue == "3") ?
-                            const SizedBox(height: 16) : Container(),
-                             (selectedValue == "3") ?
-                            CustomTextField(
-                              hintText: "",
-                              hintTextSize: 16,
-                              initialValue: '',
-                              onChanged: () {},
-                              onSaved: () {},
-                              validator: () {},
-                              labelText: 'Name',
-                            ) : Container(),
-                            ( selectedValue == "3") ?
-                            const SizedBox(height: 16) : Container(),
-                            ( selectedValue == "3") ?
-                            CustomTextField(
-                              hintText: "",
-                              minLine: 3,
-                              textInputType: TextInputType.multiline,
-                              hintTextSize: 16,
-                              initialValue: '',
-                              onChanged: () {},
-                              onSaved: () {},
-                              validator: () {},
-                              labelText: 'Reason',
-                            ) : Container(),
-                            ( selectedValue == "3") ?
-                            const SizedBox(height: 16) : Container(),
-                            
+                            (selectedValue == "1" ||
+                                    selectedValue == "2" ||
+                                    selectedValue == "3")
+                                ? Row(
+                                    children: [
+                                      CustomText.mediumText(
+                                        (_language)
+                                            ? StringValues.person.english
+                                            : StringValues.person.hindi,
+                                      ),
+                                      CustomText.mediumText(' 1')
+                                    ],
+                                  )
+                                : Container(),
+                            (selectedValue == "1" ||
+                                    selectedValue == "2" ||
+                                    selectedValue == "3")
+                                ? const SizedBox(height: 16)
+                                : Container(),
+                            (selectedValue == "1" ||
+                                    selectedValue == "2" ||
+                                    selectedValue == "3")
+                                ? CustomTextField(
+                                    hintText: "",
+                                    hintTextSize: 16,
+                                    initialValue: '',
+                                    onChanged: () {},
+                                    onSaved: () {},
+                                    validator: () {},
+                                    labelText: (_language)
+                                        ? StringValues.name.english
+                                        : StringValues.name.hindi,
+                                  )
+                                : Container(),
+                            (selectedValue == "1" ||
+                                    selectedValue == "2" ||
+                                    selectedValue == "3")
+                                ? const SizedBox(height: 16)
+                                : Container(),
+                            (selectedValue == "1" ||
+                                    selectedValue == "2" ||
+                                    selectedValue == "3")
+                                ? CustomTextField(
+                                    hintText: "",
+                                    minLine: 3,
+                                    textInputType: TextInputType.multiline,
+                                    hintTextSize: 16,
+                                    initialValue: '',
+                                    onChanged: () {},
+                                    onSaved: () {},
+                                    validator: () {},
+                                    labelText: (_language)
+                                        ? StringValues.reason.english
+                                        : StringValues.reason.hindi,
+                                  )
+                                : Container(),
+                            (selectedValue == "1" ||
+                                    selectedValue == "2" ||
+                                    selectedValue == "3")
+                                ? const SizedBox(height: 16)
+                                : Container(),
+                            (selectedValue == "2" || selectedValue == "3")
+                                ? Row(
+                                    children: [
+                                      CustomText.mediumText(
+                                        (_language)
+                                            ? StringValues.person.english
+                                            : StringValues.person.hindi,
+                                      ),
+                                      CustomText.mediumText(" 2")
+                                    ],
+                                  )
+                                : Container(),
+                            (selectedValue == "2" || selectedValue == "3")
+                                ? const SizedBox(height: 16)
+                                : Container(),
+                            (selectedValue == "2" || selectedValue == "3")
+                                ? CustomTextField(
+                                    hintText: "",
+                                    hintTextSize: 16,
+                                    initialValue: '',
+                                    onChanged: () {},
+                                    onSaved: () {},
+                                    validator: () {},
+                                    labelText: (_language)
+                                        ? StringValues.name.english
+                                        : StringValues.name.hindi,
+                                  )
+                                : Container(),
+                            (selectedValue == "2" || selectedValue == "3")
+                                ? const SizedBox(height: 16)
+                                : Container(),
+                            (selectedValue == "2" || selectedValue == "3")
+                                ? CustomTextField(
+                                    hintText: "",
+                                    minLine: 3,
+                                    textInputType: TextInputType.multiline,
+                                    hintTextSize: 16,
+                                    initialValue: '',
+                                    onChanged: () {},
+                                    onSaved: () {},
+                                    validator: () {},
+                                    labelText: (_language)
+                                        ? StringValues.reason.english
+                                        : StringValues.reason.hindi,
+                                  )
+                                : Container(),
+                            (selectedValue == "2" || selectedValue == "3")
+                                ? const SizedBox(height: 16)
+                                : Container(),
+                            (selectedValue == "3")
+                                ? Row(
+                                    children: [
+                                      CustomText.mediumText(
+                                        (_language)
+                                            ? StringValues.person.english
+                                            : StringValues.person.hindi,
+                                      ),
+                                      CustomText.mediumText(' 3')
+                                    ],
+                                  )
+                                : Container(),
+                            (selectedValue == "3")
+                                ? const SizedBox(height: 16)
+                                : Container(),
+                            (selectedValue == "3")
+                                ? CustomTextField(
+                                    hintText: "",
+                                    hintTextSize: 16,
+                                    initialValue: '',
+                                    onChanged: () {},
+                                    onSaved: () {},
+                                    validator: () {},
+                                    labelText: (_language)
+                                        ? StringValues.name.english
+                                        : StringValues.name.hindi,
+                                  )
+                                : Container(),
+                            (selectedValue == "3")
+                                ? const SizedBox(height: 16)
+                                : Container(),
+                            (selectedValue == "3")
+                                ? CustomTextField(
+                                    hintText: "",
+                                    minLine: 3,
+                                    textInputType: TextInputType.multiline,
+                                    hintTextSize: 16,
+                                    initialValue: '',
+                                    onChanged: () {},
+                                    onSaved: () {},
+                                    validator: () {},
+                                    labelText: (_language)
+                                        ? StringValues.reason.english
+                                        : StringValues.reason.hindi,
+                                  )
+                                : Container(),
+                            (selectedValue == "3")
+                                ? const SizedBox(height: 16)
+                                : Container(),
                           ],
                         );
                       }
@@ -230,7 +324,9 @@ class _AddState extends State<Add> {
                       postIconSize: 20,
                       postIcon: Icons.arrow_forward,
                       visiblepostIcon: false,
-                      labelText: "Next Step ",
+                      labelText: (_language)
+                          ? StringValues.proceed.english
+                          : StringValues.proceed.hindi,
                       containerColor: Styles.redColor,
                       onTap: () {
                         _routeToAddress();

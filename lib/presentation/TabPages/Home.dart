@@ -6,6 +6,9 @@ import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -14,6 +17,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool _language = true;
+
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
+  }
+
   _routoBookingDetail() {
     Navigator.pushNamed(context, BookingDetail.routeNamed);
   }
@@ -26,7 +47,9 @@ class _HomeState extends State<Home> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const SizedBox(height: 32),
-            CustomText.xLargeText("Home"),
+            CustomText.xLargeText((_language)
+                ? StringValues.home.english
+                : StringValues.home.hindi),
             const SizedBox(height: 32),
             for (int i = 0; i < 10; i++)
               CustomCard(

@@ -3,6 +3,8 @@ import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
 
+import '../../utils/global.dart';
+
 class AddFriend extends StatefulWidget {
   static const String routeNamed = "AddFriend";
 
@@ -11,6 +13,23 @@ class AddFriend extends StatefulWidget {
 }
 
 class _AddFriendState extends State<AddFriend> {
+  bool _language = true;
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

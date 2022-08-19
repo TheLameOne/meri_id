@@ -4,6 +4,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import '../../services/widgets/CustomText.dart';
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
 import '../../utils/styles.dart';
 
 class Feeds extends StatefulWidget {
@@ -13,6 +15,29 @@ class Feeds extends StatefulWidget {
 }
 
 class _FeedsState extends State<Feeds> {
+  bool isLoading = true;
+  bool _language = true;
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+    await _loadingOff();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    _language = val;
+  }
+
+  _loadingOff() {
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,7 +49,12 @@ class _FeedsState extends State<Feeds> {
           foregroundColor: Styles.blackColor,
           elevation: 0,
         ),
-        body: SingleChildScrollView(
+        body:
+            // (isLoading)
+            //     ? const Center(
+            //         child: CircularProgressIndicator(color: Styles.redColor),
+            //       )
+            SingleChildScrollView(
           child: Container(
             color: Styles.backgroundColor,
             child: Padding(
@@ -32,7 +62,9 @@ class _FeedsState extends State<Feeds> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText.xLargeText("News Feed"),
+                  CustomText.xLargeText((_language)
+                      ? StringValues.newsFeed.english
+                      : StringValues.newsFeed.hindi),
                   const SizedBox(
                     height: 64,
                   ),

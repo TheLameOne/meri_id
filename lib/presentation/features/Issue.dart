@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meri_id/utils/styles.dart';
 import '../../services/widgets/CustomText.dart';
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
 import '../custom/CustomButton.dart';
 
 class Issue extends StatefulWidget {
@@ -11,6 +13,23 @@ class Issue extends StatefulWidget {
 }
 
 class _IssueState extends State<Issue> {
+  bool _language = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    _language = val;
+  }
+
   _raiseIssue() {}
   @override
   Widget build(BuildContext context) {
@@ -29,7 +48,9 @@ class _IssueState extends State<Issue> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText.xLargeText("Raise Issue"),
+                CustomText.xLargeText((_language)
+                    ? StringValues.issue.english
+                    : StringValues.issue.hindi),
                 const SizedBox(
                   height: 32,
                 ),
@@ -56,7 +77,9 @@ class _IssueState extends State<Issue> {
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: CustomButton(
                       postIcon: Icons.arrow_forward_ios,
-                      labelText: "Issue",
+                      labelText: (_language)
+                          ? StringValues.proceed.english
+                          : StringValues.proceed.hindi,
                       containerColor: Styles.redColor,
                       onTap: () {
                         _raiseIssue();

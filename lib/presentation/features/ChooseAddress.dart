@@ -9,6 +9,9 @@ import 'package:meri_id/presentation/features/ChooseTimeSlot.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
+
 class ChooseAddress extends StatefulWidget {
   static const String routeNamed = 'choose Address';
   const ChooseAddress({Key? key}) : super(key: key);
@@ -18,11 +21,21 @@ class ChooseAddress extends StatefulWidget {
 }
 
 class _ChooseAddressState extends State<ChooseAddress> {
-
+  bool _language = true;
   @override
   void initState() {
     super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
     _getUserLocation();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    _language = val;
   }
 
   double? latitude;
@@ -61,16 +74,22 @@ class _ChooseAddressState extends State<ChooseAddress> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              CustomText.xLargeText("Address"),
+                              CustomText.xLargeText(
+                                (_language)
+                                    ? StringValues.address.english
+                                    : StringValues.address.hindi,
+                              ),
                               const SizedBox(height: 32),
                               CustomTextField(
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onSaved:() {},
-                                onChanged: (){},
+                                onSaved: () {},
+                                onChanged: () {},
                                 validator: () {},
-                                labelText: 'Choose your location',
+                                labelText: (_language)
+                                    ? StringValues.chooseYourLocation.english
+                                    : StringValues.chooseYourLocation.hindi,
                               ),
                               const SizedBox(height: 16),
                               Container(
@@ -85,7 +104,9 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 onChanged: () {},
                                 onSaved: () {},
                                 validator: () {},
-                                labelText: 'Home/Street',
+                                labelText: (_language)
+                                    ? StringValues.homeStreet.english
+                                    : StringValues.homeStreet.hindi,
                               ),
                               const SizedBox(height: 16),
                               CustomTextField(
@@ -95,7 +116,9 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 onChanged: () {},
                                 onSaved: () {},
                                 validator: () {},
-                                labelText: 'Area/localilty/society name',
+                                labelText: (_language)
+                                    ? StringValues.area.english
+                                    : StringValues.area.hindi,
                               ),
                               const SizedBox(height: 16),
                               CustomTextField(
@@ -105,7 +128,9 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 onChanged: () {},
                                 onSaved: () {},
                                 validator: () {},
-                                labelText: 'city/district',
+                                labelText: (_language)
+                                    ? StringValues.cityDistrict.english
+                                    : StringValues.cityDistrict.hindi,
                               ),
                               const SizedBox(height: 16),
                               CustomTextField(
@@ -115,7 +140,9 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 onChanged: () {},
                                 onSaved: () {},
                                 validator: () {},
-                                labelText: 'state',
+                                labelText: (_language)
+                                    ? StringValues.state.english
+                                    : StringValues.state.hindi,
                               ),
                               const SizedBox(height: 16),
                               CustomTextField(
@@ -125,14 +152,18 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 onChanged: () {},
                                 onSaved: () {},
                                 validator: () {},
-                                labelText: 'pincode',
+                                labelText: (_language)
+                                    ? StringValues.pincode.english
+                                    : StringValues.pincode.hindi,
                               ),
                               const SizedBox(height: 32),
                               CustomButton(
                                   postIconSize: 20,
                                   postIcon: Icons.arrow_forward,
                                   visiblepostIcon: false,
-                                  labelText: "Next Page ",
+                                  labelText: (_language)
+                                      ? StringValues.proceed.english
+                                      : StringValues.proceed.hindi,
                                   containerColor: Styles.redColor,
                                   onTap: () {
                                     _routeToTimeSlotPage();

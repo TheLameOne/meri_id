@@ -6,6 +6,8 @@ import 'package:meri_id/utils/global.dart';
 import 'package:meri_id/utils/styles.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import '../../utils/strings.dart';
+
 class QRpage extends StatefulWidget {
   final String data;
 
@@ -16,6 +18,23 @@ class QRpage extends StatefulWidget {
 }
 
 class _QRpageState extends State<QRpage> {
+  bool _language = true;
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,11 +51,15 @@ class _QRpageState extends State<QRpage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomText.largeText("QR code of booking"),
+                            CustomText.largeText((_language)
+                                ? StringValues.qrCodeofBooking.english
+                                : StringValues.qrCodeofBooking.hindi),
                             const SizedBox(
                               height: 16,
                             ),
-                            CustomText.mediumText("Booking id"),
+                            CustomText.mediumText((_language)
+                                ? StringValues.bookingID.english
+                                : StringValues.bookingID.hindi),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 32, vertical: 128),
@@ -53,7 +76,9 @@ class _QRpageState extends State<QRpage> {
                                 postIconSize: 20,
                                 postIcon: Icons.arrow_forward,
                                 visiblepostIcon: false,
-                                labelText: "Go To Home Page",
+                                labelText: (_language)
+                                    ? StringValues.goToHomePage.english
+                                    : StringValues.goToHomePage.hindi,
                                 containerColor: Styles.redColor,
                                 onTap: () {
                                   currentPage = 0;
@@ -64,7 +89,9 @@ class _QRpageState extends State<QRpage> {
                                 postIconSize: 20,
                                 postIcon: Icons.arrow_forward,
                                 visiblepostIcon: false,
-                                labelText: "Go Back",
+                                labelText: (_language)
+                                    ? StringValues.goBack.english
+                                    : StringValues.goBack.hindi,
                                 containerColor: Styles.redColor,
                                 onTap: () {
                                   Navigator.pop(context);

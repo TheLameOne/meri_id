@@ -7,6 +7,9 @@ import 'package:meri_id/presentation/kyc/PanPage.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
+
 class KycStepper extends StatefulWidget {
   static const String routeNamed = 'kycStepper';
 
@@ -16,6 +19,22 @@ class KycStepper extends StatefulWidget {
 
 class _KycStepperState extends State<KycStepper> {
   bool hide = true;
+  bool _language = true;
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
+  }
 
   _routeToPanPage() {
     Navigator.popAndPushNamed(context, PANPage.routeNamed);
@@ -37,34 +56,95 @@ class _KycStepperState extends State<KycStepper> {
             const SizedBox(
               height: 32,
             ),
-            CustomText.xLargeText("Choose Kyc Journey"),
+            CustomText.xLargeText(
+              (_language)
+                  ? StringValues.chooseKYCJourney.english
+                  : StringValues.chooseKYCJourney.hindi,
+            ),
             const SizedBox(height: 64),
-            CustomText.xLargeText("Kyc Journey 1"),
+            CustomText.xLargeText(
+              (_language)
+                  ? StringValues.KYCJourney1.english
+                  : StringValues.KYCJourney1.hindi,
+            ),
             const SizedBox(height: 16),
-            CustomText.mediumText("1. Upload PanCard"),
+            Row(
+              children: [
+                CustomText.mediumText("1. "),
+                CustomText.mediumText(
+                  (_language)
+                      ? StringValues.uploadPANCard.english
+                      : StringValues.uploadPANCard.hindi,
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
-            CustomText.mediumText("2. Upload AdharCard"),
+            Row(
+              children: [
+                CustomText.mediumText("2. "),
+                CustomText.mediumText(
+                  (_language)
+                      ? StringValues.uploadAadhar.english
+                      : StringValues.uploadAadhar.hindi,
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
-            CustomText.mediumText("3. Video Kyc"),
+            Row(
+              children: [
+                CustomText.mediumText("3. "),
+                CustomText.mediumText(
+                  (_language)
+                      ? StringValues.videoKYC.english
+                      : StringValues.videoKYC.hindi,
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
             CustomButton(
               postIcon: Icons.arrow_forward_ios,
-              labelText: "Proceed",
+              labelText: (_language)
+                  ? StringValues.proceed.english
+                  : StringValues.proceed.hindi,
               onTap: () {
                 _routeToPanPage();
               },
               containerColor: Styles.redColor,
             ),
             const SizedBox(height: 64),
-            CustomText.xLargeText("Kyc Journey 2"),
+            CustomText.xLargeText(
+              (_language)
+                  ? StringValues.KYCJourney2.english
+                  : StringValues.KYCJourney2.hindi,
+            ),
             const SizedBox(height: 16),
-            CustomText.mediumText("1. Upload Other Document"),
+            Row(
+              children: [
+                CustomText.mediumText("1. "),
+                CustomText.mediumText(
+                  (_language)
+                      ? StringValues.uploadOtherDocuments.english
+                      : StringValues.uploadOtherDocuments.hindi,
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
-            CustomText.mediumText("2. Video Kyc"),
+            Row(
+              children: [
+                CustomText.mediumText("2. "),
+                CustomText.mediumText(
+                  (_language)
+                      ? StringValues.videoKYC.english
+                      : StringValues.videoKYC.hindi,
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
             CustomButton(
               postIcon: Icons.arrow_forward_ios,
-              labelText: "Proceed",
+              labelText: (_language)
+                  ? StringValues.proceed.english
+                  : StringValues.proceed.hindi,
               onTap: () {
                 _routeToOtherDocumentPage();
               },

@@ -5,6 +5,9 @@ import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/utils/styles.dart';
 
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
+
 class SvgScreen extends StatefulWidget {
   static const String routeNamed = 'svgScreen';
   const SvgScreen({Key? key}) : super(key: key);
@@ -14,6 +17,23 @@ class SvgScreen extends StatefulWidget {
 }
 
 class _SvgScreenState extends State<SvgScreen> {
+  bool _language = true;
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
+  }
+
   _routeToSplashPage() {
     Navigator.popAndPushNamed(context, SplashPage.routeNamed);
   }
@@ -31,7 +51,9 @@ class _SvgScreenState extends State<SvgScreen> {
               SvgPicture.asset('assets/images/pending.svg'),
               CustomButton(
                 postIcon: Icons.arrow_forward_ios,
-                labelText: "Check Kyc Status",
+                labelText: (_language)
+                    ? StringValues.checkKYCStatus.english
+                    : StringValues.checkKYCStatus.hindi,
                 onTap: () {
                   _routeToSplashPage();
                 },

@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/global.dart';
 import 'package:meri_id/utils/styles.dart';
+import '../../services/LocalAuthApi.dart';
+import '../../utils/strings.dart';
 import '../custom/CustomScaffold.dart';
+import '../kyc/KycStepper.dart';
 
 class FirstPage extends StatefulWidget {
   static const String routeNamed = "FirstPage";
@@ -16,7 +20,6 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-
   bool _showFingerPrintButton = true;
   bool _isTimer = true;
   bool _language = true;
@@ -74,19 +77,26 @@ class _FirstPageState extends State<FirstPage> {
               Column(
                 children: [
                   Padding(
-                      padding:
-                          (!_isTimer && _showFingerPrintButton)
-                              ? const EdgeInsets.all(0)
-                              : const EdgeInsets.all(0),
+                      padding: (!_isTimer && _showFingerPrintButton)
+                          ? const EdgeInsets.all(0)
+                          : const EdgeInsets.all(0),
                       child: (!_isTimer && _showFingerPrintButton)
                           ? CustomButton(
                               postIcon: Icons.arrow_forward_ios,
                               visiblepostIcon: false,
                               labelText: (_language)
-                                  ? "Finger Print"
-                                  : "finger print hindi",
+                                  ? StringValues.fingerprint.english
+                                  : StringValues.fingerprint.hindi,
                               containerColor: Styles.redColor,
-                              onTap: () {})
+                              onTap: () async {
+                                final isAuthenticated =
+                                    await LocalAuthApi.authenticate();
+                                if (isAuthenticated) {
+                                  Navigator.popAndPushNamed(
+                                      context, SplashPage.routeNamed);
+                                }
+                              },
+                            )
                           : Container()),
                   Padding(
                       padding: const EdgeInsets.only(top: 32),
@@ -95,8 +105,8 @@ class _FirstPageState extends State<FirstPage> {
                               postIcon: Icons.arrow_forward_ios,
                               visiblepostIcon: false,
                               labelText: (_language)
-                                  ? "Sign in by mobile number"
-                                  : "Sign in by mobile number hindi",
+                                  ? StringValues.signInByMobileNumber.english
+                                  : StringValues.signInByMobileNumber.hindi,
                               containerColor: Styles.redColor,
                               onTap: () {
                                 route();

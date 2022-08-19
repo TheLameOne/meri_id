@@ -6,6 +6,9 @@ import 'package:meri_id/presentation/custom/CustomTextField.dart';
 import 'package:meri_id/presentation/auth/otp.dart';
 import 'package:meri_id/utils/styles.dart';
 
+import '../../utils/global.dart';
+import '../../utils/strings.dart';
+
 class PhoneNumber extends StatefulWidget {
   static const String routeNamed = 'PhoneNumber';
   @override
@@ -13,6 +16,23 @@ class PhoneNumber extends StatefulWidget {
 }
 
 class _PhoneNumberState extends State<PhoneNumber> {
+  bool _language = true;
+  void initState() {
+    super.initState();
+    _parent();
+  }
+
+  _parent() async {
+    await _languageFunction();
+  }
+
+  _languageFunction() async {
+    bool val = await checkLanguage();
+    setState(() {
+      _language = val;
+    });
+  }
+
   _routeToOtp() {
     Navigator.pushNamed(context, OTP.routeNamed);
   }
@@ -35,22 +55,26 @@ class _PhoneNumberState extends State<PhoneNumber> {
                 height: 10,
               ),
               CustomTextField(
-                 hintText: "",
+                hintText: "",
                 hintTextSize: 16,
                 initialValue: '',
                 onChanged: () {},
                 onSaved: () {},
                 validator: () {},
-                labelText: 'Enter Phone Number',
+                labelText: (_language)
+                    ? StringValues.enterPhoneNumber.english
+                    : StringValues.enterPhoneNumber.hindi,
               ),
               const SizedBox(height: 32),
-                   CustomButton(
-                      postIcon: Icons.arrow_forward_ios,
-                      visiblepostIcon: false,
-                      labelText: "Get Otp",
-                      onTap: _routeToOtp, 
-                      containerColor: Styles.redColor,
-                      )
+              CustomButton(
+                postIcon: Icons.arrow_forward_ios,
+                visiblepostIcon: false,
+                labelText: (_language)
+                    ? StringValues.getOTP.english
+                    : StringValues.getOTP.hindi,
+                onTap: _routeToOtp,
+                containerColor: Styles.redColor,
+              )
             ],
           ),
         ),
