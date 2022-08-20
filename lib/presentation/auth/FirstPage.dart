@@ -77,10 +77,10 @@ class _FirstPageState extends State<FirstPage> {
               Column(
                 children: [
                   Padding(
-                      padding: (!_isTimer && _showFingerPrintButton)
+                      padding: (!_isTimer)
                           ? const EdgeInsets.all(0)
                           : const EdgeInsets.all(0),
-                      child: (!_isTimer && _showFingerPrintButton)
+                      child: (!_isTimer)
                           ? CustomButton(
                               postIcon: Icons.arrow_forward_ios,
                               visiblepostIcon: false,

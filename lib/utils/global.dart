@@ -3,12 +3,16 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meri_id/services/PreferenceService.dart';
 import 'package:meri_id/utils/styles.dart';
 
+import '../model/UserProfile.dart';
+import '../services/ApiService.dart';
 import '../services/FirebaseStorage.dart';
 
 var currentPage = 0;
 var role = "user";
+UserProfile userProfile = UserProfile(name: "", number: "", userId: "");
 
 final PreferenceService preferenceService = PreferenceService.getInstance();
+final ApiService apiService = ApiService.getInstance();
 final UploadFileFirebase uploadFileFirebase = UploadFileFirebase.getInstance();
 
 String? validateEmail(String email) {
@@ -86,6 +90,7 @@ Widget customizedLeadingIconWidget(String message) {
     ),
   );
 }
+
 void errorToast(String message, BuildContext context) {
   var fToast = FToast();
   fToast.init(context);

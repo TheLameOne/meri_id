@@ -58,7 +58,7 @@ class _BookingDetailState extends State<BookingDetail> {
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.mediumText("Booking Id - 12345"),
+                    CustomText.mediumText("BOOK9932562423"),
                     const SizedBox(
                       height: 16,
                     ),
@@ -66,30 +66,27 @@ class _BookingDetailState extends State<BookingDetail> {
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.mediumText("1. klartikeya sharma"),
+                    CustomText.mediumText("1. Kartikeya Sharma"),
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.smallText(
-                        "reasone dfmndlkfmdslkfn  sdlfjnsldfmdslkfds ldsfmsdl"),
+                    CustomText.smallText("Aadhar Enrollment"),
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.mediumText('2. janhvi singh'),
+                    CustomText.mediumText('2. Janhvi Singh'),
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.smallText(
-                        "dslkkfndklsfndskf sdfnldksfnds ldfjdslfmdsl"),
+                    CustomText.smallText("Aadhar Updation"),
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.mediumText("3. Alankar saxena"),
+                    CustomText.mediumText("3. Alankar Saxena"),
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.smallText(
-                        "dsjnfkdsf dslkfmdslkfdlsf dsflmdslkfnmds lkfmdldsf"),
+                    CustomText.smallText("Aadhar Updation"),
                     const SizedBox(
                       height: 16,
                     ),
@@ -97,11 +94,11 @@ class _BookingDetailState extends State<BookingDetail> {
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.mediumText("Date  02-Jan-2022"),
+                    CustomText.mediumText("Date : 25-Aug-2022"),
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.mediumText("Time 16:00 to 17:00 pm"),
+                    CustomText.mediumText("Time : 4:00 to 5:00 pm"),
                     const SizedBox(
                       height: 16,
                     ),
@@ -113,18 +110,19 @@ class _BookingDetailState extends State<BookingDetail> {
                       height: 16,
                     ),
                     CustomText.mediumText(
-                        "57 , Moti enclave aurangabad mathura , 281006 , lat long"),
+                        "Vignana Bharathi Institute of Technology,Aushapur, Ghatkesar, near HPCL, Hyderabad, Telangana 501301"),
                     const SizedBox(
                       height: 16,
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.largeText("operator Info"),
+                    CustomText.largeText("Operator Info"),
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomText.mediumText("Hasrsh Verma"),
+                    CustomText.mediumText("Harsh Verma"),
+                    CustomText.mediumText("7451985966"),
                     const SizedBox(
                       height: 16,
                     ),

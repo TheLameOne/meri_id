@@ -5,6 +5,7 @@ import 'package:meri_id/utils/styles.dart';
 import '../../services/widgets/CustomText.dart';
 import '../../utils/global.dart';
 import '../../utils/strings.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class Info extends StatefulWidget {
   static const String routeNamed = 'Info';
@@ -20,11 +21,11 @@ class _InfoState extends State<Info> {
   @override
   void initState() {
     super.initState();
-    _getGuidleLines();
     _parent();
   }
 
   _parent() async {
+    value = await apiService.getGuildeLines();
     await _languageFunction();
     await _loadingOff();
   }
@@ -38,21 +39,6 @@ class _InfoState extends State<Info> {
     setState(() {
       _isLoading = false;
     });
-  }
-
-  _getGuidleLines() async {
-    final String url = "https://meriid.herokuapp.com/api/general/guidelines";
-    Response res = await get(Uri.parse(url));
-    if (res.statusCode == 200) {
-      var body = jsonDecode(res.body);
-      print(body["data"][0]["guideline"]);
-      setState(() {
-        _isLoading = false;
-        if (role == "user") {
-          value = body["data"][0]["guideline"];
-        }
-      });
-    }
   }
 
   @override
@@ -79,11 +65,18 @@ class _InfoState extends State<Info> {
                           ? StringValues.guidelines.english
                           : StringValues.guidelines.hindi),
                       const SizedBox(
-                        height: 64,
+                        height: 32,
                       ),
                       Center(
-                        child: CustomText.smallText(value),
-                      ),
+                          child: Html(
+                        data: value,
+                        style: {
+                          "p": Style(
+                            color: Styles.blackColor,
+                            fontSize: FontSize.medium,
+                          )
+                        },
+                      )),
 
                       //                   Switch(
                       //   value: isHindi,
