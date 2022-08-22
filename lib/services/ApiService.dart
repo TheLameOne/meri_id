@@ -10,7 +10,7 @@ class ApiService {
   ApiService._();
   factory ApiService.getInstance() => _instance;
   static final ApiService _instance = ApiService._();
-
+  
   final String baseUrl = "https://meriid.herokuapp.com/api";
   final String role = 'operator';
   final String token = 'Token';
@@ -32,6 +32,7 @@ class ApiService {
     return false;
   }
 
+
   Future<bool> login(String phoneNumber, String otp) async {
     final String url = "$baseUrl/auth/login";
     Response res = await post(
@@ -48,6 +49,7 @@ class ApiService {
     }
     return false;
   }
+
 
   Future<bool> currentStatus(String phoneNumber, String otp) async {
     String authId = await PreferenceService.uid;
@@ -66,10 +68,12 @@ class ApiService {
     return false;
   }
 
+
   Future<bool> logOut() async {
     await preferenceService.removeUID();
     return true;
   }
+
 
   Future<UserProfile> getProfile() async {
     String authId = await PreferenceService.uid;
@@ -92,6 +96,7 @@ class ApiService {
     }
     return UserProfile(name: "", number: "", userId: "");
   }
+
 
   Future<bool> raiseIssue(String title, String description) async {
     String authId = await PreferenceService.uid;

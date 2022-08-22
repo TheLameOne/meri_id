@@ -46,34 +46,16 @@ Future<bool> checkLanguage() async =>
     (await preferenceService.getLanguage() == null ||
         await preferenceService.getLanguage() == "english");
 
-// Widget _dialoque() {
-//   return Builder(builder: (context) {
-//     return AlertDialog(
-//       title: const Text('In Which Language you want to use App'),
-//       actions: <Widget>[
-//         TextButton(
-//           child: const Text('Hindi'),
-//           onPressed: () {
-//             setState(() {
-//               _language = false;
-//               preferenceService.setLanguage("hindi");
-//               _isVisible = false;
-//             });
-//           },
-//         ),
-//         TextButton(
-//           child: const Text('English'),
-//           onPressed: () {
-//             setState(() {
-//               preferenceService.setLanguage("english");
-//               _isVisible = false;
-//             });
-//           },
-//         ),
-//       ],
-//     );
-//   });
-// }
+
+String? validateOtp(String otp) {
+  String? required = requiredString(otp);
+  if (required != null) return required;
+
+  RegExp regex = RegExp(r'^[0-9]{1,6}$');
+  return (!regex.hasMatch(otp)) ? 'Valid Otp!!' : null;
+}
+
+
 
 Widget customizedLeadingIconWidget(String message) {
   return Container(

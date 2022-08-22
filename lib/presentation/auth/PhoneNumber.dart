@@ -16,25 +16,32 @@ class PhoneNumber extends StatefulWidget {
 }
 
 class _PhoneNumberState extends State<PhoneNumber> {
-  bool _language = true;
-  void initState() {
-    super.initState();
-    _parent();
-  }
+String phoneNumber = "";
+  bool isButtonLoading = false;
 
-  _parent() async {
-    await _languageFunction();
-  }
-
-  _languageFunction() async {
-    bool val = await checkLanguage();
+  _routeToOtp(BuildContext c) async {
     setState(() {
-      _language = val;
+      isButtonLoading = true;
     });
-  }
-
-  _routeToOtp() {
-    Navigator.pushNamed(context, OTP.routeNamed);
+    if (validatePhone(phoneNumber) == null) {
+      bool res = await apiService.getOtp(phoneNumber);
+      if(res) 
+      {
+        Navigator.push(context ,
+            MaterialPageRoute
+            (builder: (context) => OTP(phoneNumber: phoneNumber)
+        ));
+      }
+       else {
+             errorToast("Oops!! please Connect With Admin", c);
+      }
+    }
+    else {
+      errorToast("please enter valid phone Number", c);
+    }
+        setState(() {
+              isButtonLoading = false;
+            });
   }
 
   @override
@@ -55,24 +62,24 @@ class _PhoneNumberState extends State<PhoneNumber> {
                 height: 10,
               ),
               CustomTextField(
-                hintText: "",
-                hintTextSize: 16,
-                initialValue: '',
-                onChanged: () {},
-                onSaved: () {},
-                validator: () {},
-                labelText: (_language)
-                    ? StringValues.enterPhoneNumber.english
-                    : StringValues.enterPhoneNumber.hindi,
-              ),
+                  hintText: "",
+                  hintTextSize: 16,
+                  initialValue: phoneNumber,
+                  onSaved: () {},
+                  onChanged: (value) {
+                    phoneNumber = value!;
+                  },
+                  validator: () {},
+                  labelText: StringValues.enterPhoneNumber.english),
               const SizedBox(height: 32),
               CustomButton(
+                isLoading: isButtonLoading,
                 postIcon: Icons.arrow_forward_ios,
                 visiblepostIcon: false,
-                labelText: (_language)
-                    ? StringValues.getOTP.english
-                    : StringValues.getOTP.hindi,
-                onTap: _routeToOtp,
+                labelText: StringValues.getOTP.english,
+                onTap: () {
+                  _routeToOtp(context);
+                },
                 containerColor: Styles.redColor,
               )
             ],

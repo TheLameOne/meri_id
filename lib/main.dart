@@ -49,7 +49,6 @@ class MyApp extends StatelessWidget {
         routes: {
           SplashPage.routeNamed: (BuildContext context) => SplashPage(),
           FirstPage.routeNamed: (BuildContext context) => FirstPage(),
-          OTP.routeNamed: (BuildContext context) => OTP(),
           PhoneNumber.routeNamed: (BuildContext context) => PhoneNumber(),
           AddFriend.routeNamed: (BuildContext context) => AddFriend(),
           PANPage.routeNamed: (BuildContext context) => PANPage(),

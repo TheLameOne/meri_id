@@ -13,39 +13,39 @@ import '../../utils/global.dart';
 import '../../utils/strings.dart';
 
 class OTP extends StatefulWidget {
-  static const String routeNamed = 'OTP';
+  final String phoneNumber;
+  OTP({required this.phoneNumber});
   @override
   State<OTP> createState() => _OTPState();
 }
 
 class _OTPState extends State<OTP> {
-  bool _language = true;
-  void initState() {
-    super.initState();
-    _parent();
-  }
-
-  _parent() async {
-    await _languageFunction();
-  }
-
-  _languageFunction() async {
-    bool val = await checkLanguage();
-    setState(() {
-      _language = val;
-    });
-  }
-
-  _routeToSplashPage() {
-    Navigator.popAndPushNamed(context, SplashPage.routeNamed);
-  }
-
-  _routeToKycStepper() {
-    Navigator.popAndPushNamed(context, KycStepper.routeNamed);
-  }
-
-  _routeToPhoneNumber() {
+ _routeToPhoneNumber() {
     Navigator.pushNamed(context, PhoneNumber.routeNamed);
+  }
+
+  bool isButtonLoading = false;
+  String otp = "";
+
+
+  _routeToSplashPage(BuildContext c) async {
+    setState(() {
+      isButtonLoading = true;
+    });
+    if (validateOtp(otp) == null) {
+      bool res = await apiService.login(widget.phoneNumber , otp);
+      if (res) {
+        Navigator.pop(context);
+        Navigator.pushNamed(context, SplashPage.routeNamed);
+      } else {
+        errorToast("Oops!! server down", c);
+      }
+    } else {
+      errorToast("please enter valid Otp", c);
+    }
+    setState(() {
+      isButtonLoading = false;
+    });
   }
 
   @override
@@ -66,36 +66,32 @@ class _OTPState extends State<OTP> {
                 height: 10,
               ),
               CustomTextField(
-                hintText: "",
-                hintTextSize: 16,
-                initialValue: '',
-                onChanged: () {},
-                onSaved: () {},
-                validator: () {},
-                labelText: (_language)
-                    ? StringValues.enterOTP.english
-                    : StringValues.enterOTP.hindi,
-              ),
+                  hintText: "",
+                  hintTextSize: 16,
+                  initialValue: '',
+                  onSaved: () {},
+                  onChanged: (value) {
+                    otp = value!;
+                  },
+                  validator: () {},
+                  labelText: StringValues.getOTP.english),
               const SizedBox(height: 32),
               CustomButton(
                   postIcon: Icons.arrow_forward_ios,
                   visiblepostIcon: false,
-                  labelText: (_language)
-                      ? StringValues.submit.english
-                      : StringValues.submit.hindi,
-                  onTap: () {
-                    _routeToKycStepper();
+                  labelText: StringValues.submit.english,
+                  isLoading: isButtonLoading,
+                  onTap: () async{
+                    await _routeToSplashPage(context);
                   },
                   containerColor: Styles.redColor),
               const SizedBox(
                 height: 16,
               ),
               InkWell(
-                child: CustomText.mediumText((_language)
-                    ? StringValues.enterNumberAgain.english
-                    : StringValues.enterNumberAgain.hindi),
-                onTap: (() => _routeToPhoneNumber()),
-              )
+                  onTap: (() => _routeToPhoneNumber()),
+                  child: CustomText.mediumText(
+                      StringValues.enterNumberAgain.english))
             ],
           ),
         ),

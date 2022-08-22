@@ -102,4 +102,6 @@ abstract class StringValues {
   static Language record = Language(english: "Record", hindi: "रिकॉर्ड करे");
   static Language uploadAgain =
       Language(english: "Upload Again", hindi: "दोबारा अपलोड करें");
+  static Language loginByMobileNumber = Language(
+      english: "Login by Mobile Number", hindi: "मोबाइल नंबर से लॉग इन करें");
 }
