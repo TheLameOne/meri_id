@@ -38,7 +38,7 @@ class _IssueState extends State<Issue> {
 
   final List<String> items = [
     'Government Related',
-    'App Related',
+    'App Releated',
     'UI Related'
   ];
 

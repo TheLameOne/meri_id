@@ -73,7 +73,7 @@ class _InfoState extends State<Info> {
                         style: {
                           "p": Style(
                             color: Styles.blackColor,
-                            fontSize: FontSize.medium,
+                            fontSize: FontSize.large,
                           )
                         },
                       )),

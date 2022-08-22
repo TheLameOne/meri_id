@@ -28,13 +28,9 @@ class _ProfileState extends State<Profile> {
   }
 
   _parent() async {
+    await apiService.getProfile();
     await _languageFunction();
     await _loadingOff();
-    await _getProfileData();
-  }
-
-  _getProfileData() async {
-    await apiService.getProfile();
   }
 
   _routeToFeedsPage() {

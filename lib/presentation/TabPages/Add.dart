@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:meri_id/model/Booking.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
 import 'package:meri_id/presentation/features/ChooseAddress.dart';
@@ -17,6 +18,7 @@ class Add extends StatefulWidget {
 }
 
 class _AddState extends State<Add> {
+  Booking booking = Booking();
   bool _language = true;
   void initState() {
     super.initState();
@@ -49,12 +51,12 @@ class _AddState extends State<Add> {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.list,
                 size: 28,
                 color: Styles.blackColor,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 4,
               ),
               Expanded(
@@ -62,7 +64,7 @@ class _AddState extends State<Add> {
                   (_language)
                       ? StringValues.numberOfPeople.english
                       : StringValues.numberOfPeople.hindi,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Styles.blackColor,
@@ -114,7 +116,88 @@ class _AddState extends State<Add> {
       ),
     );
   }
-
+  
+  Widget dropDown(String selectedValue) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+    children:[
+      const SizedBox(height: 16),
+      Row(
+        children: [
+          CustomText.mediumText(
+            (_language)
+                ? StringValues.person.english
+                : StringValues.person.hindi,
+          ),
+          CustomText.mediumText(" $selectedValue")
+        ],
+      ),
+      const SizedBox(height: 16),
+      CustomTextField(
+        hintText: "",
+        hintTextSize: 16,
+        initialValue: '',
+        onChanged: (value) {},
+        onSaved: () {},
+        validator: () {},
+        labelText:
+            (_language) ? StringValues.name.english : StringValues.name.hindi,
+      ),
+      const SizedBox(height: 16),
+      CustomTextField(
+        hintText: "",
+        hintTextSize: 16,
+        initialValue: '',
+        onChanged: (value) {},
+        onSaved: () {},
+        validator: () {},
+        labelText: (_language)
+            ? StringValues.phoneNumber.english
+            : StringValues.phoneNumber.hindi,
+      ),
+      const SizedBox(height: 8),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              const Text("Create"),
+              Radio(
+                  value: "radio value",
+                  groupValue: "group value",
+                  onChanged: (value) {
+                    print(value);
+                  }),
+            ],
+          ),
+          Row(
+            children: [
+              const Text("Update"),
+              Radio(
+                  value: "radio value",
+                  groupValue: "group value",
+                  onChanged: (value) {
+                    print(value); //selected value
+                  }),
+            ],
+          ),
+        ],
+      ),
+      const SizedBox(height: 8),
+      CustomTextField(
+        hintText: "",
+        hintTextSize: 16,
+        initialValue: '',
+        onChanged: (value) {},
+        onSaved: () {},
+        validator: () {},
+        labelText: (_language)
+            ? StringValues.reason.english
+            : StringValues.reason.hindi,
+      ),
+      const SizedBox(height: 24),
+    ]);
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -146,177 +229,9 @@ class _AddState extends State<Add> {
                   ),
                   dropDownWidget(),
                   const SizedBox(height: 16),
-                  Builder(
-                    builder: (context) {
-                      if (selectedValue != null) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            (selectedValue == "1" ||
-                                    selectedValue == "2" ||
-                                    selectedValue == "3")
-                                ? Row(
-                                    children: [
-                                      CustomText.mediumText(
-                                        (_language)
-                                            ? StringValues.person.english
-                                            : StringValues.person.hindi,
-                                      ),
-                                      CustomText.mediumText(' 1')
-                                    ],
-                                  )
-                                : Container(),
-                            (selectedValue == "1" ||
-                                    selectedValue == "2" ||
-                                    selectedValue == "3")
-                                ? const SizedBox(height: 16)
-                                : Container(),
-                            (selectedValue == "1" ||
-                                    selectedValue == "2" ||
-                                    selectedValue == "3")
-                                ? CustomTextField(
-                                    hintText: "",
-                                    hintTextSize: 16,
-                                    initialValue: '',
-                                    onChanged: (value) {},
-                                    onSaved: () {},
-                                    validator: () {},
-                                    labelText: (_language)
-                                        ? StringValues.name.english
-                                        : StringValues.name.hindi,
-                                  )
-                                : Container(),
-                            (selectedValue == "1" ||
-                                    selectedValue == "2" ||
-                                    selectedValue == "3")
-                                ? const SizedBox(height: 16)
-                                : Container(),
-                            (selectedValue == "1" ||
-                                    selectedValue == "2" ||
-                                    selectedValue == "3")
-                                ? CustomTextField(
-                                    hintText: "",
-                                    minLine: 3,
-                                    textInputType: TextInputType.multiline,
-                                    hintTextSize: 16,
-                                    initialValue: '',
-                                    onChanged: (value) {},
-                                    onSaved: () {},
-                                    validator: () {},
-                                    labelText: (_language)
-                                        ? StringValues.reason.english
-                                        : StringValues.reason.hindi,
-                                  )
-                                : Container(),
-                            (selectedValue == "1" ||
-                                    selectedValue == "2" ||
-                                    selectedValue == "3")
-                                ? const SizedBox(height: 16)
-                                : Container(),
-                            (selectedValue == "2" || selectedValue == "3")
-                                ? Row(
-                                    children: [
-                                      CustomText.mediumText(
-                                        (_language)
-                                            ? StringValues.person.english
-                                            : StringValues.person.hindi,
-                                      ),
-                                      CustomText.mediumText(" 2")
-                                    ],
-                                  )
-                                : Container(),
-                            (selectedValue == "2" || selectedValue == "3")
-                                ? const SizedBox(height: 16)
-                                : Container(),
-                            (selectedValue == "2" || selectedValue == "3")
-                                ? CustomTextField(
-                                    hintText: "",
-                                    hintTextSize: 16,
-                                    initialValue: '',
-                                    onChanged: (value) {},
-                                    onSaved: () {},
-                                    validator: () {},
-                                    labelText: (_language)
-                                        ? StringValues.name.english
-                                        : StringValues.name.hindi,
-                                  )
-                                : Container(),
-                            (selectedValue == "2" || selectedValue == "3")
-                                ? const SizedBox(height: 16)
-                                : Container(),
-                            (selectedValue == "2" || selectedValue == "3")
-                                ? CustomTextField(
-                                    hintText: "",
-                                    minLine: 3,
-                                    textInputType: TextInputType.multiline,
-                                    hintTextSize: 16,
-                                    initialValue: '',
-                                    onChanged: (value) {},
-                                    onSaved: () {},
-                                    validator: () {},
-                                    labelText: (_language)
-                                        ? StringValues.reason.english
-                                        : StringValues.reason.hindi,
-                                  )
-                                : Container(),
-                            (selectedValue == "2" || selectedValue == "3")
-                                ? const SizedBox(height: 16)
-                                : Container(),
-                            (selectedValue == "3")
-                                ? Row(
-                                    children: [
-                                      CustomText.mediumText(
-                                        (_language)
-                                            ? StringValues.person.english
-                                            : StringValues.person.hindi,
-                                      ),
-                                      CustomText.mediumText(' 3')
-                                    ],
-                                  )
-                                : Container(),
-                            (selectedValue == "3")
-                                ? const SizedBox(height: 16)
-                                : Container(),
-                            (selectedValue == "3")
-                                ? CustomTextField(
-                                    hintText: "",
-                                    hintTextSize: 16,
-                                    initialValue: '',
-                                    onChanged: (value) {},
-                                    onSaved: () {},
-                                    validator: () {},
-                                    labelText: (_language)
-                                        ? StringValues.name.english
-                                        : StringValues.name.hindi,
-                                  )
-                                : Container(),
-                            (selectedValue == "3")
-                                ? const SizedBox(height: 16)
-                                : Container(),
-                            (selectedValue == "3")
-                                ? CustomTextField(
-                                    hintText: "",
-                                    minLine: 3,
-                                    textInputType: TextInputType.multiline,
-                                    hintTextSize: 16,
-                                    initialValue: '',
-                                    onChanged: (value) {},
-                                    onSaved: () {},
-                                    validator: () {},
-                                    labelText: (_language)
-                                        ? StringValues.reason.english
-                                        : StringValues.reason.hindi,
-                                  )
-                                : Container(),
-                            (selectedValue == "3")
-                                ? const SizedBox(height: 16)
-                                : Container(),
-                          ],
-                        );
-                      }
-                      return Container();
-                    },
-                  ),
+                  if(selectedValue !=null)
+                    for(int i = 1 ; i  <= int.parse(selectedValue!);i++)
+                      dropDown(i.toString())
                 ],
               ),
               (selectedValue != null)

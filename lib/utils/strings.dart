@@ -106,4 +106,7 @@ abstract class StringValues {
       english: "Login by Mobile Number", hindi: "मोबाइल नंबर से लॉग इन करें");
   static Language checkout =
       Language(english: "Checkout", hindi: "चेक आउट");
+
+      static Language phoneNumber =
+      Language(english: "Phone Number", hindi: "फ़ोन नंबर");
 }

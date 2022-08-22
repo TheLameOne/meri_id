@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:http/http.dart';
+import 'package:meri_id/model/Booking.dart';
 
 import '../model/UserProfile.dart';
 import '../utils/global.dart';
@@ -95,8 +97,6 @@ class ApiService {
       },
       body: jsonEncode(<String, String>{'doc_type': docType, 'link': link}),
     );
-    print(res.body);
-    print(res.statusCode);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
       return true;
@@ -109,9 +109,9 @@ class ApiService {
     return true;
   }
 
-  Future<UserProfile> getProfile() async {
-    String authId = await PreferenceService.uid;
-    final String url = "$baseUrl/auth/profile";
+  Future<void> getProfile() async {
+    String? authId = await preferenceService.getUID();
+    final String url = "$baseUrl/auth/profile/user";
 
     Response res = await get(
       Uri.parse(url),
@@ -120,22 +120,19 @@ class ApiService {
         'Authorization': '$token $authId'
       },
     );
-
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
-      return UserProfile(
+      userProfile = UserProfile(
         uuid: body['data']['uuid'],
         name: body['data']['name'],
         number: body['data']['phone_number'],
       );
     }
-    return UserProfile(name: "", number: "", uuid: "");
   }
 
   Future<bool> raiseIssue(String title, String description) async {
-    String authId = await PreferenceService.uid;
+    String? authId = await preferenceService.getUID();
     final String url = "$baseUrl/auth/issue";
-
     Response res = await post(Uri.parse(url),
         headers: {
           'content-type': 'application/json',
@@ -162,5 +159,22 @@ class ApiService {
       return body["data"][0]["guideline"];
     }
     return "No GuidelInes";
+  }
+
+  Future<bool> createBooking(Booking booking) async {
+    String? authId = await preferenceService.getUID();
+    final String url = "$baseUrl/booking/booking";
+    print(jsonEncode(booking));
+    Response res = await post(Uri.parse(url),
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': '$token $authId'
+        },
+        body: jsonEncode(booking));
+    if (res.statusCode == 200) {
+      var body = jsonDecode(res.body);
+      return true;
+    }
+    return false;
   }
 }
