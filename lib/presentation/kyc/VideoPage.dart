@@ -1,11 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
-import 'package:meri_id/presentation/custom/CustomImageContainer.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
-import 'package:meri_id/presentation/features/SvgScreen.dart';
+import 'package:meri_id/presentation/kyc/SvgScreen.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 
@@ -20,34 +18,10 @@ class VideoPage extends StatefulWidget {
 }
 
 class _VideoPageState extends State<VideoPage> {
-  bool _language = true;
   bool imageLoading = false;
-  bool isLoading = true;
   bool isSubmit = false;
-  String defaultContainerUrl =
-      'https://cdn4.iconfinder.com/data/icons/human-resources-34/100/Team-02-512.png';
-  void initState() {
-    super.initState();
-    _parent();
-  }
-
-  _parent() async {
-    await _languageFunction();
-    await _loadingOff();
-  }
-
-  _loadingOff() {
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  _languageFunction() async {
-    bool val = await checkLanguage();
-    setState(() {
-      _language = val;
-    });
-  }
+  String? defaultContainerUrl = null;
+  bool isButtonLoading = false;
 
   _routeToSvgScreen() {
     Navigator.popAndPushNamed(context, SvgScreen.routeNamed);
@@ -56,11 +30,7 @@ class _VideoPageState extends State<VideoPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        body: (isLoading)
-            ? const Center(
-                child: CircularProgressIndicator(color: Styles.redColor),
-              )
-            : Padding(
+        body: Padding(
                 padding: const EdgeInsets.all(32),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,9 +41,7 @@ class _VideoPageState extends State<VideoPage> {
                           height: 32,
                         ),
                         CustomText.xLargeText(
-                          (_language)
-                              ? StringValues.videoKYC.english
-                              : StringValues.videoKYC.hindi,
+                          StringValues.videoKYC.english,
                         ),
                       ],
                     ),
@@ -83,12 +51,8 @@ class _VideoPageState extends State<VideoPage> {
                           isLoading: imageLoading,
                           postIcon: Icons.arrow_forward_ios,
                           labelText: (isSubmit)
-                              ? (_language)
-                                  ? StringValues.uploadAgain.english
-                                  : StringValues.uploadAgain.hindi
-                              : (_language)
-                                  ? StringValues.record.english
-                                  : StringValues.record.hindi,
+                              ? StringValues.uploadAgain.english
+                              : StringValues.record.english,
                           onTap: () async {
                             try {
                               setState(() {
@@ -123,12 +87,43 @@ class _VideoPageState extends State<VideoPage> {
                         ),
                         (isSubmit)
                             ? CustomButton(
+                                isLoading: isButtonLoading,
                                 postIcon: Icons.arrow_forward_ios,
-                                labelText: (_language)
-                                    ? StringValues.submit.english
-                                    : StringValues.submit.hindi,
-                                onTap: () {
-                                  _routeToSvgScreen();
+                                labelText: StringValues.submit.english,
+                                onTap: () async {
+                                  
+                                  setState(() {
+                                    isButtonLoading = true;
+                                  });
+
+                                  if (defaultContainerUrl == null) {
+                                    errorToast(
+                                        "Please Upload the Image", context);
+                                    return;
+                                  }
+                                  bool api = await apiService.uploadDoc(
+                                      "video", defaultContainerUrl!);
+                                  if (api) {
+                                    bool val = await apiService
+                                        .statusUpdate("pending");
+                                    if (val) {
+                                      Navigator.popAndPushNamed(
+                                          context, SvgScreen.routeNamed);
+                                      successToast(
+                                          "Video Kyc will be checked by Support Team",
+                                          context);
+                                    } else
+                                      errorToast(
+                                          "!OOps Please Try Again", context);
+                                  } else {
+                                    errorToast(
+                                        "!OOps Please Try Again", context);
+                                  }
+
+                                  setState(() {
+                                    isButtonLoading = false;
+                                  });
+
                                 },
                                 containerColor: Styles.redColor,
                               )

@@ -57,13 +57,51 @@ class ApiService {
         'Authorization': '$token $authId'
       },
     );
-    print(res.body);
-    print(res.statusCode);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
       return body["data"]["status"];
     }
     return "";
+  }
+
+  Future<bool> statusUpdate(String status) async {
+    String? authId = await preferenceService.getUID();
+    final String url = "$baseUrl/auth/user/status/update";
+    Response res = await post(
+      Uri.parse(url),
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': '$token $authId'
+      },
+      body: jsonEncode(<String, String>{'status': status}),
+    );
+    print(res.body);
+    print(res.statusCode);
+    if (res.statusCode == 200) {
+      var body = jsonDecode(res.body);
+      return true;
+    }
+    return false;
+  }
+
+   Future<bool> uploadDoc(String docType , String link) async {
+    String? authId = await preferenceService.getUID();
+    final String url = "$baseUrl/auth/user/docs/update";
+    Response res = await put(
+      Uri.parse(url),
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': '$token $authId'
+      },
+      body: jsonEncode(<String, String>{'doc_type': docType , 'link' : link }),
+    );
+    print(res.body);
+    print(res.statusCode);
+    if (res.statusCode == 200) {
+      var body = jsonDecode(res.body);
+      return true;
+    }
+    return false;
   }
 
   Future<bool> logOut() async {

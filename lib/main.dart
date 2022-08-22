@@ -17,7 +17,7 @@ import 'package:meri_id/presentation/features/GoogleMapTracking.dart';
 import 'package:meri_id/presentation/features/Info.dart';
 import 'package:meri_id/presentation/features/Issue.dart';
 import 'package:meri_id/presentation/features/Language.dart';
-import 'package:meri_id/presentation/features/SvgScreen.dart';
+import 'package:meri_id/presentation/kyc/SvgScreen.dart';
 import 'package:meri_id/presentation/kyc/KycStepper.dart';
 import 'package:meri_id/presentation/kyc/OtherDocumentPage.dart';
 import 'presentation/features/Feeds.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
-import 'package:meri_id/presentation/features/SvgScreen.dart';
+import 'package:meri_id/presentation/kyc/SvgScreen.dart';
 import 'package:meri_id/presentation/kyc/AadharPage.dart';
 import 'package:meri_id/presentation/kyc/OtherDocumentPage.dart';
 import 'package:meri_id/presentation/kyc/PanPage.dart';

@@ -20,32 +20,9 @@ class PANPage extends StatefulWidget {
 }
 
 class _PANPageState extends State<PANPage> {
-  bool _language = true;
   bool imageLoading = false;
-  bool isLoading = true;
   String? defaultContainerUrl = null;
-  void initState() {
-    super.initState();
-    _parent();
-  }
-
-  _parent() async {
-    await _languageFunction();
-    await _loadingOff();
-  }
-
-  _loadingOff() {
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  _languageFunction() async {
-    bool val = await checkLanguage();
-    setState(() {
-      _language = val;
-    });
-  }
+  bool isButtonLoading = false;
 
   _routeToAdhar() {
     Navigator.popAndPushNamed(context, AadharPage.routeNamed);
@@ -54,11 +31,7 @@ class _PANPageState extends State<PANPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        body: (isLoading)
-            ? const Center(
-                child: CircularProgressIndicator(color: Styles.redColor),
-              )
-            : Padding(
+        body: Padding(
                 padding: const EdgeInsets.all(32),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,9 +42,7 @@ class _PANPageState extends State<PANPage> {
                           height: 32,
                         ),
                         CustomText.xLargeText(
-                          (_language)
-                              ? StringValues.uploadPANCard.english
-                              : StringValues.uploadPANCard.hindi,
+                          StringValues.uploadPANCard.english,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(32),
@@ -110,12 +81,40 @@ class _PANPageState extends State<PANPage> {
                     Column(
                       children: [
                         CustomButton(
+                          isLoading: isButtonLoading,
                           postIcon: Icons.arrow_forward_ios,
-                          labelText: (_language)
-                              ? StringValues.submit.english
-                              : StringValues.submit.hindi,
-                          onTap: () {
-                            _routeToAdhar();
+                          labelText: StringValues.submit.english,
+                          onTap: () async {
+                            
+                            setState(() {
+                              isButtonLoading = true;
+                            });
+
+                            if (defaultContainerUrl == null) {
+                              errorToast("Please Upload the Image", context);
+                              return;
+                            }
+                            bool api = await apiService.uploadDoc(
+                                "pan", defaultContainerUrl!);
+                            if (api) {
+                              bool val =
+                                  await apiService.statusUpdate("aadhar");
+                              if (val) {
+                                Navigator.popAndPushNamed(
+                                    context, AadharPage.routeNamed);
+                                     successToast(
+                                          "Congrats Pan Uploaded",
+                                          context);
+                              } else
+                                errorToast("!OOps Please Try Again", context);
+                            } else {
+                                 errorToast("!OOps Please Try Again", context);
+                            }
+
+                            setState(() {
+                              isButtonLoading = false;
+                            });
+
                           },
                           containerColor: Styles.redColor,
                         ),

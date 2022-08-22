@@ -19,33 +19,9 @@ class AadharPage extends StatefulWidget {
 }
 
 class _AadharPageState extends State<AadharPage> {
-  bool _language = true;
-  bool isLoading = true;
   bool imageLoading = false;
-  String defaultContainerUrl =
-      'https://cdn4.iconfinder.com/data/icons/human-resources-34/100/Team-02-512.png';
-  void initState() {
-    super.initState();
-    _parent();
-  }
-
-  _parent() async {
-    await _languageFunction();
-    await _loadingOff();
-  }
-
-  _languageFunction() async {
-    bool val = await checkLanguage();
-    setState(() {
-      _language = val;
-    });
-  }
-
-  _loadingOff() {
-    setState(() {
-      isLoading = false;
-    });
-  }
+  String? defaultContainerUrl = null;
+  bool isButtonLoading = false;
 
   _routeToVideoPage() {
     Navigator.pushNamed(context, VideoPage.routeNamed);
@@ -54,11 +30,7 @@ class _AadharPageState extends State<AadharPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        body: (isLoading)
-            ? const Center(
-                child: CircularProgressIndicator(color: Styles.redColor),
-              )
-            : Padding(
+        body: Padding(
                 padding: const EdgeInsets.all(32),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,9 +40,8 @@ class _AadharPageState extends State<AadharPage> {
                         const SizedBox(
                           height: 32,
                         ),
-                        CustomText.xLargeText((_language)
-                            ? StringValues.uploadAadhar.english
-                            : StringValues.uploadAadhar.hindi),
+                        CustomText.xLargeText(
+                            StringValues.uploadAadhar.english),
                         Padding(
                           padding: const EdgeInsets.all(32),
                           child: CustomImageContainer(
@@ -108,12 +79,38 @@ class _AadharPageState extends State<AadharPage> {
                     Column(
                       children: [
                         CustomButton(
+                          isLoading: isButtonLoading,
                           postIcon: Icons.arrow_forward_ios,
-                          labelText: (_language)
-                              ? StringValues.submit.english
-                              : StringValues.submit.hindi,
-                          onTap: () {
-                            _routeToVideoPage();
+                          labelText: StringValues.submit.english,
+                          onTap: () async {
+                            
+                            setState(() {
+                              isButtonLoading = true;
+                            });
+
+                            if (defaultContainerUrl == null) {
+                              errorToast("Please Upload the Image", context);
+                              return;
+                            }
+                            bool api = await apiService.uploadDoc(
+                                "aadhar", defaultContainerUrl!);
+                            if (api) {
+                              bool val = await apiService.statusUpdate("video");
+                              if (val) {
+                                Navigator.popAndPushNamed(
+                                    context, VideoPage.routeNamed);
+                                successToast(
+                                    "Congrats Aadhar Uploaded", context);
+                              } else
+                                errorToast("!OOps Please Try Again", context);
+                            } else {
+                              errorToast("!OOps Please Try Again", context);
+                            }
+
+                            setState(() {
+                              isButtonLoading = false;
+                            });
+
                           },
                           containerColor: Styles.redColor,
                         ),

@@ -1,17 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
 import 'package:image_picker/image_picker.dart';
-import 'package:meri_id/presentation/KYC/VideoPage.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomImageContainer.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
+import 'package:meri_id/presentation/kyc/VideoPage.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
+import 'package:meri_id/utils/global.dart';
+import 'package:meri_id/utils/strings.dart';
 import 'package:meri_id/utils/styles.dart';
-
-import '../../utils/global.dart';
-import '../../utils/strings.dart';
 
 class OtherDocumentPage extends StatefulWidget {
   static const String routeNamed = 'otherDocumentPage';
@@ -21,29 +19,9 @@ class OtherDocumentPage extends StatefulWidget {
 }
 
 class _OtherDocumentPageState extends State<OtherDocumentPage> {
-  bool _language = true;
   bool imageLoading = false;
-  String defaultContainerUrl =
-      'https://cdn4.iconfinder.com/data/icons/human-resources-34/100/Team-02-512.png';
-  void initState() {
-    super.initState();
-    _parent();
-  }
-
-  _parent() async {
-    await _languageFunction();
-  }
-
-  _languageFunction() async {
-    bool val = await checkLanguage();
-    setState(() {
-      _language = val;
-    });
-  }
-
-  _routeToVideoPage() {
-    Navigator.popAndPushNamed(context, VideoPage.routeNamed);
-  }
+  bool isButtonLoading = false;
+  String? defaultContainerUrl = null;
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +36,7 @@ class _OtherDocumentPageState extends State<OtherDocumentPage> {
               const SizedBox(
                 height: 32,
               ),
-              CustomText.xLargeText(
-                (_language)
-                    ? StringValues.uploadOtherDocuments.english
-                    : StringValues.uploadOtherDocuments.hindi,
-              ),
+              CustomText.xLargeText(StringValues.uploadOtherDocuments.english),
               Padding(
                 padding: const EdgeInsets.all(32),
                 child: CustomImageContainer(
@@ -73,7 +47,7 @@ class _OtherDocumentPageState extends State<OtherDocumentPage> {
                         imageLoading = true;
                       });
                       XFile? xFile = (await ImagePicker.platform
-                          .getImage(source: ImageSource.gallery));
+                          .getImage(source: ImageSource.camera));
                       if (xFile != null) {
                         File file = File(xFile.path);
                         String id =
@@ -99,12 +73,39 @@ class _OtherDocumentPageState extends State<OtherDocumentPage> {
           Column(
             children: [
               CustomButton(
+                isLoading: isButtonLoading,
                 postIcon: Icons.arrow_forward_ios,
-                labelText: (_language)
-                    ? StringValues.submit.english
-                    : StringValues.submit.hindi,
-                onTap: () {
-                  _routeToVideoPage();
+                labelText: StringValues.submit.english,
+                onTap: () async {
+                  setState(() {
+                    isButtonLoading = true;
+                  });
+
+                  if (defaultContainerUrl == null) {
+                    errorToast("Please Upload the Image", context);
+                    return;
+                  }
+
+                  bool api =
+                      await apiService.uploadDoc("other", defaultContainerUrl!);
+                  if (api) {
+                    bool val = await apiService.statusUpdate("video");
+                                           successToast(
+                                          "Congrats! Documents uploaded",
+                                          context);
+                    if (val) {
+                      Navigator.popAndPushNamed(context, VideoPage.routeNamed);
+                    } else
+                      errorToast("!OOps Please Try Again", context);
+                  }else
+                  {
+                    errorToast("!OOps Please Try Again", context);
+                  }
+
+                  setState(() {
+                    isButtonLoading = false;
+                  });
+
                 },
                 containerColor: Styles.redColor,
               ),

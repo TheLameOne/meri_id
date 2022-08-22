@@ -4,7 +4,7 @@ import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomIcon.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
-import 'package:meri_id/presentation/features/SvgScreen.dart';
+import 'package:meri_id/presentation/kyc/SvgScreen.dart';
 import 'package:meri_id/presentation/kyc/AadharPage.dart';
 import 'package:meri_id/presentation/kyc/KycStepper.dart';
 import 'package:meri_id/presentation/kyc/OtherDocumentPage.dart';

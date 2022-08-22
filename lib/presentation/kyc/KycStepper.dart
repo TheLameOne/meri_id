@@ -19,29 +19,23 @@ class KycStepper extends StatefulWidget {
 
 class _KycStepperState extends State<KycStepper> {
   bool hide = true;
-  bool _language = true;
-  void initState() {
-    super.initState();
-    _parent();
+  bool isPanLoading = false;
+  bool isOtherLoading = false;
+  
+  _routeToPanPage() async {
+      bool val = await apiService.statusUpdate("pan");
+        if (val)
+        Navigator.popAndPushNamed(context, PANPage.routeNamed);
+        else
+        errorToast("!OOps Please Try Again", context);
   }
 
-  _parent() async {
-    await _languageFunction();
-  }
-
-  _languageFunction() async {
-    bool val = await checkLanguage();
-    setState(() {
-      _language = val;
-    });
-  }
-
-  _routeToPanPage() {
-    Navigator.popAndPushNamed(context, PANPage.routeNamed);
-  }
-
-  _routeToOtherDocumentPage() {
-    Navigator.popAndPushNamed(context, OtherDocumentPage.routeNamed);
+  _routeToOtherDocumentPage() async {
+    bool val = await apiService.statusUpdate("other");
+    if (val)
+      Navigator.popAndPushNamed(context, OtherDocumentPage.routeNamed);
+    else
+      errorToast("!OOps Please Try Again", context);
   }
 
   @override
@@ -56,97 +50,76 @@ class _KycStepperState extends State<KycStepper> {
             const SizedBox(
               height: 32,
             ),
-            CustomText.xLargeText(
-              (_language)
-                  ? StringValues.chooseKYCJourney.english
-                  : StringValues.chooseKYCJourney.hindi,
-            ),
+            CustomText.xLargeText(StringValues.chooseKYCJourney.english),
             const SizedBox(height: 64),
-            CustomText.xLargeText(
-              (_language)
-                  ? StringValues.KYCJourney1.english
-                  : StringValues.KYCJourney1.hindi,
-            ),
+            CustomText.xLargeText(StringValues.KYCJourney1.english),
             const SizedBox(height: 16),
             Row(
               children: [
                 CustomText.mediumText("1. "),
-                CustomText.mediumText(
-                  (_language)
-                      ? StringValues.uploadPANCard.english
-                      : StringValues.uploadPANCard.hindi,
-                ),
+                CustomText.mediumText(StringValues.uploadPANCard.english),
               ],
             ),
             const SizedBox(height: 16),
             Row(
               children: [
                 CustomText.mediumText("2. "),
-                CustomText.mediumText(
-                  (_language)
-                      ? StringValues.uploadAadhar.english
-                      : StringValues.uploadAadhar.hindi,
-                ),
+                CustomText.mediumText(StringValues.uploadAadhar.english),
               ],
             ),
             const SizedBox(height: 16),
             Row(
               children: [
                 CustomText.mediumText("3. "),
-                CustomText.mediumText(
-                  (_language)
-                      ? StringValues.videoKYC.english
-                      : StringValues.videoKYC.hindi,
-                ),
+                CustomText.mediumText(StringValues.videoKYC.english),
               ],
             ),
             const SizedBox(height: 16),
             CustomButton(
+              isLoading: isPanLoading,
               postIcon: Icons.arrow_forward_ios,
-              labelText: (_language)
-                  ? StringValues.proceed.english
-                  : StringValues.proceed.hindi,
-              onTap: () {
-                _routeToPanPage();
+              labelText: StringValues.proceed.english,
+              onTap: () async {
+                setState(() {
+                  isPanLoading = true;
+                });
+                await _routeToPanPage();
+                setState(() {
+                  isPanLoading = false;
+                });
               },
               containerColor: Styles.redColor,
             ),
             const SizedBox(height: 64),
-            CustomText.xLargeText(
-              (_language)
-                  ? StringValues.KYCJourney2.english
-                  : StringValues.KYCJourney2.hindi,
-            ),
+            CustomText.xLargeText(StringValues.KYCJourney2.english),
             const SizedBox(height: 16),
             Row(
               children: [
                 CustomText.mediumText("1. "),
                 CustomText.mediumText(
-                  (_language)
-                      ? StringValues.uploadOtherDocuments.english
-                      : StringValues.uploadOtherDocuments.hindi,
-                ),
+                    StringValues.uploadOtherDocuments.english),
               ],
             ),
             const SizedBox(height: 16),
             Row(
               children: [
                 CustomText.mediumText("2. "),
-                CustomText.mediumText(
-                  (_language)
-                      ? StringValues.videoKYC.english
-                      : StringValues.videoKYC.hindi,
-                ),
+                CustomText.mediumText(StringValues.videoKYC.english),
               ],
             ),
             const SizedBox(height: 16),
             CustomButton(
+              isLoading: isOtherLoading,
               postIcon: Icons.arrow_forward_ios,
-              labelText: (_language)
-                  ? StringValues.proceed.english
-                  : StringValues.proceed.hindi,
-              onTap: () {
-                _routeToOtherDocumentPage();
+              labelText: StringValues.proceed.english,
+              onTap: () async {
+                setState(() {
+                  isOtherLoading = true;
+                });
+                await _routeToOtherDocumentPage();
+                setState(() {
+                  isOtherLoading = false;
+                });
               },
               containerColor: Styles.redColor,
             ),

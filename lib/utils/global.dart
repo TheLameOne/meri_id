@@ -59,7 +59,7 @@ String? validateOtp(String otp) {
 
 Widget customizedLeadingIconWidget(String message) {
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(25.0),
       color: Styles.blackColor,
@@ -67,7 +67,7 @@ Widget customizedLeadingIconWidget(String message) {
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(message, style: const TextStyle(color: Styles.backgroundColor))
+        Text(message, style: const TextStyle(color: Styles.backgroundColor , fontSize: 16 , fontWeight: FontWeight.w500))
       ],
     ),
   );
@@ -82,7 +82,7 @@ void errorToast(String message, BuildContext context) {
 
 Widget successIconWidget(String message) {
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(25.0),
       color: Color.fromARGB(255, 18, 191, 222),
@@ -90,7 +90,7 @@ Widget successIconWidget(String message) {
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(message, style: const TextStyle(color: Styles.backgroundColor))
+        Text(message, style: const TextStyle(color: Styles.backgroundColor ,  fontSize: 16))
       ],
     ),
   );
@@ -100,5 +100,5 @@ void successToast(String message, BuildContext context) {
   var fToast = FToast();
   fToast.init(context);
   fToast.showToast(
-      child: successIconWidget(message), gravity: ToastGravity.TOP);
+      child: successIconWidget(message), gravity: ToastGravity.TOP );
 }
