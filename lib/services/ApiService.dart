@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:meri_id/model/Address.dart';
+import 'package:meri_id/model/Booking.dart';
 
 import '../model/UserProfile.dart';
 import '../utils/global.dart';
@@ -162,5 +164,39 @@ class ApiService {
       return body["data"][0]["guideline"];
     }
     return "No GuidelInes";
+  }
+
+  Future<bool> createBooking(Booking booking) async {
+    String authId = await PreferenceService.uid;
+    var address = new Map();
+    address['address_line_1'] = booking.address.addressLine1;
+    address['address_line_2'] = booking.address.addressLine2;
+    address['city'] = booking.address.city;
+    address['pincode'] = booking.address.pincode;
+    address['state'] = booking.address.state;
+    address['latitude'] = booking.address.lat;
+    address['longitude'] = booking.address.long;
+
+    var friends = List<Map>;
+    friends['name'] = booking.friends.name;
+    friends['phoneNumber'] = booking.friends.phoneNumber;
+    friends['reason'] = booking.friends.reason;
+
+    final String url = "$baseUrl/booking/booking";
+    Response res = await post(Uri.parse(url),
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': '$token $authId'
+        },
+        body: jsonEncode(<String, String>{
+          'address': address.toString(),
+          'friends': friends.toString(),
+        }));
+
+    if (res.statusCode == 200) {
+      var body = jsonDecode(res.body);
+      return true;
+    }
+    return false;
   }
 }
