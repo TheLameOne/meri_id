@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
@@ -7,7 +9,7 @@ import 'package:meri_id/presentation/features/QRpage.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 import 'package:intl/intl.dart';
-
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../../utils/global.dart';
 import '../../utils/strings.dart';
 
@@ -20,6 +22,10 @@ class ChooseTimeSlot extends StatefulWidget {
 }
 
 class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
+  bool loading = true;
+  static const platform = MethodChannel("razorpay_flutter");
+  late Razorpay _razorpay;
+
   bool _language = true;
   TextEditingController dateInput = TextEditingController();
 
@@ -27,6 +33,10 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
   void initState() {
     dateInput.text = ""; //set the initial value of text field
     super.initState();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     _parent();
   }
 
@@ -43,10 +53,6 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
 
   String? radioValue;
 
-  _submit() {
-    _routeToQRPage();
-  }
-
   _routeToQRPage() {
     Navigator.pop(context);
     Navigator.push(
@@ -55,66 +61,47 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
     );
   }
 
-  // Widget _timeWidget(String startTime, String endTime, String val) {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //     children: [
-  //       Container(
-  //         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(10),
-  //           color: Styles.backgroundColor,
-  //         ),
-  //         child: Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //           children: [
-  //             CustomText.mediumText(startTime),
-  //             const SizedBox(
-  //               width: 16,
-  //             ),
-  //             CustomText.mediumText("-"),
-  //             const SizedBox(
-  //               width: 16,
-  //             ),
-  //             CustomText.mediumText(endTime),
-  //           ],
-  //         ),
-  //       ),
-  //       Padding(
-  //         padding: const EdgeInsets.only(top: 16, bottom: 16),
-  //         child: Radio(
-  //             fillColor:
-  //                 MaterialStateColor.resolveWith((states) => Styles.iconColor),
-  //             value: val,
-  //             groupValue: radioValue,
-  //             onChanged: (val) {
-  //               setState(() {
-  //                 radioValue = val.toString();
-  //                 print(radioValue);
-  //               });
-  //             }),
-  //       ),
-  //     ],
-  //   );
-  // }
+  void openCheckout() async {
+    var options = {
+      'key': 'rzp_test_FfJrm8TZId9hTK',
+      'amount': 5000,
+      'name': 'Meri ID',
+      'description': 'Aadhar Service',
+      'retry': {'enabled': true, 'max_count': 1},
+      'send_sms_hash': true,
+      'prefill': {'contact': '7451985966', 'email': 'test@razorpay.com'},
+      'external': {
+        'wallets': ['paytm']
+      }
+    };
 
-  // Widget _timeBoxWidget() {
-  //   return Container(
-  //       decoration: BoxDecoration(
-  //         borderRadius: BorderRadius.circular(10),
-  //         color: Styles.grayColor,
-  //       ),
-  //       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-  //       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-  //         _timeWidget("9:00 am", "10:00 am", '1'),
-  //         _timeWidget("10:00 am", "11:00 am", '2'),
-  //         _timeWidget("11:00 am", "12:00 am", '3'),
-  //         _timeWidget("12:00 am", "13:00 pm", '4'),
-  //         _timeWidget("13:00 am", "14:00 pm", '5'),
-  //         _timeWidget("14:00 am", "15:00 pm", '6'),
-  //         _timeWidget("15:00 am", "16:00 pm", '7'),
-  //       ]));
-  // }
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      debugPrint('Error: e');
+    }
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    print('Success Response: $response');
+    successToast("Payment Successful", context);
+    _routeToQRPage();
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    print('Error Response: $response');
+    errorToast("Payment could not be completed!", context);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    print('External SDK Response: $response');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _razorpay.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +130,6 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                           const SizedBox(
                             height: 16,
                           ),
-                          // timeboxwidget()
                           TextField(
                               cursorColor: Styles.redColor,
                               controller: dateInput,
@@ -198,11 +184,11 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                           postIcon: Icons.arrow_forward,
                           visiblepostIcon: false,
                           labelText: (_language)
-                              ? StringValues.submit.english
-                              : StringValues.submit.hindi,
+                              ? StringValues.checkout.english
+                              : StringValues.checkout.hindi,
                           containerColor: Styles.redColor,
                           onTap: () {
-                            _submit();
+                            openCheckout();
                           })
                     ],
                   )))),

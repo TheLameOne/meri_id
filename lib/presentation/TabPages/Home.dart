@@ -18,7 +18,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool _language = true;
-
   void initState() {
     super.initState();
     _parent();

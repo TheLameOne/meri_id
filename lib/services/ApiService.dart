@@ -84,7 +84,7 @@ class ApiService {
     return false;
   }
 
-   Future<bool> uploadDoc(String docType , String link) async {
+  Future<bool> uploadDoc(String docType, String link) async {
     String? authId = await preferenceService.getUID();
     final String url = "$baseUrl/auth/user/docs/update";
     Response res = await put(
@@ -93,7 +93,7 @@ class ApiService {
         'content-type': 'application/json',
         'Authorization': '$token $authId'
       },
-      body: jsonEncode(<String, String>{'doc_type': docType , 'link' : link }),
+      body: jsonEncode(<String, String>{'doc_type': docType, 'link': link}),
     );
     print(res.body);
     print(res.statusCode);
@@ -124,11 +124,12 @@ class ApiService {
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
       return UserProfile(
-          name: body['data']['name'],
-          number: body['data']['phone_number'],
-          userId: body['data']['user']);
+        uuid: body['data']['uuid'],
+        name: body['data']['name'],
+        number: body['data']['phone_number'],
+      );
     }
-    return UserProfile(name: "", number: "", userId: "");
+    return UserProfile(name: "", number: "", uuid: "");
   }
 
   Future<bool> raiseIssue(String title, String description) async {
@@ -143,7 +144,7 @@ class ApiService {
         body: jsonEncode(<String, String>{
           'title': title,
           'description': description,
-          'user': userProfile.userId
+          'user': userProfile.uuid
         }));
 
     if (res.statusCode == 200) {
