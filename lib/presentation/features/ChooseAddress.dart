@@ -85,7 +85,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintTextSize: 16,
                                 initialValue: '',
                                 onSaved: () {},
-                                onChanged: () {},
+                                onChanged: (value) {},
                                 validator: () {},
                                 labelText: (_language)
                                     ? StringValues.chooseYourLocation.english
@@ -101,7 +101,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onChanged: () {},
+                                onChanged: (value) {},
                                 onSaved: () {},
                                 validator: () {},
                                 labelText: (_language)
@@ -113,7 +113,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onChanged: () {},
+                                onChanged: (value) {},
                                 onSaved: () {},
                                 validator: () {},
                                 labelText: (_language)
@@ -125,7 +125,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onChanged: () {},
+                                onChanged: (value) {},
                                 onSaved: () {},
                                 validator: () {},
                                 labelText: (_language)
@@ -137,7 +137,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onChanged: () {},
+                                onChanged: (value) {},
                                 onSaved: () {},
                                 validator: () {},
                                 labelText: (_language)
@@ -149,7 +149,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onChanged: () {},
+                                onChanged: (value) {},
                                 onSaved: () {},
                                 validator: () {},
                                 labelText: (_language)

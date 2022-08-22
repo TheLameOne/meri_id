@@ -178,7 +178,7 @@ class _AddState extends State<Add> {
                                     hintText: "",
                                     hintTextSize: 16,
                                     initialValue: '',
-                                    onChanged: () {},
+                                    onChanged: (value) {},
                                     onSaved: () {},
                                     validator: () {},
                                     labelText: (_language)
@@ -200,7 +200,7 @@ class _AddState extends State<Add> {
                                     textInputType: TextInputType.multiline,
                                     hintTextSize: 16,
                                     initialValue: '',
-                                    onChanged: () {},
+                                    onChanged: (value) {},
                                     onSaved: () {},
                                     validator: () {},
                                     labelText: (_language)
@@ -233,7 +233,7 @@ class _AddState extends State<Add> {
                                     hintText: "",
                                     hintTextSize: 16,
                                     initialValue: '',
-                                    onChanged: () {},
+                                    onChanged: (value) {},
                                     onSaved: () {},
                                     validator: () {},
                                     labelText: (_language)
@@ -251,7 +251,7 @@ class _AddState extends State<Add> {
                                     textInputType: TextInputType.multiline,
                                     hintTextSize: 16,
                                     initialValue: '',
-                                    onChanged: () {},
+                                    onChanged: (value) {},
                                     onSaved: () {},
                                     validator: () {},
                                     labelText: (_language)
@@ -282,7 +282,7 @@ class _AddState extends State<Add> {
                                     hintText: "",
                                     hintTextSize: 16,
                                     initialValue: '',
-                                    onChanged: () {},
+                                    onChanged: (value) {},
                                     onSaved: () {},
                                     validator: () {},
                                     labelText: (_language)
@@ -300,7 +300,7 @@ class _AddState extends State<Add> {
                                     textInputType: TextInputType.multiline,
                                     hintTextSize: 16,
                                     initialValue: '',
-                                    onChanged: () {},
+                                    onChanged: (value) {},
                                     onSaved: () {},
                                     validator: () {},
                                     labelText: (_language)

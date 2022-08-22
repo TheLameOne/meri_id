@@ -12,7 +12,7 @@ class ApiService {
   static final ApiService _instance = ApiService._();
   
   final String baseUrl = "https://meriid.herokuapp.com/api";
-  final String role = 'operator';
+  final String role = 'user';
   final String token = 'Token';
 
   Future<bool> getOtp(String phoneNumber) async {
@@ -23,8 +23,6 @@ class ApiService {
       body: jsonEncode(
           <String, String>{'phone_number': phoneNumber, 'role': role}),
     );
-    print(res.body);
-    print(res.statusCode);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
       return true;
@@ -41,7 +39,7 @@ class ApiService {
       body:
           jsonEncode(<String, String>{'phone_number': phoneNumber, 'otp': otp}),
     );
-
+    
     if (res.statusCode == 201) {
       var body = jsonDecode(res.body);
       await preferenceService.setUID(body["data"]["token"]);
