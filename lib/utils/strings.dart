@@ -104,4 +104,6 @@ abstract class StringValues {
       Language(english: "Upload Again", hindi: "दोबारा अपलोड करें");
   static Language loginByMobileNumber = Language(
       english: "Login by Mobile Number", hindi: "मोबाइल नंबर से लॉग इन करें");
+  static Language checkout =
+      Language(english: "Checkout", hindi: "चेक आउट");
 }

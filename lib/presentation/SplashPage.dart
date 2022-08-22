@@ -13,6 +13,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  bool isButtonLoading = false;
   _getBody() {
     switch (currentPage) {
       case 0:
@@ -99,18 +100,29 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar:_getBottomBar(),
+          bottomNavigationBar: _getBottomBar(),
           backgroundColor: Colors.white,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[Expanded(child: _getBody())],
           ),
           floatingActionButton: FloatingActionButton(
-              backgroundColor: Styles.purpleColor,
+              backgroundColor: Styles.grayColor,
               elevation: 12,
               tooltip: 'chat bot',
-              child: const Icon(Icons.help, color: Styles.blackColor),
+              child: (isButtonLoading)
+                  ? Container(
+                      height: 14,
+                      width: 14,
+                      child: const CircularProgressIndicator(
+                        color: Styles.blackColor,
+                      ),
+                    )
+                  : const Icon(Icons.help, color: Styles.blackColor),
               onPressed: () async {
+                setState(() {
+                  isButtonLoading = true;
+                });
                 try {
                   dynamic conversationObject = {
                     'appId': '259ee76a76674e8ee1a6d02613a91595f'
@@ -118,14 +130,16 @@ class _SplashPageState extends State<SplashPage> {
                   dynamic result =
                       await KommunicateFlutterPlugin.buildConversation(
                           conversationObject);
-                  print(
-                      "Conversation builder success : " + result.toString());
+                  print("Conversation builder success : " + result.toString());
                 } on Exception catch (e) {
-                  print("Conversation builder error occurred : " +
-                      e.toString());
+                  print(
+                      "Conversation builder error occurred : " + e.toString());
+                  errorToast("!OOps Some Error Occur", context);
                 }
+                setState(() {
+                  isButtonLoading = false;
+                });
               })),
-
     );
   }
 }

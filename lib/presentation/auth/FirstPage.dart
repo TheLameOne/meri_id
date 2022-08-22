@@ -59,20 +59,36 @@ class _FirstPageState extends State<FirstPage> {
     Navigator.popAndPushNamed(context, PhoneNumber.routeNamed);
   }
 
-  pageRouting(String state ,BuildContext c)
-  {
-      switch(state)
-      {
-        case "kyc" : Navigator.popAndPushNamed(context, KycStepper.routeNamed);break;
-        case "pan" : Navigator.popAndPushNamed(context, PANPage.routeNamed);break;
-        case "other" : Navigator.popAndPushNamed(context, OtherDocumentPage.routeNamed);break;
-        case "aadhar" : Navigator.popAndPushNamed(context, AadharPage.routeNamed);break;
-        case "video" : Navigator.popAndPushNamed(context, VideoPage.routeNamed);break;
-        case "pending" : Navigator.popAndPushNamed(context, SvgScreen.routeNamed);break;
-        case "active" : Navigator.popAndPushNamed(context, SplashPage.routeNamed);break;
-        case "" : errorToast("Please Try Againg", c);break;
-        default: errorToast("Please Try Againg", c);break;
-      }
+  pageRouting(String state, BuildContext c) {
+    switch (state) {
+      case "kyc":
+        Navigator.popAndPushNamed(context, KycStepper.routeNamed);
+        break;
+      case "pan":
+        Navigator.popAndPushNamed(context, PANPage.routeNamed);
+        break;
+      case "other":
+        Navigator.popAndPushNamed(context, OtherDocumentPage.routeNamed);
+        break;
+      case "aadhar":
+        Navigator.popAndPushNamed(context, AadharPage.routeNamed);
+        break;
+      case "video":
+        Navigator.popAndPushNamed(context, VideoPage.routeNamed);
+        break;
+      case "pending":
+        Navigator.popAndPushNamed(context, SvgScreen.routeNamed);
+        break;
+      case "active":
+        Navigator.popAndPushNamed(context, SplashPage.routeNamed);
+        break;
+      case "":
+        errorToast("Please Try Again", c);
+        break;
+      default:
+        errorToast("Please Try Again", c);
+        break;
+    }
   }
 
   @override
@@ -119,8 +135,9 @@ class _FirstPageState extends State<FirstPage> {
                                   final isAuthenticated =
                                       await LocalAuthApi.authenticate();
                                   if (isAuthenticated) {
-                                    String state = await apiService.currentStatus();
-                                    pageRouting(state,context);
+                                    String state =
+                                        await apiService.currentStatus();
+                                    pageRouting(state, context);
                                   } else {
                                     errorToast("Please Try Again", context);
                                   }

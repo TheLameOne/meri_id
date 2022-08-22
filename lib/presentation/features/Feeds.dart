@@ -1,12 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../model/News.dart';
 import '../../services/widgets/CustomText.dart';
 import '../../utils/global.dart';
@@ -24,6 +19,7 @@ class _FeedsState extends State<Feeds> {
   bool isLoading = true;
   bool _language = true;
   List<News> news = <News>[];
+  @override
   void initState() {
     super.initState();
     _parent();
@@ -31,8 +27,8 @@ class _FeedsState extends State<Feeds> {
 
   _parent() async {
     await _languageFunction();
-    await _loadingOff();
     await _getNews();
+    await _loadingOff();
   }
 
   _languageFunction() async {
@@ -40,18 +36,11 @@ class _FeedsState extends State<Feeds> {
     _language = val;
   }
 
-  _loadingOff() {
-    setState(() {
-      isLoading = false;
-    });
-  }
-
   _getNews() async {
     const String url =
         "https://newsapi.org/v2/top-headlines?country=in&q=government&apiKey=b959933666884935be61f74caa1c9a9b";
     Response res = await get(Uri.parse(url));
     print(res.body);
-    print(res.statusCode);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
       if (body["status"] == 'ok') {
@@ -71,6 +60,13 @@ class _FeedsState extends State<Feeds> {
     }
   }
 
+  _loadingOff() {
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(

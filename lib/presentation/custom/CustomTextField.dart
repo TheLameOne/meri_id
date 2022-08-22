@@ -40,7 +40,7 @@ class CustomTextField extends StatelessWidget {
       this.size = false,
       this.onRegPage = false,
       this.cursorColor = Styles.blackColor,
-      this.maxLine = 1,
+      this.maxLine = null,
       this.minLine = 1,
       this.obscureText = false});
 

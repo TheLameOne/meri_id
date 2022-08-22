@@ -1,6 +1,13 @@
+import 'package:flutter/material.dart';
+
 class UserProfile {
+  late String uuid;
   late String name;
   late String number;
-  late String userId;
-  UserProfile({required this.name, required this.number ,required this.userId});
+
+  UserProfile({
+    required this.uuid,
+    required this.name,
+    required this.number,
+  });
 }

@@ -9,7 +9,7 @@ import '../services/FirebaseStorage.dart';
 
 var currentPage = 0;
 var role = "user";
-UserProfile userProfile = UserProfile(name: "", number: "", userId: "");
+UserProfile userProfile = UserProfile(uuid: "", name: "", number: "");
 
 final PreferenceService preferenceService = PreferenceService.getInstance();
 final ApiService apiService = ApiService.getInstance();
@@ -46,7 +46,6 @@ Future<bool> checkLanguage() async =>
     (await preferenceService.getLanguage() == null ||
         await preferenceService.getLanguage() == "english");
 
-
 String? validateOtp(String otp) {
   String? required = requiredString(otp);
   if (required != null) return required;
@@ -54,8 +53,6 @@ String? validateOtp(String otp) {
   RegExp regex = RegExp(r'^[0-9]{1,6}$');
   return (!regex.hasMatch(otp)) ? 'Valid Otp!!' : null;
 }
-
-
 
 Widget customizedLeadingIconWidget(String message) {
   return Container(
