@@ -10,7 +10,7 @@ class ApiService {
   ApiService._();
   factory ApiService.getInstance() => _instance;
   static final ApiService _instance = ApiService._();
-  
+
   final String baseUrl = "https://meriid.herokuapp.com/api";
   final String role = 'user';
   final String token = 'Token';
@@ -30,7 +30,6 @@ class ApiService {
     return false;
   }
 
-
   Future<bool> login(String phoneNumber, String otp) async {
     final String url = "$baseUrl/auth/login";
     Response res = await post(
@@ -39,7 +38,7 @@ class ApiService {
       body:
           jsonEncode(<String, String>{'phone_number': phoneNumber, 'otp': otp}),
     );
-    
+
     if (res.statusCode == 201) {
       var body = jsonDecode(res.body);
       await preferenceService.setUID(body["data"]["token"]);
@@ -48,9 +47,8 @@ class ApiService {
     return false;
   }
 
-
-  Future<bool> currentStatus(String phoneNumber, String otp) async {
-    String authId = await PreferenceService.uid;
+  Future<String> currentStatus() async {
+    String? authId = await preferenceService.getUID();
     final String url = "$baseUrl/auth/current-status";
     Response res = await get(
       Uri.parse(url),
@@ -59,19 +57,19 @@ class ApiService {
         'Authorization': '$token $authId'
       },
     );
+    print(res.body);
+    print(res.statusCode);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
-      return true;
+      return body["data"]["status"];
     }
-    return false;
+    return "";
   }
-
 
   Future<bool> logOut() async {
     await preferenceService.removeUID();
     return true;
   }
-
 
   Future<UserProfile> getProfile() async {
     String authId = await PreferenceService.uid;
@@ -94,7 +92,6 @@ class ApiService {
     }
     return UserProfile(name: "", number: "", userId: "");
   }
-
 
   Future<bool> raiseIssue(String title, String description) async {
     String authId = await PreferenceService.uid;
@@ -126,46 +123,5 @@ class ApiService {
       return body["data"][0]["guideline"];
     }
     return "No GuidelInes";
-  }
-
-
-  Future<bool> punchInAttendance(String date, String time) async {
-    String authId = await PreferenceService.uid;
-    final String url = "$baseUrl/auth/issue";
-    Response res = await post(Uri.parse(url),
-        headers: {
-          'content-type': 'application/json',
-          'Authorization': '$token $authId'
-        },
-        body: jsonEncode(<String, String>{
-          "date": date,
-          "punch_in": time,
-        }));
-
-    if (res.statusCode == 200) {
-      var body = jsonDecode(res.body);
-      return true;
-    }
-    return false;
-  }
-
-  Future<bool> punchOutAttendance(String date, String time) async {
-    String authId = await PreferenceService.uid;
-    final String url = "$baseUrl/auth/issue";
-    Response res = await post(Uri.parse(url),
-        headers: {
-          'content-type': 'application/json',
-          'Authorization': '$token $authId'
-        },
-        body: jsonEncode(<String, String>{
-          "date": date,
-          "punch_out": time,
-        }));
-
-    if (res.statusCode == 200) {
-      var body = jsonDecode(res.body);
-      return true;
-    }
-    return false;
   }
 }

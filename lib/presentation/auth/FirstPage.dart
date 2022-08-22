@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
+import 'package:meri_id/presentation/features/SvgScreen.dart';
+import 'package:meri_id/presentation/kyc/AadharPage.dart';
+import 'package:meri_id/presentation/kyc/OtherDocumentPage.dart';
+import 'package:meri_id/presentation/kyc/PanPage.dart';
+import 'package:meri_id/presentation/kyc/VideoPage.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/global.dart';
 import 'package:meri_id/utils/styles.dart';
@@ -20,7 +25,6 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  
   bool _showFingerPrintButton = true;
   bool _isTimer = true;
   bool _language = true;
@@ -53,6 +57,22 @@ class _FirstPageState extends State<FirstPage> {
 
   route() {
     Navigator.popAndPushNamed(context, PhoneNumber.routeNamed);
+  }
+
+  pageRouting(String state ,BuildContext c)
+  {
+      switch(state)
+      {
+        case "kyc" : Navigator.popAndPushNamed(context, KycStepper.routeNamed);break;
+        case "pan" : Navigator.popAndPushNamed(context, PANPage.routeNamed);break;
+        case "other" : Navigator.popAndPushNamed(context, OtherDocumentPage.routeNamed);break;
+        case "aadhar" : Navigator.popAndPushNamed(context, AadharPage.routeNamed);break;
+        case "video" : Navigator.popAndPushNamed(context, VideoPage.routeNamed);break;
+        case "pending" : Navigator.popAndPushNamed(context, SvgScreen.routeNamed);break;
+        case "active" : Navigator.popAndPushNamed(context, SplashPage.routeNamed);break;
+        case "" : errorToast("Please Try Againg", c);break;
+        default: errorToast("Please Try Againg", c);break;
+      }
   }
 
   @override
@@ -99,12 +119,12 @@ class _FirstPageState extends State<FirstPage> {
                                   final isAuthenticated =
                                       await LocalAuthApi.authenticate();
                                   if (isAuthenticated) {
-                                    Navigator.popAndPushNamed(
-                                        context, SplashPage.routeNamed);
+                                    String state = await apiService.currentStatus();
+                                    pageRouting(state,context);
                                   } else {
                                     errorToast("Please Try Again", context);
                                   }
-                                    setState(() {
+                                  setState(() {
                                     isLoading = false;
                                   });
                                 })

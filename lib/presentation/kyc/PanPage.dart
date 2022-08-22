@@ -23,8 +23,7 @@ class _PANPageState extends State<PANPage> {
   bool _language = true;
   bool imageLoading = false;
   bool isLoading = true;
-  String defaultContainerUrl =
-      'https://cdn4.iconfinder.com/data/icons/human-resources-34/100/Team-02-512.png';
+  String? defaultContainerUrl = null;
   void initState() {
     super.initState();
     _parent();

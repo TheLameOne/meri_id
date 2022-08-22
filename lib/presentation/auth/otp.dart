@@ -4,7 +4,12 @@ import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomIcon.dart';
 import 'package:meri_id/presentation/custom/CustomScaffold.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
+import 'package:meri_id/presentation/features/SvgScreen.dart';
+import 'package:meri_id/presentation/kyc/AadharPage.dart';
 import 'package:meri_id/presentation/kyc/KycStepper.dart';
+import 'package:meri_id/presentation/kyc/OtherDocumentPage.dart';
+import 'package:meri_id/presentation/kyc/PanPage.dart';
+import 'package:meri_id/presentation/kyc/VideoPage.dart';
 import 'package:meri_id/presentation/splashPage.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
@@ -28,6 +33,24 @@ class _OTPState extends State<OTP> {
   String otp = "";
 
 
+
+ pageRouting(String state ,BuildContext c)
+  {
+      switch(state)
+      {
+        case "kyc" : Navigator.popAndPushNamed(context, KycStepper.routeNamed);break;
+        case "pan" : Navigator.popAndPushNamed(context, PANPage.routeNamed);break;
+        case "other" : Navigator.popAndPushNamed(context, OtherDocumentPage.routeNamed);break;
+        case "aadhar" : Navigator.popAndPushNamed(context, AadharPage.routeNamed);break;
+        case "video" : Navigator.popAndPushNamed(context, VideoPage.routeNamed);break;
+        case "pending" : Navigator.popAndPushNamed(context, SvgScreen.routeNamed);break;
+        case "active" : Navigator.popAndPushNamed(context, SplashPage.routeNamed);break;
+        case "" : errorToast("Please Try Againg", c);break;
+        default: errorToast("Please Try Againg", c);break;
+      }
+  }
+
+
   _routeToSplashPage(BuildContext c) async {
     setState(() {
       isButtonLoading = true;
@@ -35,8 +58,9 @@ class _OTPState extends State<OTP> {
     if (validateOtp(otp) == null) {
       bool res = await apiService.login(widget.phoneNumber , otp);
       if (res) {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, SplashPage.routeNamed);
+             String state = await apiService.currentStatus();
+              pageRouting(state,context);
+              
       } else {
         errorToast("Oops!! server down", c);
       }
