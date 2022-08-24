@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'dart:ffi';
 import 'package:http/http.dart';
+import 'package:meri_id/model/Book.dart';
 import 'package:meri_id/model/Booking.dart';
+import 'package:meri_id/model/Friends.dart';
+import 'package:meri_id/model/Payment.dart';
 import '../model/UserProfile.dart';
 import '../utils/global.dart';
 import 'PreferenceService.dart';
@@ -159,20 +162,96 @@ class ApiService {
     return "No GuidelInes";
   }
 
-  Future<bool> createBooking(Booking booking) async {
+  Future<String> createBooking(Booking booking) async {
     String? authId = await preferenceService.getUID();
     final String url = "$baseUrl/booking/booking";
-    print(jsonEncode(booking));
+    var body = jsonEncode(<dynamic, dynamic>{
+      'address': {
+        'address_line_1': booking.address?.address_line_1,
+        'address_line_2': booking.address?.address_line_2,
+        'city': booking.address?.city,
+        'state': booking.address?.state,
+        'pincode': booking.address?.pincode,
+        'latitude': booking.address?.latitude,
+        'longitude': booking.address?.longitude
+      },
+      'slot_date': booking.slot_date,
+      'friends': [
+        {
+          'name': booking.friends?[0].name,
+          'phone_number': booking.friends?[0].phone_number,
+          'reason': booking.friends?[0].reason,
+          'booking_type': booking.friends?[0].booking_type
+        },
+        {
+          'name': booking.friends?[1].name,
+          'phone_number': booking.friends?[1].phone_number,
+          'reason': booking.friends?[1].reason,
+          'booking_type': booking.friends?[1].booking_type
+        },
+        {
+          'name': booking.friends?[2].name,
+          'phone_number': booking.friends?[2].phone_number,
+          'reason': booking.friends?[2].reason,
+          'booking_type': booking.friends?[2].booking_type
+        }
+      ],
+      'payment': {
+        'amount': booking.payment?.amount,
+        'from_user': booking.payment?.from_user
+      }
+    });
+
+    print(body);
+
     Response res = await post(Uri.parse(url),
         headers: {
           'content-type': 'application/json',
           'Authorization': '$token $authId'
         },
-        body: jsonEncode(booking));
+        body: body);
+    print(res.body);
+    print(res.statusCode);
+    if (res.statusCode == 201) {
+      var body = jsonDecode(res.body);
+      return body["data"]["booking_id"];
+    }
+    return "";
+  }
+
+  Future<List<Book>> getBooking() async {
+    List<Book> ls = [];
+    List<Friends> fList = [];
+    final String url = "$baseUrl/booking/booking";
+    String? authId = await preferenceService.getUID();
+    Response res = await get(Uri.parse(url), headers: {
+      'content-type': 'application/json',
+      'Authorization': '$token $authId'
+    });
+    print(res.body);
+    print(res.statusCode);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
-      return true;
+      for (int i = 0; i < body['data'].length; i++) {
+        Book x = Book();
+        x.address = body["data"][i]["address"];
+        x.uuid = body["data"][i]["uuid"];
+        x.bookingId = body["data"][i]["booking_id"];
+        x.slotDate = body["data"][i]["slot_date"];
+        x.slotTime = body["data"][i]["slot_time"];
+        x.operator = Operator(
+            name: body["data"][i]["operator"]["name"],
+            phoneNumber: body["data"][i]["operator"]["phone_number"]);
+
+        for (int j = 0; j < body["data"][i]["friends"].length; j++) {
+          fList.add(Friends(
+              name: body["data"][i]["friends"][j]["name"],
+              phone_number: body["data"][i]["friends"][j]["phone_number"]));
+        }
+        x.friendList = fList;
+        ls.add(x);
+      }
     }
-    return false;
+    return ls;
   }
 }

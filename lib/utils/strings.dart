@@ -98,15 +98,14 @@ abstract class StringValues {
       Language(english: "Choose Day", hindi: "दिन चुनें");
   static Language enterDate =
       Language(english: "Enter Date", hindi: "तिथि दर्ज करें");
-  static Language goBack = Language(english: "Enter Date", hindi: "पीछे चले");
+  static Language goBack = Language(english: "Go Back", hindi: "पीछे चले");
   static Language record = Language(english: "Record", hindi: "रिकॉर्ड करे");
   static Language uploadAgain =
       Language(english: "Upload Again", hindi: "दोबारा अपलोड करें");
   static Language loginByMobileNumber = Language(
       english: "Login by Mobile Number", hindi: "मोबाइल नंबर से लॉग इन करें");
-  static Language checkout =
-      Language(english: "Checkout", hindi: "चेक आउट");
+  static Language checkout = Language(english: "Checkout", hindi: "चेक आउट");
 
-      static Language phoneNumber =
+  static Language phoneNumber =
       Language(english: "Phone Number", hindi: "फ़ोन नंबर");
 }

@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.white,
             textTheme:
                 GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
-        initialRoute: SplashPage.routeNamed,
+        initialRoute: FirstPage.routeNamed,
         routes: {
           SplashPage.routeNamed: (BuildContext context) => SplashPage(),
           FirstPage.routeNamed: (BuildContext context) => FirstPage(),
@@ -64,9 +64,7 @@ class MyApp extends StatelessWidget {
           Feeds.routeNamed: (BuildContext context) => Feeds(),
           LanguagePage.routeNamed: (BuildContext context) => LanguagePage(),
           Issue.routeNamed: (BuildContext context) => Issue(),
-          Info.routeNamed: (BuildContext context) => Info(),
-          BookingDetail.routeNamed: (BuildContext context) =>
-              const BookingDetail(),
+          Info.routeNamed: (BuildContext context) => Info()
         });
   }
 }

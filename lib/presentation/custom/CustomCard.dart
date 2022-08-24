@@ -6,18 +6,18 @@ class CustomCard extends StatelessWidget {
   final String booking_id;
   final String date;
   final String time;
-  final String name;
   final Color color;
   final Function onTap;
   final Function makeCall;
+  final String? phoneNumber;
 
   const CustomCard(
       {this.booking_id = "7231905",
+      this.phoneNumber = "",
       this.date = "Date",
       this.time = "Time",
-      this.name = "Person Name",
       required this.makeCall,
-      this.color = Styles.redColor,
+      this.color = Styles.blackColor,
       required this.onTap});
 
   @override
@@ -27,7 +27,7 @@ class CustomCard extends StatelessWidget {
         onTap();
       },
       child: Container(
-        margin: const EdgeInsets.only(bottom: 16),
+        margin: const EdgeInsets.only(bottom: 22),
         child: Card(
           elevation: 5,
           shadowColor: Styles.blackColor,
@@ -48,34 +48,34 @@ class CustomCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        // profile pic
-                        Icon(Icons.person),
-                        // Name
-                        CustomText.smallText(name),
+                        CustomText.mediumText(booking_id),
                       ],
                     ),
                     // Calling button
-                    IconButton(
-                        onPressed: () {
-                          makeCall();
-                        },
-                        icon: Icon(Icons.call))
+                    InkWell(
+                      onTap: () {
+                        makeCall();
+                      },
+                      child: (phoneNumber == "")
+                          ? const Icon(
+                              Icons.phone_disabled,
+                              size: 32,
+                            )
+                          : const Icon(
+                              Icons.call,
+                              size: 32,
+                            ),
+                    )
                   ],
                 ),
-                Row(
-                  children: [
-                    CustomText.smallText("Booking ID : "),
-                    CustomText.smallText(booking_id),
-                    // Booking ID
-                  ],
-                ),
+                const SizedBox(height: 14),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Date
                     CustomText.timeText(date),
-                    // Time
-                    CustomText.timeText(time),
+                    (time == "")
+                        ? CustomText.timeText("Slot: Pending")
+                        : CustomText.timeText(time),
                   ],
                 )
               ],

@@ -108,7 +108,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintTextSize: 16,
                                 initialValue: '',
                                 onChanged: (value) {
-                                  address.address_line_2 = value;
+                                  address.address_line_1 = value;
                                 },
                                 onSaved: () {},
                                 validator: () {},
@@ -136,7 +136,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintTextSize: 16,
                                 initialValue: '',
                                 onChanged: (value) {
-                                  address.city;
+                                  address.city = value;
                                 },
                                 onSaved: () {},
                                 validator: () {},
@@ -150,7 +150,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintTextSize: 16,
                                 initialValue: '',
                                 onChanged: (value) {
-                                  address.state;
+                                  address.state = value;
                                 },
                                 onSaved: () {},
                                 validator: () {},
@@ -164,7 +164,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintTextSize: 16,
                                 initialValue: '',
                                 onChanged: (value) {
-                                  address.pincode;
+                                  address.pincode = value;
                                 },
                                 onSaved: () {},
                                 validator: () {},

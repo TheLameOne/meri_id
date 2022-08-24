@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -83,13 +85,23 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
     }
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     print(
         'Success Response: ${response.paymentId} + ${response.orderId} + ${response.signature}');
     successToast("Payment Successful", context);
     widget.booking.payment = Payment(
         amount: 50.00, from_user: "${response.orderId}||${response.orderId}");
-    _routeToQRPage("lets do it");
+    try {
+      String res = await apiService.createBooking(widget.booking);
+      if (res != "")
+        _routeToQRPage(res);
+      else
+        errorToast("!oops Some Error Occur Money will be refund", context);
+    } catch (e) {
+      print("---------->");
+      print(e);
+      errorToast("!oops Some Error Occur", context);
+    }
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

@@ -43,6 +43,7 @@ class _AddState extends State<Add> {
   String? selectedValue;
 
   _routeToAddress() {
+    booking.friends = listFriends;
     Navigator.push(
         context,
         MaterialPageRoute(

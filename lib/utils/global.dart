@@ -61,12 +61,11 @@ Widget customizedLeadingIconWidget(String message) {
       borderRadius: BorderRadius.circular(25.0),
       color: Styles.blackColor,
     ),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(message, style: const TextStyle(color: Styles.backgroundColor , fontSize: 16 , fontWeight: FontWeight.w500))
-      ],
-    ),
+    child: Text(message,
+        style: const TextStyle(
+            color: Styles.backgroundColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w500)),
   );
 }
 
@@ -84,12 +83,8 @@ Widget successIconWidget(String message) {
       borderRadius: BorderRadius.circular(25.0),
       color: Color.fromARGB(255, 18, 191, 222),
     ),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(message, style: const TextStyle(color: Styles.backgroundColor ,  fontSize: 16))
-      ],
-    ),
+    child: Text(message,
+        style: const TextStyle(color: Styles.backgroundColor, fontSize: 16)),
   );
 }
 
@@ -97,5 +92,5 @@ void successToast(String message, BuildContext context) {
   var fToast = FToast();
   fToast.init(context);
   fToast.showToast(
-      child: successIconWidget(message), gravity: ToastGravity.TOP );
+      child: successIconWidget(message), gravity: ToastGravity.TOP);
 }
