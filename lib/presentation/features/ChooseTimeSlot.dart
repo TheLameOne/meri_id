@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:meri_id/model/Booking.dart';
+import 'package:meri_id/model/Payment.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
 import 'package:meri_id/presentation/features/QRpage.dart';
@@ -14,8 +16,8 @@ import '../../utils/global.dart';
 import '../../utils/strings.dart';
 
 class ChooseTimeSlot extends StatefulWidget {
-  static const String routeNamed = 'choose time';
-  const ChooseTimeSlot({Key? key}) : super(key: key);
+  late Booking booking;
+  ChooseTimeSlot({required this.booking});
 
   @override
   State<ChooseTimeSlot> createState() => _ChooseTimeSlotState();
@@ -51,13 +53,11 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
     });
   }
 
-  String? radioValue;
-
-  _routeToQRPage() {
+  _routeToQRPage(data) {
     Navigator.pop(context);
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const QRpage(data: "lets do it")),
+      MaterialPageRoute(builder: (context) => QRpage(data: data)),
     );
   }
 
@@ -78,14 +78,18 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
     try {
       _razorpay.open(options);
     } catch (e) {
+      errorToast("!oops some error has occured", context);
       debugPrint('Error: e');
     }
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    print('Success Response: $response');
+    print(
+        'Success Response: ${response.paymentId} + ${response.orderId} + ${response.signature}');
     successToast("Payment Successful", context);
-    _routeToQRPage();
+    widget.booking.payment = Payment(
+        amount: 50.00, from_user: "${response.orderId}||${response.orderId}");
+    _routeToQRPage("lets do it");
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -153,11 +157,35 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                               readOnly: true,
                               onTap: () async {
                                 DateTime? pickedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(1950),
-                                    //DateTime.now() - not to allow to choose before today.
-                                    lastDate: DateTime(2100));
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  //DateTime.now() - not to allow to choose before today.
+                                  lastDate: DateTime.now().add(
+                                    const Duration(days: 30),
+                                  ),
+                                  builder: (context, child) {
+                                    return Theme(
+                                      child: child!,
+                                      data: Theme.of(context).copyWith(
+                                        colorScheme: ColorScheme.light(
+                                          primary:
+                                              Styles.redColor, // <-- SEE HERE
+                                          onPrimary: Styles
+                                              .backgroundColor, // <-- SEE HERE
+                                          onSurface:
+                                              Styles.blackColor, // <-- SEE HERE
+                                        ),
+                                        textButtonTheme: TextButtonThemeData(
+                                          style: TextButton.styleFrom(
+                                              primary: Styles
+                                                  .redColor // button text color
+                                              ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
 
                                 if (pickedDate != null) {
                                   print(
@@ -170,22 +198,28 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                                   setState(() {
                                     dateInput.text =
                                         formattedDate; //set output date to TextField value.
+                                    widget.booking.slot_date =
+                                        formattedDate.toString();
                                   });
                                 } else {}
                               }),
-                          const SizedBox(
-                            height: 16,
-                          ),
                         ],
                       ),
-                      SvgPicture.asset('assets/images/date.svg'),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32),
+                        child: SvgPicture.asset('assets/images/date.svg'),
+                      ),
+                      CustomText.smallText(
+                          "Aadhar update/enrolment fees : Rs 50"),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       CustomButton(
                           postIconSize: 20,
                           postIcon: Icons.arrow_forward,
                           visiblepostIcon: false,
-                          labelText: (_language)
-                              ? StringValues.checkout.english
-                              : StringValues.checkout.hindi,
+                          labelText:
+                              (_language) ? "Make Payment" : "भुगतान करना",
                           containerColor: Styles.redColor,
                           onTap: () {
                             openCheckout();

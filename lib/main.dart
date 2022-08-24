@@ -20,6 +20,7 @@ import 'package:meri_id/presentation/features/Language.dart';
 import 'package:meri_id/presentation/kyc/SvgScreen.dart';
 import 'package:meri_id/presentation/kyc/KycStepper.dart';
 import 'package:meri_id/presentation/kyc/OtherDocumentPage.dart';
+import 'package:meri_id/utils/styles.dart';
 import 'presentation/features/Feeds.dart';
 import 'utils/strings.dart';
 
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.white,
             textTheme:
                 GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
-        initialRoute: FirstPage.routeNamed,
+        initialRoute: SplashPage.routeNamed,
         routes: {
           SplashPage.routeNamed: (BuildContext context) => SplashPage(),
           FirstPage.routeNamed: (BuildContext context) => FirstPage(),
@@ -64,10 +65,6 @@ class MyApp extends StatelessWidget {
           LanguagePage.routeNamed: (BuildContext context) => LanguagePage(),
           Issue.routeNamed: (BuildContext context) => Issue(),
           Info.routeNamed: (BuildContext context) => Info(),
-          ChooseTimeSlot.routeNamed: (BuildContext context) =>
-              const ChooseTimeSlot(),
-          ChooseAddress.routeNamed: (BuildContext context) =>
-              const ChooseAddress(),
           BookingDetail.routeNamed: (BuildContext context) =>
               const BookingDetail(),
         });

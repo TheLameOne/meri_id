@@ -8,10 +8,5 @@ class Booking {
   late List<Friends>? friends;
   late Payment? payment;
 
-  Booking({
-  this.address = null,
-  this.slot_date = null,
-  this.friends = null,
-  this.payment = null
-  });
+  Booking({this.address, this.slot_date, this.friends, this.payment});
 }

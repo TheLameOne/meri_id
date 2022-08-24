@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:ffi';
-
 import 'package:http/http.dart';
 import 'package:meri_id/model/Booking.dart';
-
 import '../model/UserProfile.dart';
 import '../utils/global.dart';
 import 'PreferenceService.dart';

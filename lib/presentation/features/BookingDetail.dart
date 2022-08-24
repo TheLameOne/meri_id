@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:meri_id/presentation/features/GoogleMapTracking.dart';
 import 'package:meri_id/presentation/features/QRpage.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
@@ -47,90 +45,140 @@ class _BookingDetailState extends State<BookingDetail> {
             elevation: 0,
           ),
           body: SingleChildScrollView(
-            child: Container(
-              color: Styles.backgroundColor,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 32, left: 32, right: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText.xLargeText("Booking Detail"),
-                    const SizedBox(
-                      height: 16,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText.xLargeText("Booking Details"),
+                  const SizedBox(height: 16),
+                  CustomText.mediumText("BOOK14254334"),
+                  const SizedBox(height: 32),
+                  CustomText.largeText("Booking"),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Card(
+                      elevation: 4,
+                      shadowColor: Styles.grayColor,
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color: Styles.grayColor,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              children: [
+                                CustomText.mediumText("1.Harsh Verma"),
+                                CustomText.smallText("Aadhar Update"),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Column(
+                              children: [
+                                CustomText.mediumText("2.Savagecarol"),
+                                CustomText.smallText("Aadhar Update"),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    CustomText.mediumText("BOOK9932562423"),
-                    const SizedBox(
-                      height: 16,
+                  ),
+                  const SizedBox(height: 16),
+                  CustomText.largeText("Timing"),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Card(
+                      elevation: 4,
+                      shadowColor: Styles.grayColor,
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color: Styles.grayColor,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText.smallText("2022-08-16"),
+                            CustomText.smallText("5:00 pm to 6:00 pm"),
+                          ],
+                        ),
+                      ),
                     ),
-                    CustomText.largeText("Booking Info"),
-                    const SizedBox(
-                      height: 16,
+                  ),
+                  const SizedBox(height: 16),
+                  CustomText.largeText("Address"),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Card(
+                      elevation: 4,
+                      shadowColor: Styles.grayColor,
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color: Styles.grayColor,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText.smallText(
+                                "Vignana Bharathi Institute of Technology,Aushapur, Ghatkesar, near HPCL, Hyderabad, Telangana 501301")
+                          ],
+                        ),
+                      ),
                     ),
-                    CustomText.mediumText("1. Kartikeya Sharma"),
-                    const SizedBox(
-                      height: 16,
+                  ),
+                  const SizedBox(height: 16),
+                  CustomText.largeText("Operator"),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Card(
+                      elevation: 4,
+                      shadowColor: Styles.grayColor,
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color: Styles.grayColor,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText.smallText("Harsh Verma"),
+                            CustomText.smallText("7451985966"),
+                          ],
+                        ),
+                      ),
                     ),
-                    CustomText.smallText("Aadhar Enrollment"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.mediumText('2. Janhvi Singh'),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.smallText("Aadhar Updation"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.mediumText("3. Alankar Saxena"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.smallText("Aadhar Updation"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.largeText("Time Details"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.mediumText("Date : 25-Aug-2022"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.mediumText("Time : 4:00 to 5:00 pm"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.largeText("Address Detail "),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.mediumText(
-                        "Vignana Bharathi Institute of Technology,Aushapur, Ghatkesar, near HPCL, Hyderabad, Telangana 501301"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.largeText("Operator Info"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomText.mediumText("Harsh Verma"),
-                    CustomText.mediumText("7451985966"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

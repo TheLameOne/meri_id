@@ -1,9 +1,11 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:meri_id/model/Booking.dart';
+import 'package:meri_id/model/Friends.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
 import 'package:meri_id/presentation/features/ChooseAddress.dart';
+import 'package:meri_id/presentation/features/ChooseTimeSlot.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 
 import '../../utils/global.dart';
@@ -18,6 +20,7 @@ class Add extends StatefulWidget {
 }
 
 class _AddState extends State<Add> {
+  List<Friends> listFriends = [Friends(), Friends(), Friends()];
   Booking booking = Booking();
   bool _language = true;
   void initState() {
@@ -40,7 +43,10 @@ class _AddState extends State<Add> {
   String? selectedValue;
 
   _routeToAddress() {
-    Navigator.pushNamed(context, ChooseAddress.routeNamed);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ChooseAddress(booking: booking)));
   }
 
   Widget dropDownWidget() {
@@ -116,11 +122,9 @@ class _AddState extends State<Add> {
       ),
     );
   }
-  
-  Widget dropDown(String selectedValue) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-    children:[
+
+  Widget dropDown(int i) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const SizedBox(height: 16),
       Row(
         children: [
@@ -129,7 +133,7 @@ class _AddState extends State<Add> {
                 ? StringValues.person.english
                 : StringValues.person.hindi,
           ),
-          CustomText.mediumText(" $selectedValue")
+          CustomText.mediumText(" ${i.toString()}")
         ],
       ),
       const SizedBox(height: 16),
@@ -137,7 +141,9 @@ class _AddState extends State<Add> {
         hintText: "",
         hintTextSize: 16,
         initialValue: '',
-        onChanged: (value) {},
+        onChanged: (value) {
+          listFriends[i - 1].name = value;
+        },
         onSaved: () {},
         validator: () {},
         labelText:
@@ -148,56 +154,99 @@ class _AddState extends State<Add> {
         hintText: "",
         hintTextSize: 16,
         initialValue: '',
-        onChanged: (value) {},
+        onChanged: (value) {
+          listFriends[i - 1].phone_number = value;
+        },
         onSaved: () {},
         validator: () {},
         labelText: (_language)
             ? StringValues.phoneNumber.english
             : StringValues.phoneNumber.hindi,
       ),
-      const SizedBox(height: 8),
+      const SizedBox(height: 16),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              const Text("Create"),
-              Radio(
-                  value: "radio value",
-                  groupValue: "group value",
-                  onChanged: (value) {
-                    print(value);
-                  }),
-            ],
+          InkWell(
+            onTap: () {
+              setState(() {
+                listFriends[i - 1].booking_type = "create";
+              });
+            },
+            child: Row(
+              children: [
+                const Text("Create"),
+                Container(
+                    padding: const EdgeInsets.all(2),
+                    margin: const EdgeInsets.only(left: 10),
+                    height: 20,
+                    width: 20,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Styles.blackColor, width: .5),
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: (listFriends[i - 1].booking_type == "create")
+                              ? Styles.redColor
+                              : Styles.backgroundColor,
+                          borderRadius: BorderRadius.circular(50)),
+                    ))
+              ],
+            ),
           ),
-          Row(
-            children: [
-              const Text("Update"),
-              Radio(
-                  value: "radio value",
-                  groupValue: "group value",
-                  onChanged: (value) {
-                    print(value); //selected value
-                  }),
-            ],
+          InkWell(
+            onTap: () {
+              setState(() {
+                listFriends[i - 1].booking_type = "update";
+              });
+            },
+            child: Row(
+              children: [
+                const Text("Update"),
+                Container(
+                    padding: const EdgeInsets.all(2),
+                    margin: const EdgeInsets.only(left: 10),
+                    height: 20,
+                    width: 20,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Styles.blackColor, width: .5),
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: (listFriends[i - 1].booking_type == "update")
+                              ? Styles.redColor
+                              : Styles.backgroundColor,
+                          borderRadius: BorderRadius.circular(50)),
+                    ))
+              ],
+            ),
           ),
         ],
       ),
-      const SizedBox(height: 8),
-      CustomTextField(
-        hintText: "",
-        hintTextSize: 16,
-        initialValue: '',
-        onChanged: (value) {},
-        onSaved: () {},
-        validator: () {},
-        labelText: (_language)
-            ? StringValues.reason.english
-            : StringValues.reason.hindi,
-      ),
-      const SizedBox(height: 24),
+      (listFriends[i - 1].booking_type == "update")
+          ? const SizedBox(height: 16)
+          : Container(),
+      (listFriends[i - 1].booking_type == "update")
+          ? CustomTextField(
+              hintText: "",
+              hintTextSize: 16,
+              initialValue: '',
+              onChanged: (value) {
+                listFriends[i - 1].reason = value;
+              },
+              onSaved: () {},
+              validator: () {},
+              labelText: (_language)
+                  ? StringValues.reason.english
+                  : StringValues.reason.hindi,
+            )
+          : Container(),
+      (listFriends[i - 1].booking_type == "update")
+          ? const SizedBox(height: 16)
+          : Container(),
     ]);
   }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -229,9 +278,10 @@ class _AddState extends State<Add> {
                   ),
                   dropDownWidget(),
                   const SizedBox(height: 16),
-                  if(selectedValue !=null)
-                    for(int i = 1 ; i  <= int.parse(selectedValue!);i++)
-                      dropDown(i.toString())
+                  if (selectedValue != null)
+                    for (int i = 1; i <= int.parse(selectedValue!); i++)
+                      dropDown(i),
+                  const SizedBox(height: 16),
                 ],
               ),
               (selectedValue != null)

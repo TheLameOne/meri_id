@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:meri_id/model/Address.dart';
+import 'package:meri_id/model/Booking.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomLocation.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
@@ -13,8 +15,8 @@ import '../../utils/global.dart';
 import '../../utils/strings.dart';
 
 class ChooseAddress extends StatefulWidget {
-  static const String routeNamed = 'choose Address';
-  const ChooseAddress({Key? key}) : super(key: key);
+  late Booking booking;
+  ChooseAddress({required this.booking});
 
   @override
   State<ChooseAddress> createState() => _ChooseAddressState();
@@ -22,6 +24,7 @@ class ChooseAddress extends StatefulWidget {
 
 class _ChooseAddressState extends State<ChooseAddress> {
   bool _language = true;
+  Address address = Address();
   @override
   void initState() {
     super.initState();
@@ -42,7 +45,10 @@ class _ChooseAddressState extends State<ChooseAddress> {
   double? longitude;
 
   _routeToTimeSlotPage() {
-    Navigator.pushNamed(context, ChooseTimeSlot.routeNamed);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ChooseTimeSlot(booking: widget.booking)));
   }
 
   _getUserLocation() async {
@@ -101,7 +107,9 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  address.address_line_2 = value;
+                                },
                                 onSaved: () {},
                                 validator: () {},
                                 labelText: (_language)
@@ -113,7 +121,9 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  address.address_line_2 = value;
+                                },
                                 onSaved: () {},
                                 validator: () {},
                                 labelText: (_language)
@@ -125,7 +135,9 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  address.city;
+                                },
                                 onSaved: () {},
                                 validator: () {},
                                 labelText: (_language)
@@ -137,7 +149,9 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  address.state;
+                                },
                                 onSaved: () {},
                                 validator: () {},
                                 labelText: (_language)
@@ -149,7 +163,9 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                 hintText: "",
                                 hintTextSize: 16,
                                 initialValue: '',
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  address.pincode;
+                                },
                                 onSaved: () {},
                                 validator: () {},
                                 labelText: (_language)
@@ -166,6 +182,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                       : StringValues.proceed.hindi,
                                   containerColor: Styles.redColor,
                                   onTap: () {
+                                    widget.booking.address = address;
                                     _routeToTimeSlotPage();
                                   })
                             ])))
