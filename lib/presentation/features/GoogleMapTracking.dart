@@ -19,10 +19,15 @@ class GoogleMapTracking extends StatefulWidget {
 }
 
 class _GoogleMapTrackingState extends State<GoogleMapTracking> {
+
+    List<Marker> allMarkers = [];
+  // BitmapDescriptor icon1 = BitmapDescriptor.defaultMarker;
+  // BitmapDescriptor icon2 = BitmapDescriptor.defaultMarker;
+  
   bool isLoading = true;
   final Completer<GoogleMapController> _controller = Completer();
+  
   Loc loc = Loc();
-
   static const LatLng sourceLocation = LatLng(37.33500926, -122.03272188);
   static const LatLng destination = LatLng(37.33429383, -122.06600055);
   List<LatLng> polylineCoordinates = [];
@@ -39,6 +44,21 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
           LatLng(point.latitude, point.longitude),
         ),
       );
+
+
+        allMarkers.add(Marker(
+      markerId: const MarkerId('destination'),
+      draggable: false,
+      onTap: () {},
+      position: LatLng(double.parse(loc.bookLat) , double.parse(loc.bookLat))));
+
+      allMarkers.add(Marker(
+      markerId: const MarkerId('destination'),
+      draggable: false,
+      onTap: () {},
+      position: LatLng(double.parse(loc.opLat) , double.parse(loc.opLong))));
+
+
       setState(() {
         isLoading = false;
       });
@@ -56,20 +76,6 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
     getPolyPoints();
   }
 
-  BitmapDescriptor icon1 = BitmapDescriptor.defaultMarker;
-  BitmapDescriptor icon2 = BitmapDescriptor.defaultMarker;
-
-  seticonMarker() async{
-    String imgurl = "https://www.fluttercampus.com/img/car.png";
-      Uint8List bytes = (await NetworkAssetBundle(Uri.parse(imgurl))
-      .load(imgurl))
-      .buffer
-      .asUint8List();
-    icon2 = BitmapDescriptor.fromBytes(bytes); //Icon for Marker
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -77,11 +83,13 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
         backgroundColor: Styles.backgroundColor,
         appBar: AppBar(
           actions: [],
+          title: Text("Operator Live Location"),
+          centerTitle: true,
           backgroundColor: Colors.white,
           foregroundColor: Styles.blackColor,
           elevation: 0,
         ),
-        body: isLoading 
+        body: isLoading
             ? const Center(
                 child: CircularProgressIndicator(color: Styles.redColor),
               )
@@ -89,20 +97,9 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
                       double.parse(loc.bookLat), double.parse(loc.bookLong)),
-                  zoom: 13.5,
+                  zoom: 14,
                 ),
-                markers: {
-                   Marker(
-                    markerId: MarkerId("source"),
-                    position: sourceLocation,
-                    icon: icon1
-                  ),
-                   Marker(
-                    markerId: MarkerId("destination"),
-                    position: destination,
-                    icon: icon1
-                  ),
-                },
+                markers:  Set.from(allMarkers), 
                 onMapCreated: (mapController) {
                   _controller.complete(mapController);
                 },
@@ -110,8 +107,8 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
                   Polyline(
                     polylineId: const PolylineId("route"),
                     points: polylineCoordinates,
-                    color: const Color(0xFF7B61FF),
-                    width: 6,
+                    color: Styles.redColor,
+                    width: 8,
                   ),
                 },
               ),

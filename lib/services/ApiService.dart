@@ -27,6 +27,8 @@ class ApiService {
       body: jsonEncode(
           <String, String>{'phone_number': phoneNumber, 'role': role}),
     );
+    print(res.body);
+    print(res.statusCode);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
       return true;
@@ -222,7 +224,6 @@ class ApiService {
 
   Future<List<Book>> getBooking() async {
     List<Book> ls = [];
-    List<Friends> fList = [];
     final String url = "$baseUrl/booking/booking";
     String? authId = await preferenceService.getUID();
     Response res = await get(Uri.parse(url), headers: {
@@ -235,6 +236,7 @@ class ApiService {
       var body = jsonDecode(res.body);
       for (int i = 0; i < body['data'].length; i++) {
         Book x = Book();
+        List<Friends> fList = [];
         x.address = body["data"][i]["address"];
         x.uuid = body["data"][i]["uuid"];
         x.bookingId = body["data"][i]["booking_id"];
@@ -243,7 +245,6 @@ class ApiService {
         x.operator = Operator(
             name: body["data"][i]["operator"]["name"],
             phoneNumber: body["data"][i]["operator"]["phone_number"]);
-
         for (int j = 0; j < body["data"][i]["friends"].length; j++) {
           fList.add(Friends(
               name: body["data"][i]["friends"][j]["name"],
