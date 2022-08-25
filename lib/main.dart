@@ -8,19 +8,13 @@ import 'package:meri_id/presentation/KYC/VideoPage.dart';
 import 'package:meri_id/presentation/SplashPage.dart';
 import 'package:meri_id/presentation/auth/FirstPage.dart';
 import 'package:meri_id/presentation/auth/PhoneNumber.dart';
-import 'package:meri_id/presentation/auth/otp.dart';
-import 'package:meri_id/presentation/features/BookingDetail.dart';
 import 'package:meri_id/presentation/features/AddFriend.dart';
-import 'package:meri_id/presentation/features/ChooseAddress.dart';
-import 'package:meri_id/presentation/features/ChooseTimeSlot.dart';
-import 'package:meri_id/presentation/features/GoogleMapTracking.dart';
 import 'package:meri_id/presentation/features/Info.dart';
 import 'package:meri_id/presentation/features/Issue.dart';
 import 'package:meri_id/presentation/features/Language.dart';
 import 'package:meri_id/presentation/kyc/SvgScreen.dart';
 import 'package:meri_id/presentation/kyc/KycStepper.dart';
 import 'package:meri_id/presentation/kyc/OtherDocumentPage.dart';
-import 'package:meri_id/utils/styles.dart';
 import 'presentation/features/Feeds.dart';
 import 'utils/strings.dart';
 
@@ -46,7 +40,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.white,
             textTheme:
                 GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
-        initialRoute: FirstPage.routeNamed,
+        initialRoute: SplashPage.routeNamed,
         routes: {
           SplashPage.routeNamed: (BuildContext context) => SplashPage(),
           FirstPage.routeNamed: (BuildContext context) => FirstPage(),

@@ -77,17 +77,6 @@ class _InfoState extends State<Info> {
                           )
                         },
                       )),
-
-                      //                   Switch(
-                      //   value: isHindi,
-                      //   onChanged: (value) {
-                      //     setState(() {
-                      //       isHindi = value;
-                      //     });
-                      //   },
-                      //   activeTrackColor: Colors.lightGreenAccent,
-                      //   activeColor: Colors.green,
-                      // ),
                     ],
                   ),
                 ),

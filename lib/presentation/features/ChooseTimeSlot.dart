@@ -12,6 +12,7 @@ import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
 import 'package:intl/intl.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utils/global.dart';
 import '../../utils/strings.dart';
 
@@ -117,6 +118,7 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
     _razorpay.clear();
   }
 
+  bool _term = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -215,50 +217,94 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                               }),
                         ],
                       ),
-
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 32),
                         child: SizedBox(
-                          height: 400,
-                          child: SvgPicture.asset('assets/images/date.svg')),
+                            height: 400,
+                            child: SvgPicture.asset('assets/images/date.svg')),
                       ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CustomText.smallText("I would prefer female operator"),
-              InkWell(
-            onTap: () {
-              setState(() {
-                if(widget.booking.preference == "male")
-               widget.booking.preference = "female";
-               else
-                  widget.booking.preference = "male";
-              });
-            },
-                child: Container(
-                    padding: const EdgeInsets.all(2),
-                    margin: const EdgeInsets.only(left: 10),
-                    height: 20,
-                    width: 20,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Styles.blackColor, width: .5),
-                        borderRadius: BorderRadius.circular(50)),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: (widget.booking.preference == "female")
-                              ? Styles.redColor
-                              : Styles.backgroundColor,
-                          borderRadius: BorderRadius.circular(50)),
-                    )),
-              )
-            ],
-          ),
-           const SizedBox(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText.smallText(
+                              "I would prefer female operator"),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                if (widget.booking.preference == "male")
+                                  widget.booking.preference = "female";
+                                else
+                                  widget.booking.preference = "male";
+                              });
+                            },
+                            child: Container(
+                                padding: const EdgeInsets.all(2),
+                                margin: const EdgeInsets.only(left: 10),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Styles.blackColor, width: .5),
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: (widget.booking.preference ==
+                                              "female")
+                                          ? Styles.redColor
+                                          : Styles.backgroundColor,
+                                      borderRadius: BorderRadius.circular(50)),
+                                )),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
                         height: 16,
                       ),
-
-
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText.smallText("Please Read"),
+                          InkWell(
+                            onTap: () {
+                              launchUrl(Uri.parse("https://admin-meriid.web.app/user/guidelines"));
+                            },
+                            child: Text("Terms And Condition",
+                                style: GoogleFonts.montserrat(
+                                    textStyle: const TextStyle(
+                                      decoration: TextDecoration.underline,
+                                        fontSize: 16,
+                                        color: Styles.blackColor,
+                                        fontWeight: FontWeight.w500
+                                        ))),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _term = !_term;
+                              });
+                            },
+                            child: Container(
+                                padding: const EdgeInsets.all(2),
+                                margin: const EdgeInsets.only(left: 10),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Styles.blackColor, width: .5),
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: (_term == true)
+                                          ? Styles.redColor
+                                          : Styles.backgroundColor,
+                                      borderRadius: BorderRadius.circular(50)),
+                                )),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -277,7 +323,11 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                               (_language) ? "Make Payment" : "भुगतान करना",
                           containerColor: Styles.redColor,
                           onTap: () {
-                            openCheckout();
+                            if (_term == false)
+                              errorToast("Please approve terms and condition",
+                                  context);
+                            else
+                              openCheckout();
                           })
                     ],
                   )))),
