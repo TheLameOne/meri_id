@@ -166,6 +166,7 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                                       fontSize: 16, color: Styles.blackColor),
                                 ),
                               ),
+
                               
                               readOnly: true,
                               onTap: () async {
