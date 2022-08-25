@@ -1,18 +1,21 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
-import 'package:meri_id/model/Address.dart';
-import 'package:meri_id/model/Booking.dart';
-import 'package:meri_id/presentation/custom/CustomButton.dart';
-import 'package:meri_id/presentation/custom/CustomLocation.dart';
-import 'package:meri_id/presentation/custom/CustomTextField.dart';
-import 'package:meri_id/presentation/features/ChooseTimeSlot.dart';
-import 'package:meri_id/services/widgets/CustomText.dart';
-import 'package:meri_id/utils/styles.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
+// import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:google_api_headers/google_api_headers.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/places.dart';
 
+import '../../model/Address.dart';
+import '../../model/Booking.dart';
+import '../../services/widgets/CustomText.dart';
 import '../../utils/global.dart';
 import '../../utils/strings.dart';
+import '../../utils/styles.dart';
+import '../custom/CustomButton.dart';
+import '../custom/CustomLocation.dart';
+
+import '../custom/CustomTextField.dart';
+import 'ChooseTimeSlot.dart';
 
 class ChooseAddress extends StatefulWidget {
   late Booking booking;
@@ -23,8 +26,14 @@ class ChooseAddress extends StatefulWidget {
 }
 
 class _ChooseAddressState extends State<ChooseAddress> {
+  String googleApikey = "AIzaSyC71uktesLZfNFqlMcKRgJFdNiyZoug9o0";
+  LatLng startLocation = LatLng(17.471236, 78.721465);
+  String location = "Search Location";
   bool _language = true;
   Address address = Address();
+  double? latitude;
+  double? longitude;
+
   @override
   void initState() {
     super.initState();
@@ -33,16 +42,17 @@ class _ChooseAddressState extends State<ChooseAddress> {
 
   _parent() async {
     await _languageFunction();
-    _getUserLocation();
+    // _getUserLocation();
   }
 
   _languageFunction() async {
     bool val = await checkLanguage();
-    _language = val;
+    setState(() {
+      _language = val;
+      latitude = 17.471236;
+      longitude = 78.721465;
+    });
   }
-
-  double? latitude;
-  double? longitude;
 
   _routeToTimeSlotPage() {
     Navigator.push(
@@ -51,14 +61,14 @@ class _ChooseAddressState extends State<ChooseAddress> {
             builder: (context) => ChooseTimeSlot(booking: widget.booking)));
   }
 
-  _getUserLocation() async {
-    Location location = Location();
-    final _locationData = await location.getLocation();
-    setState(() {
-      latitude = _locationData.latitude;
-      longitude = _locationData.longitude;
-    });
-  }
+  // _getUserLocation() async {
+  //   Location location = Location();
+  //   final _locationData = await location.getLocation();
+  //   setState(() {
+  //     latitude = _locationData.latitude;
+  //     longitude = _locationData.longitude;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -86,22 +96,46 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                     : StringValues.address.hindi,
                               ),
                               const SizedBox(height: 32),
-                              CustomTextField(
-                                hintText: "",
-                                hintTextSize: 16,
-                                initialValue: '',
-                                onSaved: () {},
-                                onChanged: (value) {},
-                                validator: () {},
-                                labelText: (_language)
-                                    ? StringValues.chooseYourLocation.english
-                                    : StringValues.chooseYourLocation.hindi,
+                              TextField(
+                                onTap: () async {
+                                  var place = await PlacesAutocomplete.show(
+                                      context: context,
+                                      apiKey: googleApikey,
+                                      mode: Mode.overlay,
+                                      types: [],
+                                      strictbounds: false,
+                                      components: [
+                                        Component(Component.country, 'IN')
+                                      ],
+
+                                      //google_map_webservice package
+                                      onError: (err) {
+                                        print(err);
+                                      });
+
+                                  if (place != null) {
+                                    setState(() {});
+
+                                    //form google_maps_webservice package
+                                    final plist = GoogleMapsPlaces(
+                                      apiKey: googleApikey,
+                                      apiHeaders:
+                                          await GoogleApiHeaders().getHeaders(),
+                                      //from google_api_headers package
+                                    );
+                                    String placeid = place.placeId ?? "0";
+                                    final detail = await plist
+                                        .getDetailsByPlaceId(placeid);
+                                    final geometry = detail.result.geometry!;
+                                    final lat = geometry.location.lat;
+                                    final lang = geometry.location.lng;
+                                    var newlatlang = LatLng(lat, lang);
+
+                                    //move map camera to selected place with animation
+
+                                  }
+                                },
                               ),
-                              const SizedBox(height: 16),
-                              Container(
-                                  height: 500,
-                                  child: CustomLocation(
-                                      lat: latitude!, long: longitude!)),
                               const SizedBox(height: 16),
                               CustomTextField(
                                 hintText: "",

@@ -81,7 +81,8 @@ class _HomeState extends State<Home> {
                           },
                           makeCall: () {
                             if (ls[i].operator?.phoneNumber == "")
-                              errorToast("Operator will b assigned soon to you",
+                              errorToast(
+                                  "Operator will be assigned soon to you",
                                   context);
                             else
                               launchUrlString(
