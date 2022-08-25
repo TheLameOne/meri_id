@@ -4,8 +4,6 @@ import 'package:meri_id/model/Booking.dart';
 import 'package:meri_id/model/Friends.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
-import 'package:meri_id/presentation/features/ChooseAddress.dart';
-import 'package:meri_id/presentation/features/ChooseTimeSlot.dart';
 import 'package:meri_id/presentation/features/Places.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 

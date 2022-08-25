@@ -179,6 +179,7 @@ class ApiService {
         'longitude': booking.address?.longitude
       },
       'slot_date': booking.slot_date,
+      'preference' : booking.preference, 
       'friends': [
         {
           'name': booking.friends?[0].name,

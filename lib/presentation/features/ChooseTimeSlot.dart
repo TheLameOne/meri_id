@@ -3,12 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meri_id/model/Booking.dart';
 import 'package:meri_id/model/Payment.dart';
 import 'package:meri_id/presentation/custom/CustomButton.dart';
-import 'package:meri_id/presentation/custom/CustomTextField.dart';
 import 'package:meri_id/presentation/features/QRpage.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
@@ -217,12 +215,57 @@ class _ChooseTimeSlotState extends State<ChooseTimeSlot> {
                               }),
                         ],
                       ),
+
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: SvgPicture.asset('assets/images/date.svg'),
+                        child: SizedBox(
+                          height: 400,
+                          child: SvgPicture.asset('assets/images/date.svg')),
                       ),
-                      CustomText.smallText(
-                          "Aadhar update/enrolment fees : Rs 50"),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomText.smallText("I would prefer female operator"),
+              InkWell(
+            onTap: () {
+              setState(() {
+                if(widget.booking.preference == "male")
+               widget.booking.preference = "female";
+               else
+                  widget.booking.preference = "male";
+              });
+            },
+                child: Container(
+                    padding: const EdgeInsets.all(2),
+                    margin: const EdgeInsets.only(left: 10),
+                    height: 20,
+                    width: 20,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Styles.blackColor, width: .5),
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: (widget.booking.preference == "female")
+                              ? Styles.redColor
+                              : Styles.backgroundColor,
+                          borderRadius: BorderRadius.circular(50)),
+                    )),
+              )
+            ],
+          ),
+           const SizedBox(
+                        height: 16,
+                      ),
+
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CustomText.smallText(
+                              "Aadhar update/enrolment fees : Rs 50"),
+                        ],
+                      ),
                       const SizedBox(
                         height: 16,
                       ),
