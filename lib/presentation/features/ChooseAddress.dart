@@ -167,6 +167,40 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                       : StringValues.proceed.hindi,
                                   containerColor: Styles.redColor,
                                   onTap: () {
+                                    if (address.address_line_1 == null) {
+                                      errorToast(
+                                          "Please enter Home/Steet", context);
+                                      return;
+                                    }
+                                    if (address.address_line_2 == null) {
+                                      errorToast(
+                                          "please enter Area/locality/Society",
+                                          context);
+                                      return;
+                                    }
+                                    if (address.city == null) {
+                                      errorToast(
+                                          "please enter City name", context);
+                                      return;
+                                    }
+                                    if (address.state == null) {
+                                      errorToast("please enter State", context);
+                                      return;
+                                    }
+                                    if (address.pincode == null) {
+                                      errorToast(
+                                          "please enter Pincode", context);
+                                      return;
+                                    }
+
+                                    if (address.pincode?.length != 6 &&
+                                        double.tryParse(address.pincode!) !=
+                                            null) {
+                                      errorToast("please enter valid Pincode",
+                                          context);
+                                      return;
+                                    }
+
                                     address.latitude = widget.lat;
                                     address.longitude = widget.long;
                                     widget.booking.address = address;

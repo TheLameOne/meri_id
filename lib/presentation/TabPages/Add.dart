@@ -41,7 +41,6 @@ class _AddState extends State<Add> {
   final List<String> items = ['1', '2', '3'];
   String? selectedValue;
 
-
   Widget dropDownWidget() {
     return DropdownButtonHideUnderline(
       child: DropdownButton2(
@@ -287,9 +286,42 @@ class _AddState extends State<Add> {
                           : StringValues.proceed.hindi,
                       containerColor: Styles.redColor,
                       onTap: () {
-                            booking.friends = listFriends;
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Places(booking:booking)));
+                        booking.friends = listFriends;
+                        for (int i = 0; i < int.parse(selectedValue!); i++) {
+                          print(i);
+                          if (listFriends[i].name == null) {
+                            errorToast("Name cannot be null", context);
+                            return;
+                          }
+                          if (listFriends[i].phone_number == null) {
+                            errorToast("Phone Number cannot be null", context);
+                            return;
+                          }
+                          if (validatePhone(listFriends[i].phone_number!) !=
+                              null) {
+                            errorToast(
+                                "Please enter valid phone number", context);
+                            return;
+                          }
+
+                          if (listFriends[i].booking_type == 'update') {
+                            if (listFriends[i].reason == null) {
+                              errorToast("Reason cannot be null", context);
+                              return;
+                            }
+                          }
+                          if (listFriends[i].booking_type != 'create' &&
+                              listFriends[i].booking_type != 'update') {
+                            errorToast(
+                                "Please select the Booking Type", context);
+                            return;
+                          }
+                        }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Places(booking: booking)));
                       })
                   : Container(),
             ],

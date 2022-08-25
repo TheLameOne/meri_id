@@ -49,7 +49,8 @@ class MyApp extends StatelessWidget {
           PANPage.routeNamed: (BuildContext context) => PANPage(),
           AadharPage.routeNamed: (BuildContext context) => AadharPage(),
           VideoPage.routeNamed: (BuildContext context) => VideoPage(),
-          OtherDocumentPage.routeNamed: (BuildContext context) =>OtherDocumentPage(),
+          OtherDocumentPage.routeNamed: (BuildContext context) =>
+              OtherDocumentPage(),
           KycStepper.routeNamed: (BuildContext context) => KycStepper(),
           SvgScreen.routeNamed: (BuildContext context) => const SvgScreen(),
           Feeds.routeNamed: (BuildContext context) => Feeds(),
