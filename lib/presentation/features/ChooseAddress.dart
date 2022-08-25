@@ -16,7 +16,9 @@ import '../../utils/strings.dart';
 
 class ChooseAddress extends StatefulWidget {
   late Booking booking;
-  ChooseAddress({required this.booking});
+  late String lat;
+  late String long;
+  ChooseAddress({required this.booking, required this.lat, required this.long});
 
   @override
   State<ChooseAddress> createState() => _ChooseAddressState();
@@ -86,23 +88,6 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                     : StringValues.address.hindi,
                               ),
                               const SizedBox(height: 32),
-                              CustomTextField(
-                                hintText: "",
-                                hintTextSize: 16,
-                                initialValue: '',
-                                onSaved: () {},
-                                onChanged: (value) {},
-                                validator: () {},
-                                labelText: (_language)
-                                    ? StringValues.chooseYourLocation.english
-                                    : StringValues.chooseYourLocation.hindi,
-                              ),
-                              const SizedBox(height: 16),
-                              Container(
-                                  height: 500,
-                                  child: CustomLocation(
-                                      lat: latitude!, long: longitude!)),
-                              const SizedBox(height: 16),
                               CustomTextField(
                                 hintText: "",
                                 hintTextSize: 16,
@@ -182,6 +167,8 @@ class _ChooseAddressState extends State<ChooseAddress> {
                                       : StringValues.proceed.hindi,
                                   containerColor: Styles.redColor,
                                   onTap: () {
+                                    address.latitude = widget.lat;
+                                    address.longitude = widget.long;
                                     widget.booking.address = address;
                                     _routeToTimeSlotPage();
                                   })

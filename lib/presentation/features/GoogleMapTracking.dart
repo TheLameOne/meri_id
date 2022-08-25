@@ -1,31 +1,37 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:meri_id/model/Loc.dart';
+import 'package:meri_id/utils/global.dart';
 import 'package:meri_id/utils/styles.dart';
 
 class GoogleMapTracking extends StatefulWidget {
-  static const String routeNamed = 'tracking';
-  const GoogleMapTracking({Key? key}) : super(key: key);
+  late String data;
+  GoogleMapTracking({required this.data});
 
   @override
   State<GoogleMapTracking> createState() => _GoogleMapTrackingState();
 }
 
 class _GoogleMapTrackingState extends State<GoogleMapTracking> {
+  bool isLoading = true;
   final Completer<GoogleMapController> _controller = Completer();
+  Loc loc = Loc();
+
   static const LatLng sourceLocation = LatLng(37.33500926, -122.03272188);
   static const LatLng destination = LatLng(37.33429383, -122.06600055);
-
   List<LatLng> polylineCoordinates = [];
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       "AIzaSyC71uktesLZfNFqlMcKRgJFdNiyZoug9o0", // Your Google Map Key
-      PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
-      PointLatLng(destination.latitude, destination.longitude),
+      PointLatLng(double.parse(loc.opLat), double.parse(loc.opLong)),
+      PointLatLng(double.parse(loc.bookLat), double.parse(loc.bookLong)),
     );
     if (result.points.isNotEmpty) {
       result.points.forEach(
@@ -33,45 +39,36 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
           LatLng(point.latitude, point.longitude),
         ),
       );
-      setState(() {});
+      setState(() {
+        isLoading = false;
+      });
     }
-  }
-
-  LocationData? currentLocation;
-  void getCurrentLocation() async {
-    Location location = Location();
-    location.getLocation().then(
-      (location) {
-        currentLocation = location;
-      },
-    );
-    GoogleMapController googleMapController = await _controller.future;
-    location.onLocationChanged.listen(
-      (newLoc) {
-        currentLocation = newLoc;
-        googleMapController.animateCamera(
-          CameraUpdate.newCameraPosition(
-            CameraPosition(
-              zoom: 13.5,
-              target: LatLng(
-                newLoc.latitude!,
-                newLoc.longitude!,
-              ),
-            ),
-          ),
-        );
-        // if(mounted)
-        setState(() {});
-      },
-    );
   }
 
   @override
   void initState() {
-    getPolyPoints();
-    getCurrentLocation();
     super.initState();
+    _parent();
   }
+
+  void _parent() async {
+    loc = await apiService.getLoc(widget.data);
+    getPolyPoints();
+  }
+
+  BitmapDescriptor icon1 = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor icon2 = BitmapDescriptor.defaultMarker;
+
+  seticonMarker() async{
+    String imgurl = "https://www.fluttercampus.com/img/car.png";
+      Uint8List bytes = (await NetworkAssetBundle(Uri.parse(imgurl))
+      .load(imgurl))
+      .buffer
+      .asUint8List();
+    icon2 = BitmapDescriptor.fromBytes(bytes); //Icon for Marker
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,29 +81,26 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
           foregroundColor: Styles.blackColor,
           elevation: 0,
         ),
-        body: currentLocation == null
+        body: isLoading 
             ? const Center(
                 child: CircularProgressIndicator(color: Styles.redColor),
               )
             : GoogleMap(
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
-                      currentLocation!.latitude!, currentLocation!.longitude!),
+                      double.parse(loc.bookLat), double.parse(loc.bookLong)),
                   zoom: 13.5,
                 ),
                 markers: {
-                  Marker(
-                    markerId: const MarkerId("currentLocation"),
-                    position: LatLng(currentLocation!.latitude!,
-                        currentLocation!.longitude!),
-                  ),
-                  const Marker(
+                   Marker(
                     markerId: MarkerId("source"),
                     position: sourceLocation,
+                    icon: icon1
                   ),
-                  const Marker(
+                   Marker(
                     markerId: MarkerId("destination"),
                     position: destination,
+                    icon: icon1
                   ),
                 },
                 onMapCreated: (mapController) {

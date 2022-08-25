@@ -6,6 +6,7 @@ import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomTextField.dart';
 import 'package:meri_id/presentation/features/ChooseAddress.dart';
 import 'package:meri_id/presentation/features/ChooseTimeSlot.dart';
+import 'package:meri_id/presentation/features/Places.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 
 import '../../utils/global.dart';
@@ -42,13 +43,6 @@ class _AddState extends State<Add> {
   final List<String> items = ['1', '2', '3'];
   String? selectedValue;
 
-  _routeToAddress() {
-    booking.friends = listFriends;
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ChooseAddress(booking: booking)));
-  }
 
   Widget dropDownWidget() {
     return DropdownButtonHideUnderline(
@@ -295,7 +289,9 @@ class _AddState extends State<Add> {
                           : StringValues.proceed.hindi,
                       containerColor: Styles.redColor,
                       onTap: () {
-                        _routeToAddress();
+                            booking.friends = listFriends;
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Places(booking:booking)));
                       })
                   : Container(),
             ],

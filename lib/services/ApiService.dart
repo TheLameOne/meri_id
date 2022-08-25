@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 import 'package:meri_id/model/Book.dart';
 import 'package:meri_id/model/Booking.dart';
 import 'package:meri_id/model/Friends.dart';
+import 'package:meri_id/model/Loc.dart';
 import 'package:meri_id/model/Payment.dart';
 import '../model/UserProfile.dart';
 import '../utils/global.dart';
@@ -253,5 +254,30 @@ class ApiService {
       }
     }
     return ls;
+  }
+
+  Future<Loc> getLoc(String uuid) async {
+    String? authId = await preferenceService.getUID();
+    final String url = "$baseUrl/booking/booking/location/${uuid}";
+    Response res = await get(
+      Uri.parse(url),
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': '$token $authId'
+      },
+    );
+
+    print(res.body);
+    if (res.statusCode == 200) {
+      var body = jsonDecode(res.body);
+
+      return Loc(
+        opLat: body["data"]["operator"]["lat"],
+        opLong: body["data"]["operator"]["lng"],
+        bookLat: body["data"]["booking"]["lat"],
+        bookLong: body["data"]["booking"]["lng"],
+      );
+    }
+    return Loc();
   }
 }

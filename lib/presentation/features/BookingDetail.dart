@@ -24,6 +24,7 @@ class _BookingDetailState extends State<BookingDetail> {
   }
 
   _parent() async {
+    print(widget.book.friendList);
     await _languageFunction();
   }
 
@@ -87,7 +88,7 @@ class _BookingDetailState extends State<BookingDetail> {
                                     height: 4,
                                   ),
                                   CustomText.smallText(
-                                      "+91.${widget.book.friendList?[i].phone_number}"),
+                                      "+91${widget.book.friendList?[i].phone_number}"),
                                   const SizedBox(
                                     height: 4,
                                   ),
@@ -227,8 +228,11 @@ class _BookingDetailState extends State<BookingDetail> {
                       if (widget.book.operator?.phoneNumber == "")
                         errorToast("operator will be appoint soon", context);
                       else
-                        Navigator.pushNamed(
-                            context, GoogleMapTracking.routeNamed);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => GoogleMapTracking(
+                                    data: widget.book.uuid))));
                     },
                     icon: Icon(
                         (widget.book.operator?.name == "")
