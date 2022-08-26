@@ -7,6 +7,13 @@ class Booking {
   late String? slot_date;
   late List<Friends>? friends;
   late Payment? payment;
-  late String preference="male";
-  Booking({this.address, this.slot_date, this.friends, this.payment , this.preference = "male"});
+  late String preference = "male";
+  late String? slot_time;
+  Booking(
+      {this.address,
+      this.slot_date,
+      this.friends,
+      this.payment,
+      this.preference = "male" , 
+      this.slot_time});
 }
