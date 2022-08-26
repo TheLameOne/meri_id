@@ -12,6 +12,7 @@ import 'package:meri_id/utils/styles.dart';
 
 class GoogleMapTracking extends StatefulWidget {
   late String data;
+
   GoogleMapTracking({required this.data});
 
   @override
@@ -19,19 +20,38 @@ class GoogleMapTracking extends StatefulWidget {
 }
 
 class _GoogleMapTrackingState extends State<GoogleMapTracking> {
+  List<Marker> allMarkers = [];
+  late BitmapDescriptor customIcon1 = BitmapDescriptor.defaultMarker;
+  late BitmapDescriptor customIcon2 = BitmapDescriptor.defaultMarker;
+  _mymarker(String gender) async {
+    if (gender == "female") {
+      customIcon1 = await BitmapDescriptor.fromAssetImage(
+          ImageConfiguration(size: Size(12, 12)), 'assets/images/female.png');
+    } else {
+      customIcon1 = await BitmapDescriptor.fromAssetImage(
+          ImageConfiguration(), 'assets/images/male.png');
+    }
+    customIcon2 = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(size: Size(12, 12)), 'assets/images/home.png');
+  }
 
-    List<Marker> allMarkers = [];
-  // BitmapDescriptor icon1 = BitmapDescriptor.defaultMarker;
-  // BitmapDescriptor icon2 = BitmapDescriptor.defaultMarker;
-  
   bool isLoading = true;
   final Completer<GoogleMapController> _controller = Completer();
-  
+
   Loc loc = Loc();
-  static const LatLng sourceLocation = LatLng(37.33500926, -122.03272188);
-  static const LatLng destination = LatLng(37.33429383, -122.06600055);
+  static LatLng sourceLocation = LatLng(37.33500926, -122.03272188);
+  static LatLng destinationLocation = LatLng(28.7041, 77.1025);
   List<LatLng> polylineCoordinates = [];
+
   void getPolyPoints() async {
+    loc = await apiService.getLoc(widget.data);
+    sourceLocation = LatLng(double.parse(loc.opLat), double.parse(loc.opLong));
+    destinationLocation =
+        LatLng(double.parse(loc.bookLat), double.parse(loc.bookLong));
+
+    print(sourceLocation);
+    print(destinationLocation);
+    _mymarker(loc.gender);
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       "AIzaSyC71uktesLZfNFqlMcKRgJFdNiyZoug9o0", // Your Google Map Key
@@ -45,19 +65,19 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
         ),
       );
 
-
-        allMarkers.add(Marker(
-      markerId: const MarkerId('destination'),
-      draggable: false,
-      onTap: () {},
-      position: LatLng(double.parse(loc.bookLat) , double.parse(loc.bookLat))));
+      allMarkers.add(Marker(
+          markerId: const MarkerId('source'),
+          draggable: false,
+          onTap: () {},
+          icon: customIcon1,
+          position: sourceLocation));
 
       allMarkers.add(Marker(
-      markerId: const MarkerId('destination'),
-      draggable: false,
-      onTap: () {},
-      position: LatLng(double.parse(loc.opLat) , double.parse(loc.opLong))));
-
+          markerId: const MarkerId('destination'),
+          draggable: false,
+          onTap: () {},
+          icon: customIcon2,
+          position: destinationLocation));
 
       setState(() {
         isLoading = false;
@@ -72,7 +92,6 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
   }
 
   void _parent() async {
-    loc = await apiService.getLoc(widget.data);
     getPolyPoints();
   }
 
@@ -99,7 +118,8 @@ class _GoogleMapTrackingState extends State<GoogleMapTracking> {
                       double.parse(loc.bookLat), double.parse(loc.bookLong)),
                   zoom: 14,
                 ),
-                markers:  Set.from(allMarkers), 
+                // markers: markers.values.toSet(),
+                markers: allMarkers.toSet(),
                 onMapCreated: (mapController) {
                   _controller.complete(mapController);
                 },

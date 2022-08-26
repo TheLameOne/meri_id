@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.white,
             textTheme:
                 GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
-        initialRoute: SplashPage.routeNamed,
+        initialRoute: FirstPage.routeNamed,
         routes: {
           SplashPage.routeNamed: (BuildContext context) => SplashPage(),
           FirstPage.routeNamed: (BuildContext context) => FirstPage(),

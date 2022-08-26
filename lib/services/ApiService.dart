@@ -179,7 +179,7 @@ class ApiService {
         'longitude': booking.address?.longitude
       },
       'slot_date': booking.slot_date,
-      'preference' : booking.preference, 
+      'preference': booking.preference,
       'friends': [
         {
           'name': booking.friends?[0].name,
@@ -278,6 +278,7 @@ class ApiService {
         opLong: body["data"]["operator"]["lng"],
         bookLat: body["data"]["booking"]["lat"],
         bookLong: body["data"]["booking"]["lng"],
+        // gender: body["data"]["gender"],
       );
     }
     return Loc();

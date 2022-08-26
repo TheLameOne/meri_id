@@ -56,7 +56,7 @@ abstract class StringValues {
   static Language KYCJourney1 =
       Language(english: "KYC Journey 1", hindi: "Kyc सफ़र 1");
   static Language KYCJourney2 =
-      Language(english: "KYC Journey 1", hindi: "Kyc सफ़र 2");
+      Language(english: "KYC Journey 2", hindi: "Kyc सफ़र 2");
   static Language videoKYC =
       Language(english: "Video KYC", hindi: "वीडियो KYC");
   static Language uploadPANCard =
