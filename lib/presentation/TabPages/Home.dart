@@ -70,6 +70,14 @@ class _HomeState extends State<Home> {
                           ? StringValues.home.english
                           : StringValues.home.hindi),
                       const SizedBox(height: 32),
+                                 (ls.length == 0)
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 64, horizontal: 16),
+                              child:
+                                  SvgPicture.asset("assets/images/empty.svg"))
+                          : Container(),
+                          
                       for (int i = 0; i < ls.length; i++)
                         CustomCard(
                           phoneNumber: ls[i].operator?.phoneNumber,
@@ -88,13 +96,7 @@ class _HomeState extends State<Home> {
                                   "tel:+91${ls[i].operator?.phoneNumber}");
                           },
                         ),
-                      (ls == [])
-                          ? Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 64, horizontal: 16),
-                              child:
-                                  SvgPicture.asset("assets/images/empty.svg"))
-                          : Container()
+           
                     ])),
           );
   }
