@@ -3,6 +3,8 @@ import 'package:meri_id/presentation/custom/CustomButton.dart';
 import 'package:meri_id/presentation/custom/CustomIconBox.dart';
 import 'package:meri_id/services/widgets/CustomText.dart';
 import 'package:meri_id/utils/styles.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../utils/global.dart';
 import '../../utils/strings.dart';
 import '../auth/FirstPage.dart';
@@ -129,6 +131,14 @@ class _ProfileState extends State<Profile> {
                           onTap: () {
                             _routeToLanguagePage();
                           }),
+                      const SizedBox(height: 32),
+                      FloatingActionButton(
+                        onPressed: () {
+                            launchUrlString("tel:1947");
+                        },
+                        child: Icon(Icons.call),
+                        backgroundColor: Styles.redColor,
+                      ),
                       const SizedBox(height: 64),
                       CustomButton(
                           isLoading: isLogOutLoading,
